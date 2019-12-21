@@ -6,7 +6,7 @@ import { StorageConstants } from '../../../constants/storage.constants';
 
 export default class LoginScreen extends React.Component {
     static navigationOptions = {
-        title: 'Please sign in',
+        
     };
     onSubmit = values => {
         console.log(values);

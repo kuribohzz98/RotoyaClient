@@ -1,27 +1,47 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form';
-import { Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { Text, View, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import { RotoyaButton, RotoyaTextInput } from '../../common/index';
+import { Input } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const renderField = ({input, label, secureTextEntry }) => (
-    <View style={{flexDirection:'row', height: 50, alignItems:'center'}}>
-        <Text style={{fontSize: 14, fontWeight:'bold', width: 80}}>{label}</Text>
-        <TextInput  style={{borderColor: 'steelblue', borderWidth: 1, height: 37, width: 220, padding: 5}}
-                    secureTextEntry={secureTextEntry}
-                    {...input}
-        ></TextInput>
+const renderField = ({ input, label, secureTextEntry, icon }) => (
+    <View style={{padding:10}}>
+        <Input
+            placeholder={label}
+            secureTextEntry={secureTextEntry}
+            {...input}
+            label={label}
+            leftIcon={
+                <Icon
+                    name={icon}
+                    size={24}
+                    color='black'
+                />
+            }
+        />
     </View>
 )
 
 let LoginForm = props => {
     const { handleSubmit } = props;
     return (
-        <View style={{ flex: 1, flexDirection: 'column', margin: 40, justifyContent: 'flex-start' }}>
-            <Text style={{ fontSize: 18, fontWeight: 'bold', width: 200, textAlign: 'center', margin: 10 }}>Login</Text>
-            <Field  label="UserName: " name="username" component={renderField} />
-            <Field  label="Password: " name="password" component={renderField} secureTextEntry={true}/>
-            <TouchableOpacity onPress={handleSubmit(props.onSubmit)} style={{ margin: 10, alignItems: 'center' }}>
+        <View style={{ flex: 1, justifyContent: 'flex-start', margin: 5 }}>
+            <Text style={{ fontSize: 24, fontWeight: 'bold', alignSelf: 'center' }}>Login</Text>
+            <Field label="UserName" name="username" icon="user" component={renderField} />
+            <Field label="Password" name="password" icon="lock" component={renderField} secureTextEntry={true} />
+            {/* <TouchableOpacity onPress={handleSubmit(props.onSubmit)} style={{ margin: 10, alignItems: 'center' }}>
                 <Text style={{backgroundColor: 'steelblue', color: 'white', fontSize: 16, height: 37, width: 200, textAlign:'center', padding: 10}}>Submit</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+            <RotoyaButton
+                large
+                secondary
+                rounded
+                boderd
+                style={styles.button}
+                caption="Login"
+                onPress={handleSubmit(props.onSubmit)}
+            />
         </View>
     )
 }
@@ -29,3 +49,10 @@ let LoginForm = props => {
 export default reduxForm({
     form: 'login'
 })(LoginForm);
+
+const styles = StyleSheet.create({
+    button: {
+        alignSelf: 'stretch',
+        margin: 10,
+    }
+})
