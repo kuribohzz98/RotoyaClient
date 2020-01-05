@@ -10,3 +10,10 @@ export const loginReducer = (state = { username: ''}, action) => {
 
     return state;
 }
+
+export const logoutReducer = (state, action) => {
+    switch (action.type) {
+        case EActionRedux.LOGOUT:
+            return;
+    }
+}

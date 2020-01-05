@@ -10,10 +10,13 @@ export default class RotoyaMap extends React.Component {
     }
     render() {
         return (
-            <View style={styles.page}>
-                <View style={styles.container}>
-                    {/* <MapboxGL.MapView style={styles.map} styleURL={MapboxGL.StyleURL.Street}/> */}
-                </View>
+            <View style={styles.map}>
+                <MapboxGL.MapView
+                    style={styles.map}
+                    styleURL={MapboxGL.StyleURL.Street}
+                    zoomLevel={15}
+                    centerCoordinate={[11.256, 43.77]}
+                />
             </View>
         );
     }

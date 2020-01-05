@@ -1,11 +1,12 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import store from './redux/store';
+import Storage from './redux/store';
 import AppNavigation from './navigations/navigation';
 import * as Font from 'expo-font';
 import { FontImport } from './styles/fonts';
-import { AppLoading } from 'expo';
+// import { AppLoading } from 'expo';
 import { ThemeProvider } from 'react-native-elements';
+import { PersistGate } from 'redux-persist/integration/react';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -19,12 +20,14 @@ export default class App extends React.Component {
     render() {
         return (
             this.state.fontLoaded ? (
-                <Provider store={store}>
-                    <ThemeProvider>
-                        <AppNavigation />
-                    </ThemeProvider>
+                <Provider store={Storage.store}>
+                    {/* <PersistGate loading={null} persistor={persistor}> */}
+                        <ThemeProvider>
+                            <AppNavigation />
+                        </ThemeProvider>
+                    {/* </PersistGate> */}
                 </Provider>
-            ) : <AppLoading />
+            ) : null
         )
     }
 }

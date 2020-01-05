@@ -21,7 +21,10 @@ export default class LoginScreen extends React.Component {
                 saveItem(StorageConstants.ACCESS_TOKEN, response.data.access_token);
                 this.props.navigation.navigate('Home');
             })
-            .catch((err) => console.log(err))
+            .catch((err) => {
+                console.log(err);
+                this.props.navigation.navigate('Home');
+            })
     }
     render() {
         return <LoginForm onSubmit={this.onSubmit} />

@@ -1,3 +1,4 @@
 export const EActionRedux = {
-    LOGIN: 'LOGIN'
+    LOGIN: 'LOGIN',
+    LOGOUT: 'LOGOUT'
 }

@@ -1,6 +1,7 @@
 import React from 'react';
+import { Dimensions } from 'react-native';
 import { createDrawerNavigator } from 'react-navigation-drawer';
-import MyHomeScreen from '../components/home';
+import MyHomeScreen from '../components/home/home';
 import MyNotificationsScreen from '../components/notifycation';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -8,6 +9,10 @@ import AuthLoadingScreen from '../components/auth/authLoading';
 import LoginScreen from '../components/auth/login/loginConnector';
 import LeftTopButton from '../components/common/LeftTopButton';
 import RotoyaMap from '../components/map/map';
+import UserInfoScreen from '../components/user/userInfo';
+import CustomDrawerComponent from './contentDrawer';
+
+const { width } = Dimensions.get('window');
 
 const AuthStack = createStackNavigator({
     Login: LoginScreen
@@ -38,29 +43,34 @@ const MapStack = createStackNavigator({
 const MyDrawerNavigator = createDrawerNavigator(
     {
         Home: {
-            screen: HomeStack,
-            contentOptions: {
-                activeTintColor: '#e91e63'
-            }
+            screen: HomeStack
         },
         Notifications: {
             screen: MyNotificationsScreen,
         },
         Map: {
             screen: MapStack
+        },
+        UserInfo: {
+            screen: UserInfoScreen
         }
     },
     {
         drawerPosition: 'left',
         initialRouteName: 'Home',
-        drawerBackgroundColor: 'orange',
-        drawerWidth: 200
+        drawerWidth: width * 3 / 5,
+        contentComponent: CustomDrawerComponent,
+        contentOptions: {
+            activeTintColor: {
+                color: 'orange'
+            },
+        }
     }
 );
 
 const switchNavigator = createSwitchNavigator(
     {
-        AuthLoading: AuthLoadingScreen,
+        AuthLoading: MyDrawerNavigator,
         App: MyDrawerNavigator,
         Auth: AuthStack,
     },
