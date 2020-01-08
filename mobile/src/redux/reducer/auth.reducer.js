@@ -1,19 +1,18 @@
 import { EActionRedux } from '../../constants/actions.constants';
 
-export const loginReducer = (state = { username: ''}, action) => {
+export const loginReducer = (state = {}, action) => {
     switch (action.type) {
         case EActionRedux.LOGIN:
             return Object.assign({}, state, {
-                username: action.username
+                userId: action.user.id,
+                username: action.user.username,
+                firstName: action.user.userInfo.firstName,
+                lastName: action.user.userInfo.lastName,
+                phone: action.user.userInfo.phone,
+                address: action.user.userInfo.address,
+                email: action.user.userInfo.email,
+                avatar: action.user.userMeta.avatar
             });
     }
-
     return state;
-}
-
-export const logoutReducer = (state, action) => {
-    switch (action.type) {
-        case EActionRedux.LOGOUT:
-            return;
-    }
 }

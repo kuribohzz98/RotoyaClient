@@ -5,11 +5,19 @@ import { reducer as formReducer } from 'redux-form';
 import { persistStore, persistReducer } from 'redux-persist';
 import { AsyncStorage } from 'react-native';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import { EActionRedux } from '../constants/actions.constants'
 
-const AppReducers = combineReducers({
+const appReducers = combineReducers({
   loginReducer,
   form: formReducer
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === EActionRedux.LOGOUT) {
+    state = undefined;
+  }
+  return appReducers(state, action)
+}
 
 const persistConfig = {
   key: 'root',
@@ -17,12 +25,14 @@ const persistConfig = {
   stateReconciler: autoMergeLevel2 // Xem thêm tại mục "Quá trình merge".
 };
 
-const rootReducer = (state, action) => {
-  return AppReducers(state, action);
-}
+// const rootReducer = (state, action) => {
+//   return appReducers(state, action);
+// }
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-let store = createStore(persistedReducer, applyMiddleware(thunk));
-let persistor = persistStore(store);
+// const persistedReducer = persistReducer(persistConfig, rootReducer);
+// let store = createStore(persistedReducer, applyMiddleware(thunk));
+// let persistor = persistStore(store);
 
-export default Storage = { store, persistor }
+const store = createStore(rootReducer, applyMiddleware(thunk))
+
+export default Storage = { store } //, persistor 

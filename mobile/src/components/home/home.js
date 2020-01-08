@@ -7,9 +7,9 @@ import { IconSports } from '../../constants/define.constants';
 
 export default class MyHomeScreen extends Component {
     static navigationOptions = {
-        drawerIcon: ({ tintColor }) => (
-            <Icon type="material-community" name="home" size={24} color={tintColor}></Icon>
-        )
+        // drawerIcon: ({ tintColor }) => (
+        //     <Icon type="material-community" name="home" size={24} color={tintColor}></Icon>
+        // )
     }
 
     constructor(props) {
@@ -46,8 +46,8 @@ export default class MyHomeScreen extends Component {
                         })
                     }
                 </View>
-                <View style={{ flex: 8 }}>
-                    <Divider style={{ backgroundColor: 'red' }} />
+                <View style={styles.listItems}>
+                    <Divider style={styles.drivider} />
                     <ScrollView>
                         <Card>
 
@@ -68,5 +68,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-around',
         flexDirection: 'row'
+    },
+    drivider: {
+        backgroundColor: 'red'
+    },
+    listItems: {
+        flex: 8
     }
 });
