@@ -1,6 +1,6 @@
 export const API_CONFIG = {
     PROTOCOL: 'http',
-    HOST: 'fe5ac2e7.ngrok.io',
+    HOST: 'bde1351e.ngrok.io',
     // PORT: '3000'
 };
 

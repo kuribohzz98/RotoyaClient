@@ -11,7 +11,8 @@ export const loginReducer = (state = {}, action) => {
                 phone: action.user.userInfo.phone,
                 address: action.user.userInfo.address,
                 email: action.user.userInfo.email,
-                avatar: action.user.userMeta.avatar
+                avatar: action.user.userMeta.avatar,
+                gender: action.user.userInfo.gender
             });
     }
     return state;

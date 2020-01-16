@@ -67,7 +67,7 @@ class UserInfoScreen extends React.Component {
                                             MESSAGE
                                     </Button>
                                     </Block>
-                                    <Block row space="between">
+                                    {/* <Block row space="between">
                                         <Block middle>
                                             <Text
                                                 bold
@@ -101,21 +101,69 @@ class UserInfoScreen extends React.Component {
                                             </Text>
                                             <Text size={12}>Comments</Text>
                                         </Block>
-                                    </Block>
+                                    </Block> */}
                                 </Block>
                                 <Block flex>
                                     <Block middle style={styles.nameInfo}>
                                         <Text bold size={28} color="#32325D">
                                             {this.props.firstName + ' ' + this.props.lastName}
                                         </Text>
-                                        <Text size={16} color="#32325D" style={{ marginTop: 10 }}>
+                                        {/* <Text size={16} color="#32325D" style={{ marginTop: 10 }}>
                                             San Francisco, USA
-                                        </Text>
+                                        </Text> */}
                                     </Block>
                                     <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
                                         <Block style={styles.divider} />
                                     </Block>
-                                    <Block middle>
+                                    <Block left row style={{marginBottom: 15}}>
+                                        <Text size={20} style={{ fontWeight: 'bold', width: 100 }}>
+                                            Address:
+                                        </Text>
+                                        <Text
+                                            size={16}
+                                            color="#525F7F"
+                                            style={{ textAlign: "center", alignSelf: 'center' }}
+                                        >
+                                            {this.props.address}
+                                        </Text>
+                                    </Block>
+                                    <Block left row style={{marginBottom: 15}}>
+                                        <Text size={20} style={{ fontWeight: 'bold', width: 100 }}>
+                                            Phone:
+                                        </Text>
+                                        <Text
+                                            size={16}
+                                            color="#525F7F"
+                                            style={{ textAlign: "center", alignSelf: 'center' }}
+                                        >
+                                            {this.props.phone}
+                                        </Text>
+                                    </Block>
+                                    <Block left row style={{marginBottom: 15}}>
+                                        <Text size={20} style={{ fontWeight: 'bold', width: 100 }}>
+                                            Email:
+                                        </Text>
+                                        <Text
+                                            size={16}
+                                            color="#525F7F"
+                                            style={{ textAlign: "center", alignSelf: 'center' }}
+                                        >
+                                            {this.props.email}
+                                        </Text>
+                                    </Block>
+                                    <Block left row style={{marginBottom: 15}}>
+                                        <Text size={20} style={{ fontWeight: 'bold', width: 100 }}>
+                                            Gender:
+                                        </Text>
+                                        <Text
+                                            size={16}
+                                            color="#525F7F"
+                                            style={{ textAlign: "center", alignSelf: 'center' }}
+                                        >
+                                            {this.props.gender}
+                                        </Text>
+                                    </Block>
+                                    {/* <Block middle>
                                         <Text
                                             size={16}
                                             color="#525F7F"
@@ -134,8 +182,8 @@ class UserInfoScreen extends React.Component {
                                         >
                                             Show more
                                         </Button>
-                                    </Block>
-                                    <Block
+                                    </Block> */}
+                                    {/* <Block
                                         row
                                         style={{ paddingVertical: 14, alignItems: "baseline" }}
                                     >
@@ -166,7 +214,7 @@ class UserInfoScreen extends React.Component {
                                                 />
                                             ))}
                                         </Block>
-                                    </Block>
+                                    </Block> */}
                                 </Block>
                             </Block>
                         </ScrollView>
@@ -221,7 +269,7 @@ const styles = StyleSheet.create({
         borderWidth: 0
     },
     nameInfo: {
-        marginTop: 35
+        marginTop: 25
     },
     divider: {
         width: "90%",
@@ -244,7 +292,8 @@ const mapStateToProps = state => ({
     phone: state.loginReducer.phone,
     address: state.loginReducer.address,
     email: state.loginReducer.email,
-    avatar: state.loginReducer.avatar
+    avatar: state.loginReducer.avatar,
+    gender: state.loginReducer.gender
 });
 
 const mapDispatchToProps = (dispatch) => {

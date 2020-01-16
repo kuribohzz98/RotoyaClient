@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import MapboxGL from "@react-native-mapbox-gl/maps";
+import MapboxGL from '@react-native-mapbox-gl/maps';
 
 MapboxGL.setAccessToken("sk.eyJ1Ijoia3VyaWJvaHp6OTgiLCJhIjoiY2s0ZzFiMnFyMHJ5dzNlbGhrejB1Y3U0ZSJ9.YzhAvEgqZfB-kLYNPCD3Qw");
 
@@ -13,10 +13,13 @@ export default class RotoyaMap extends React.Component {
             <View style={styles.map}>
                 <MapboxGL.MapView
                     style={styles.map}
-                    styleURL={MapboxGL.StyleURL.Street}
-                    zoomLevel={15}
-                    centerCoordinate={[11.256, 43.77]}
-                />
+                // styleURL={MapboxGL.mapStyles.Street}
+                >
+                    <MapboxGL.Camera
+                        zoomLevel={15}
+                        centerCoordinate={[105.781557, 21.037703]}
+                    />
+                </MapboxGL.MapView>
             </View>
         );
     }

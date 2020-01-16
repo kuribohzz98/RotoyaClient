@@ -1,4 +1,5 @@
 import React from 'react';
+import { Alert } from 'react-native';
 import { loginService } from '../../../service/auth.service';
 import LoginForm from './loginComponent';
 import { saveItem } from '../../../service/storage.service';
@@ -33,6 +34,13 @@ class LoginScreen extends React.Component {
                 })
                 if (!response.data.user) {
                     console.log('login fail');
+                    Alert.alert(
+                        'Problem',
+                        'Username or password is correct',
+                        [
+                            { text: 'OK', style: 'cancel' },
+                        ]
+                    );
                     return;
                 }
                 this.props.loginAction(response.data.user);
@@ -41,6 +49,13 @@ class LoginScreen extends React.Component {
             })
             .catch((err) => {
                 console.log(err);
+                Alert.alert(
+                    'Problem',
+                    'Username or password is correct',
+                    [
+                        { text: 'OK', style: 'cancel' },
+                    ]
+                );
                 this.setState({
                     isVisible: false
                 })

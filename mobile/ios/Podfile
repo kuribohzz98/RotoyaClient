@@ -43,4 +43,7 @@ target 'Rotoya' do
 
   # Automatically detect installed unimodules
   use_unimodules!
+  pod 'react-native-geolocation', :path => '../node_modules/@react-native-community/geolocation'
+  pod 'react-native-mapbox-gl', :path => '../node_modules/@react-native-mapbox-gl/maps'
+
 end

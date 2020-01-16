@@ -3,6 +3,10 @@ package com.rotoya;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.mapbox.rctmgl.RCTMGLPackage;
+import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
+import com.showlocationservicesdialogbox.LocationServicesDialogBoxPackage;
+import com.reactnativecommunity.geolocation.GeolocationPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -11,7 +15,6 @@ import com.rotoya.generated.BasePackageList;
 import com.swmansion.reanimated.ReanimatedPackage;
 import com.swmansion.rnscreens.RNScreensPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
-import com.mapbox.rctmgl.RCTMGLPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 
 import org.unimodules.adapters.react.ReactAdapterPackage;
@@ -42,12 +45,15 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+          new LocationServicesDialogBoxPackage(),
+          new GeolocationPackage(),
           new ReanimatedPackage(),
           new RNGestureHandlerPackage(),
           new RNScreensPackage(),
           new ModuleRegistryAdapter(mModuleRegistryProvider),
-          new RCTMGLPackage(),
-          new VectorIconsPackage()
+          new VectorIconsPackage(),
+          new RNFusedLocationPackage(),
+          new RCTMGLPackage()
       );
     }
 

@@ -142,6 +142,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    // packagingOptions {
+    //   pickFirst '**/libjsc.so'
+    // }
 }
 
 def jscFlavor = 'org.webkit:android-jsc:+'
@@ -149,14 +152,18 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 def enableHermes = project.ext.react.get("enableHermes", false);
 
 dependencies {
+    implementation project(':@react-native-mapbox-gl_maps')
+    implementation project(':react-native-geolocation-service')
+    implementation project(':react-native-android-location-services-dialog-box')
+    implementation project(':@react-native-community_geolocation')
     implementation project(':react-native-screens')
     implementation project(':react-native-reanimated')
     implementation project(':react-native-gesture-handler')
+    implementation project(':react-native-vector-icons')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    implementation project(':@react-native-mapbox-gl_maps')
-    implementation project(':react-native-vector-icons')
+    // implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:8.6.1'
     addUnimodulesDependencies()
 
     if (enableHermes) {

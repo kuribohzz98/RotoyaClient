@@ -13,6 +13,7 @@ import UserInfoScreen from '../components/user/userInfo';
 import CustomDrawerComponent from './contentDrawer';
 import { Icon } from 'react-native-elements';
 import RegisterScreen from '../components/auth/register/registerScreen';
+import SportCenterScreen from '../components/sportCenter/sportCenterScreen';
 
 const { width } = Dimensions.get('window');
 
@@ -34,13 +35,26 @@ const AuthStack = createStackNavigator({
 });
 
 const HomeStack = createStackNavigator({
-    Main: {
-        screen: MyHomeScreen
+    Home: {
+        screen: MyHomeScreen,
+        navigationOptions: ({ navigation }) => ({
+            headerLeft: (<LeftTopButton navigation={navigation} />)
+        })
+    },
+    SportCenter: {
+        screen: SportCenterScreen
+        // createStackNavigator({
+        //     SportCenterScreen: {
+        //         screen: SportCenterScreen,
+        //         params: ({ navigation }) => navigation.getParam('id'),
+        //         navigationOptions: {
+        //             headerShown: false
+        //         }
+        //     }
+        // })
     }
 }, {
-    defaultNavigationOptions: ({ navigation }) => ({
-        headerLeft: (<LeftTopButton navigation={navigation} />)
-    })
+    initialRouteName: 'Home'
 })
 
 const userInfoStack = createStackNavigator({
@@ -74,12 +88,12 @@ const MyDrawerNavigator = createDrawerNavigator(
                 drawerIcon: ({ tintColor }) => (<Icon type="font-awesome" name="home" size={24} color={tintColor}></Icon>)
             }
         },
-        Notifications: {
-            screen: MyNotificationsScreen,
-            navigationOptions: {
-                drawerIcon: ({ tintColor }) => (<Icon type="material-community" name="home" size={24} color={tintColor}></Icon>)
-            }
-        },
+        // Notifications: {
+        //     screen: MyNotificationsScreen,
+        //     navigationOptions: {
+        //         drawerIcon: ({ tintColor }) => (<Icon type="material-community" name="home" size={24} color={tintColor}></Icon>)
+        //     }
+        // },
         Map: {
             screen: MapStack,
             navigationOptions: {

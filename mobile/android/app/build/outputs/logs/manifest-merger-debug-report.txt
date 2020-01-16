@@ -4,15 +4,18 @@ ADDED from Z:\RotoyaClient\mobile\android\app\src\main\AndroidManifest.xml:1:1-4
 INJECTED from Z:\RotoyaClient\mobile\android\app\src\main\AndroidManifest.xml:1:1-48:12
 INJECTED from Z:\RotoyaClient\mobile\android\app\src\main\AndroidManifest.xml:1:1-48:12
 INJECTED from Z:\RotoyaClient\mobile\android\app\src\main\AndroidManifest.xml:1:1-48:12
+MERGED from [:@react-native-mapbox-gl_maps] Z:\RotoyaClient\mobile\node_modules\@react-native-mapbox-gl\maps\android\rctmgl\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-14:12
+MERGED from [:react-native-geolocation-service] Z:\RotoyaClient\mobile\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-14:12
+MERGED from [:react-native-android-location-services-dialog-box] Z:\RotoyaClient\mobile\node_modules\react-native-android-location-services-dialog-box\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-12:12
+MERGED from [:@react-native-community_geolocation] Z:\RotoyaClient\mobile\node_modules\@react-native-community\geolocation\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-screens] Z:\RotoyaClient\mobile\node_modules\react-native-screens\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-reanimated] Z:\RotoyaClient\mobile\node_modules\react-native-reanimated\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-gesture-handler] Z:\RotoyaClient\mobile\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:@react-native-mapbox-gl_maps] Z:\RotoyaClient\mobile\node_modules\@react-native-mapbox-gl\maps\android\rctmgl\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-14:12
+MERGED from [:react-native-vector-icons] Z:\RotoyaClient\mobile\node_modules\react-native-vector-icons\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:expo-permissions] Z:\RotoyaClient\mobile\node_modules\expo-permissions\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v8:0.7.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-plugin-annotation-v8-0.7.0.aar\fa18799dd8e574b3402d101812341847\AndroidManifest.xml:2:1-9:12
 MERGED from [com.mapbox.mapboxsdk:mapbox-android-plugin-localization-v8:0.10.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-plugin-localization-v8-0.10.0.aar\504e33a6baeb4e52a4deb6e71e03eff8\AndroidManifest.xml:2:1-9:12
 MERGED from [com.mapbox.mapboxsdk:mapbox-android-plugin-markerview-v8:0.3.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-plugin-markerview-v8-0.3.0.aar\001b24cddf2d0bacc1527786757869c6\AndroidManifest.xml:2:1-9:12
-MERGED from [:react-native-vector-icons] Z:\RotoyaClient\mobile\node_modules\react-native-vector-icons\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:unimodules-react-native-adapter] Z:\RotoyaClient\mobile\node_modules\@unimodules\react-native-adapter\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [com.facebook.react:react-native:0.61.5] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-react-native-0.61.5.aar\be3e7d2632fcda8d45fd6cea6aa8a587\AndroidManifest.xml:2:1-13:12
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\material-1.0.0.aar\3fa9a8c5b7cc0de3adc352f7400f5c4d\AndroidManifest.xml:17:1-24:12
@@ -39,6 +42,14 @@ MERGED from [:unimodules-core] Z:\RotoyaClient\mobile\node_modules\@unimodules\c
 MERGED from [:unimodules-image-loader-interface] Z:\RotoyaClient\mobile\node_modules\unimodules-image-loader-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:unimodules-sensors-interface] Z:\RotoyaClient\mobile\node_modules\unimodules-sensors-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [org.webkit:android-jsc:r245459] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\android-jsc-r245459.aar\35c628b25ae01444e0c8bb4c1c428052\AndroidManifest.xml:2:1-11:12
+MERGED from [com.mapbox.mapboxsdk:mapbox-android-sdk:8.2.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-sdk-8.2.1.aar\5e70b8ec0df6083cf42d30634938e1ea\AndroidManifest.xml:2:1-20:12
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\appcompat-resources-1.1.0.aar\222e09dd6ccc77287f82e7ad8e903f63\AndroidManifest.xml:17:1-24:12
+MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-glide-4.9.0.aar\a3fae5ae5f78fe2c0ebb482daa99d500\AndroidManifest.xml:2:1-12:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\vectordrawable-animated-1.1.0.aar\2e00e751ab64e7ae3030c575c6b3bf62\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\vectordrawable-1.1.0.aar\cdc54c4c9bd6f1555ff7e0cc0e8bc0e1\AndroidManifest.xml:17:1-24:12
+MERGED from [com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-telemetry-4.5.1.aar\3e9effc6bf5a839fd21526332fe7ee29\AndroidManifest.xml:2:1-30:12
+MERGED from [com.mapbox.mapboxsdk:mapbox-android-accounts:0.2.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-accounts-0.2.0.aar\0c5e2c9ffad75722656d80681ee3fffa\AndroidManifest.xml:2:1-9:12
+MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-gifdecoder-4.9.0.aar\e3584acf22f660314cafabe68c6f4f84\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-location-16.0.0.aar\276e1c1625073d44d2d473670decb285\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\2e2f9bd70bf625738cd991d2672d5f45\AndroidManifest.xml:17:1-29:12
 MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\ab0dfef96667ada96108c4ee2485392c\AndroidManifest.xml:17:1-24:12
@@ -50,22 +61,6 @@ MERGED from [androidx.recyclerview:recyclerview:1.0.0] C:\Users\admin\.gradle\ca
 MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\legacy-support-core-ui-1.0.0.aar\1ae681f6c1bf35fe0e16ec303821b8bd\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-1.0.0.aar\311eb54dc7dfed5a0ba27c1e5053ba0c\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.transition:transition:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\transition-1.1.0.aar\c29a2871d3ac0ee0ec08271f7870a5f4\AndroidManifest.xml:17:1-22:12
-MERGED from [com.facebook.fresco:fresco:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\fresco-2.0.0.aar\fabcc21b7ca13b6d666f23478f292264\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-2.0.0.aar\2fbb1adb4f1aed9040fe615d86b12dd6\AndroidManifest.xml:2:1-9:12
-MERGED from [com.mapbox.mapboxsdk:mapbox-android-sdk:8.2.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-sdk-8.2.1.aar\5e70b8ec0df6083cf42d30634938e1ea\AndroidManifest.xml:2:1-20:12
-MERGED from [com.facebook.fresco:drawee:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\drawee-2.0.0.aar\367f17e1169fe009c7b85b98f12abc15\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\nativeimagefilters-2.0.0.aar\691c6cd6bdf41ebee5a6c6e6b8cdab13\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-2.0.0.aar\7a622e15a809710a52e34aaa5962272d\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\nativeimagetranscoder-2.0.0.aar\f2b2bdf400a174d850556fccdaae157e\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-2.0.0.aar\76ea91aa6a9d5869c612e3d65affdd2d\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\90834babe9144d5d234ff2fb2e5ae70d\AndroidManifest.xml:2:1-13:12
-MERGED from [com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-telemetry-4.5.1.aar\3e9effc6bf5a839fd21526332fe7ee29\AndroidManifest.xml:2:1-30:12
-MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\appcompat-resources-1.1.0.aar\222e09dd6ccc77287f82e7ad8e903f63\AndroidManifest.xml:17:1-24:12
-MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-glide-4.9.0.aar\a3fae5ae5f78fe2c0ebb482daa99d500\AndroidManifest.xml:2:1-12:12
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\vectordrawable-animated-1.1.0.aar\2e00e751ab64e7ae3030c575c6b3bf62\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\vectordrawable-1.1.0.aar\cdc54c4c9bd6f1555ff7e0cc0e8bc0e1\AndroidManifest.xml:17:1-24:12
-MERGED from [com.mapbox.mapboxsdk:mapbox-android-accounts:0.2.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-accounts-0.2.0.aar\0c5e2c9ffad75722656d80681ee3fffa\AndroidManifest.xml:2:1-9:12
-MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-gifdecoder-4.9.0.aar\e3584acf22f660314cafabe68c6f4f84\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\fragment-1.1.0.aar\7a65b8aaa3c1d327b75eb2e8a2221e9e\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\drawerlayout-1.0.0.aar\1cd0d2e6284b4df171551ea000fab8ab\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\viewpager-1.0.0.aar\dd822c18f0eb8f0f04bea06c321f4b51\AndroidManifest.xml:17:1-22:12
@@ -92,9 +87,17 @@ MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\admin\.gradle\caches
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-2.0.0.aar\16065d5670e7b66aef18207ccf36e9a0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-core-2.0.0.aar\0dd1fdf210d5b2e4993cd2e7a7404270\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\core-runtime-2.0.0.aar\67d6b7439580d91b4dab639a61d0d379\AndroidManifest.xml:17:1-22:12
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-2.0.0.aar\2fbb1adb4f1aed9040fe615d86b12dd6\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:fresco:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\fresco-2.0.0.aar\fabcc21b7ca13b6d666f23478f292264\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:drawee:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\drawee-2.0.0.aar\367f17e1169fe009c7b85b98f12abc15\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\nativeimagefilters-2.0.0.aar\691c6cd6bdf41ebee5a6c6e6b8cdab13\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-2.0.0.aar\7a622e15a809710a52e34aaa5962272d\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\nativeimagetranscoder-2.0.0.aar\f2b2bdf400a174d850556fccdaae157e\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-2.0.0.aar\76ea91aa6a9d5869c612e3d65affdd2d\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\90834babe9144d5d234ff2fb2e5ae70d\AndroidManifest.xml:2:1-13:12
 MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\0638b046b44ffade37092d5ecc716f37\AndroidManifest.xml:2:1-30:12
-MERGED from [com.facebook.fresco:fbcore:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-fbcore-2.0.0.aar\66dbea3a802781f5e6bf66fd96a440ed\AndroidManifest.xml:2:1-9:12
 MERGED from [com.jakewharton.timber:timber:4.7.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-timber-4.7.1.aar\76329bb2c17ea74636eb390d8e740e72\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:fbcore:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-fbcore-2.0.0.aar\66dbea3a802781f5e6bf66fd96a440ed\AndroidManifest.xml:2:1-9:12
 MERGED from [com.mapbox.mapboxsdk:mapbox-android-core:1.3.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-core-1.3.0.aar\3b95604c01e7b553248dc6704a2d9903\AndroidManifest.xml:2:1-14:12
 INJECTED from Z:\RotoyaClient\mobile\android\app\src\main\AndroidManifest.xml:1:1-48:12
 INJECTED from Z:\RotoyaClient\mobile\android\app\src\main\AndroidManifest.xml:1:1-48:12
@@ -117,6 +120,8 @@ uses-permission#android.permission.INTERNET
 ADDED from Z:\RotoyaClient\mobile\android\app\src\main\AndroidManifest.xml:4:5-67
 MERGED from [:@react-native-mapbox-gl_maps] Z:\RotoyaClient\mobile\node_modules\@react-native-mapbox-gl\maps\android\rctmgl\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-67
 MERGED from [:@react-native-mapbox-gl_maps] Z:\RotoyaClient\mobile\node_modules\@react-native-mapbox-gl\maps\android\rctmgl\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-67
+MERGED from [:react-native-geolocation-service] Z:\RotoyaClient\mobile\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-67
+MERGED from [:react-native-geolocation-service] Z:\RotoyaClient\mobile\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-67
 MERGED from [:expo-file-system] Z:\RotoyaClient\mobile\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-67
 MERGED from [:expo-file-system] Z:\RotoyaClient\mobile\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-67
 MERGED from [com.mapbox.mapboxsdk:mapbox-android-sdk:8.2.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-sdk-8.2.1.aar\5e70b8ec0df6083cf42d30634938e1ea\AndroidManifest.xml:16:5-67
@@ -155,6 +160,10 @@ ADDED from Z:\RotoyaClient\mobile\android\app\src\main\AndroidManifest.xml:13:5-
 		ADDED from Z:\RotoyaClient\mobile\android\app\src\main\AndroidManifest.xml:13:22-77
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
 ADDED from Z:\RotoyaClient\mobile\android\app\src\main\AndroidManifest.xml:16:5-81
+MERGED from [:react-native-geolocation-service] Z:\RotoyaClient\mobile\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-81
+MERGED from [:react-native-geolocation-service] Z:\RotoyaClient\mobile\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-81
+MERGED from [:react-native-android-location-services-dialog-box] Z:\RotoyaClient\mobile\node_modules\react-native-android-location-services-dialog-box\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-81
+MERGED from [:react-native-android-location-services-dialog-box] Z:\RotoyaClient\mobile\node_modules\react-native-android-location-services-dialog-box\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-81
 MERGED from [:expo-location] Z:\RotoyaClient\mobile\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-81
 MERGED from [:expo-location] Z:\RotoyaClient\mobile\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-81
 MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\0638b046b44ffade37092d5ecc716f37\AndroidManifest.xml:12:5-81
@@ -165,6 +174,10 @@ uses-permission#android.permission.ACCESS_FINE_LOCATION
 ADDED from Z:\RotoyaClient\mobile\android\app\src\main\AndroidManifest.xml:17:5-79
 MERGED from [:@react-native-mapbox-gl_maps] Z:\RotoyaClient\mobile\node_modules\@react-native-mapbox-gl\maps\android\rctmgl\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-79
 MERGED from [:@react-native-mapbox-gl_maps] Z:\RotoyaClient\mobile\node_modules\@react-native-mapbox-gl\maps\android\rctmgl\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-79
+MERGED from [:react-native-geolocation-service] Z:\RotoyaClient\mobile\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-79
+MERGED from [:react-native-geolocation-service] Z:\RotoyaClient\mobile\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-79
+MERGED from [:react-native-android-location-services-dialog-box] Z:\RotoyaClient\mobile\node_modules\react-native-android-location-services-dialog-box\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-79
+MERGED from [:react-native-android-location-services-dialog-box] Z:\RotoyaClient\mobile\node_modules\react-native-android-location-services-dialog-box\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-79
 MERGED from [:expo-location] Z:\RotoyaClient\mobile\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-79
 MERGED from [:expo-location] Z:\RotoyaClient\mobile\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-79
 MERGED from [com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-telemetry-4.5.1.aar\3e9effc6bf5a839fd21526332fe7ee29\AndroidManifest.xml:13:5-79
@@ -221,6 +234,12 @@ MERGED from [:expo-file-system] Z:\RotoyaClient\mobile\node_modules\expo-file-sy
 MERGED from [:expo-file-system] Z:\RotoyaClient\mobile\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:5-28:19
 MERGED from [:expo-location] Z:\RotoyaClient\mobile\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-19:19
 MERGED from [:expo-location] Z:\RotoyaClient\mobile\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-19:19
+MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-glide-4.9.0.aar\a3fae5ae5f78fe2c0ebb482daa99d500\AndroidManifest.xml:10:5-20
+MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-glide-4.9.0.aar\a3fae5ae5f78fe2c0ebb482daa99d500\AndroidManifest.xml:10:5-20
+MERGED from [com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-telemetry-4.5.1.aar\3e9effc6bf5a839fd21526332fe7ee29\AndroidManifest.xml:18:5-28:19
+MERGED from [com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-telemetry-4.5.1.aar\3e9effc6bf5a839fd21526332fe7ee29\AndroidManifest.xml:18:5-28:19
+MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-gifdecoder-4.9.0.aar\e3584acf22f660314cafabe68c6f4f84\AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-gifdecoder-4.9.0.aar\e3584acf22f660314cafabe68c6f4f84\AndroidManifest.xml:9:5-20
 MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-location-16.0.0.aar\276e1c1625073d44d2d473670decb285\AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-location-16.0.0.aar\276e1c1625073d44d2d473670decb285\AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\2e2f9bd70bf625738cd991d2672d5f45\AndroidManifest.xml:22:5-27:19
@@ -231,18 +250,12 @@ MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\admin\.
 MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-tasks-16.0.1.aar\f95b142efc2fb3a0c094f70c3c9a07f9\AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\05d3cf22b16d77455341913bd666f064\AndroidManifest.xml:22:5-26:19
 MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\05d3cf22b16d77455341913bd666f064\AndroidManifest.xml:22:5-26:19
-MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\90834babe9144d5d234ff2fb2e5ae70d\AndroidManifest.xml:11:5-20
-MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\90834babe9144d5d234ff2fb2e5ae70d\AndroidManifest.xml:11:5-20
-MERGED from [com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-telemetry-4.5.1.aar\3e9effc6bf5a839fd21526332fe7ee29\AndroidManifest.xml:18:5-28:19
-MERGED from [com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-telemetry-4.5.1.aar\3e9effc6bf5a839fd21526332fe7ee29\AndroidManifest.xml:18:5-28:19
-MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-glide-4.9.0.aar\a3fae5ae5f78fe2c0ebb482daa99d500\AndroidManifest.xml:10:5-20
-MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-glide-4.9.0.aar\a3fae5ae5f78fe2c0ebb482daa99d500\AndroidManifest.xml:10:5-20
-MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-gifdecoder-4.9.0.aar\e3584acf22f660314cafabe68c6f4f84\AndroidManifest.xml:9:5-20
-MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-gifdecoder-4.9.0.aar\e3584acf22f660314cafabe68c6f4f84\AndroidManifest.xml:9:5-20
 MERGED from [androidx.core:core:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\core-1.1.0.aar\a3ab237257e70e0e12ccddaa90849cba\AndroidManifest.xml:24:5-89
 MERGED from [androidx.core:core:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\core-1.1.0.aar\a3ab237257e70e0e12ccddaa90849cba\AndroidManifest.xml:24:5-89
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0.aar\79f967bfd0a007fbdf91c4b34e4ce605\AndroidManifest.xml:24:5-25:19
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0.aar\79f967bfd0a007fbdf91c4b34e4ce605\AndroidManifest.xml:24:5-25:19
+MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\90834babe9144d5d234ff2fb2e5ae70d\AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\90834babe9144d5d234ff2fb2e5ae70d\AndroidManifest.xml:11:5-20
 MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\0638b046b44ffade37092d5ecc716f37\AndroidManifest.xml:18:5-28:19
 MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\0638b046b44ffade37092d5ecc716f37\AndroidManifest.xml:18:5-28:19
 MERGED from [com.jakewharton.timber:timber:4.7.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-timber-4.7.1.aar\76329bb2c17ea74636eb390d8e740e72\AndroidManifest.xml:7:5-20
@@ -289,14 +302,22 @@ uses-sdk
 INJECTED from Z:\RotoyaClient\mobile\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from Z:\RotoyaClient\mobile\android\app\src\main\AndroidManifest.xml
 INJECTED from Z:\RotoyaClient\mobile\android\app\src\main\AndroidManifest.xml
+MERGED from [:@react-native-mapbox-gl_maps] Z:\RotoyaClient\mobile\node_modules\@react-native-mapbox-gl\maps\android\rctmgl\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:@react-native-mapbox-gl_maps] Z:\RotoyaClient\mobile\node_modules\@react-native-mapbox-gl\maps\android\rctmgl\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-geolocation-service] Z:\RotoyaClient\mobile\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-geolocation-service] Z:\RotoyaClient\mobile\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-android-location-services-dialog-box] Z:\RotoyaClient\mobile\node_modules\react-native-android-location-services-dialog-box\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-android-location-services-dialog-box] Z:\RotoyaClient\mobile\node_modules\react-native-android-location-services-dialog-box\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:@react-native-community_geolocation] Z:\RotoyaClient\mobile\node_modules\@react-native-community\geolocation\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:@react-native-community_geolocation] Z:\RotoyaClient\mobile\node_modules\@react-native-community\geolocation\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-screens] Z:\RotoyaClient\mobile\node_modules\react-native-screens\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-screens] Z:\RotoyaClient\mobile\node_modules\react-native-screens\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-reanimated] Z:\RotoyaClient\mobile\node_modules\react-native-reanimated\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-reanimated] Z:\RotoyaClient\mobile\node_modules\react-native-reanimated\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] Z:\RotoyaClient\mobile\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] Z:\RotoyaClient\mobile\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:@react-native-mapbox-gl_maps] Z:\RotoyaClient\mobile\node_modules\@react-native-mapbox-gl\maps\android\rctmgl\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:@react-native-mapbox-gl_maps] Z:\RotoyaClient\mobile\node_modules\@react-native-mapbox-gl\maps\android\rctmgl\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-vector-icons] Z:\RotoyaClient\mobile\node_modules\react-native-vector-icons\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-vector-icons] Z:\RotoyaClient\mobile\node_modules\react-native-vector-icons\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:expo-permissions] Z:\RotoyaClient\mobile\node_modules\expo-permissions\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:expo-permissions] Z:\RotoyaClient\mobile\node_modules\expo-permissions\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v8:0.7.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-plugin-annotation-v8-0.7.0.aar\fa18799dd8e574b3402d101812341847\AndroidManifest.xml:5:5-7:41
@@ -305,8 +326,6 @@ MERGED from [com.mapbox.mapboxsdk:mapbox-android-plugin-localization-v8:0.10.0] 
 MERGED from [com.mapbox.mapboxsdk:mapbox-android-plugin-localization-v8:0.10.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-plugin-localization-v8-0.10.0.aar\504e33a6baeb4e52a4deb6e71e03eff8\AndroidManifest.xml:5:5-7:41
 MERGED from [com.mapbox.mapboxsdk:mapbox-android-plugin-markerview-v8:0.3.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-plugin-markerview-v8-0.3.0.aar\001b24cddf2d0bacc1527786757869c6\AndroidManifest.xml:5:5-7:41
 MERGED from [com.mapbox.mapboxsdk:mapbox-android-plugin-markerview-v8:0.3.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-plugin-markerview-v8-0.3.0.aar\001b24cddf2d0bacc1527786757869c6\AndroidManifest.xml:5:5-7:41
-MERGED from [:react-native-vector-icons] Z:\RotoyaClient\mobile\node_modules\react-native-vector-icons\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-vector-icons] Z:\RotoyaClient\mobile\node_modules\react-native-vector-icons\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:unimodules-react-native-adapter] Z:\RotoyaClient\mobile\node_modules\@unimodules\react-native-adapter\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:unimodules-react-native-adapter] Z:\RotoyaClient\mobile\node_modules\@unimodules\react-native-adapter\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.61.5] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-react-native-0.61.5.aar\be3e7d2632fcda8d45fd6cea6aa8a587\AndroidManifest.xml:7:5-9:41
@@ -359,6 +378,22 @@ MERGED from [:unimodules-sensors-interface] Z:\RotoyaClient\mobile\node_modules\
 MERGED from [:unimodules-sensors-interface] Z:\RotoyaClient\mobile\node_modules\unimodules-sensors-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [org.webkit:android-jsc:r245459] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\android-jsc-r245459.aar\35c628b25ae01444e0c8bb4c1c428052\AndroidManifest.xml:7:5-9:41
 MERGED from [org.webkit:android-jsc:r245459] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\android-jsc-r245459.aar\35c628b25ae01444e0c8bb4c1c428052\AndroidManifest.xml:7:5-9:41
+MERGED from [com.mapbox.mapboxsdk:mapbox-android-sdk:8.2.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-sdk-8.2.1.aar\5e70b8ec0df6083cf42d30634938e1ea\AndroidManifest.xml:5:5-7:41
+MERGED from [com.mapbox.mapboxsdk:mapbox-android-sdk:8.2.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-sdk-8.2.1.aar\5e70b8ec0df6083cf42d30634938e1ea\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\appcompat-resources-1.1.0.aar\222e09dd6ccc77287f82e7ad8e903f63\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\appcompat-resources-1.1.0.aar\222e09dd6ccc77287f82e7ad8e903f63\AndroidManifest.xml:20:5-22:41
+MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-glide-4.9.0.aar\a3fae5ae5f78fe2c0ebb482daa99d500\AndroidManifest.xml:6:5-8:41
+MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-glide-4.9.0.aar\a3fae5ae5f78fe2c0ebb482daa99d500\AndroidManifest.xml:6:5-8:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\vectordrawable-animated-1.1.0.aar\2e00e751ab64e7ae3030c575c6b3bf62\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\vectordrawable-animated-1.1.0.aar\2e00e751ab64e7ae3030c575c6b3bf62\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\vectordrawable-1.1.0.aar\cdc54c4c9bd6f1555ff7e0cc0e8bc0e1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\vectordrawable-1.1.0.aar\cdc54c4c9bd6f1555ff7e0cc0e8bc0e1\AndroidManifest.xml:20:5-22:41
+MERGED from [com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-telemetry-4.5.1.aar\3e9effc6bf5a839fd21526332fe7ee29\AndroidManifest.xml:7:5-9:41
+MERGED from [com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-telemetry-4.5.1.aar\3e9effc6bf5a839fd21526332fe7ee29\AndroidManifest.xml:7:5-9:41
+MERGED from [com.mapbox.mapboxsdk:mapbox-android-accounts:0.2.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-accounts-0.2.0.aar\0c5e2c9ffad75722656d80681ee3fffa\AndroidManifest.xml:5:5-7:41
+MERGED from [com.mapbox.mapboxsdk:mapbox-android-accounts:0.2.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-accounts-0.2.0.aar\0c5e2c9ffad75722656d80681ee3fffa\AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-gifdecoder-4.9.0.aar\e3584acf22f660314cafabe68c6f4f84\AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-gifdecoder-4.9.0.aar\e3584acf22f660314cafabe68c6f4f84\AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-location-16.0.0.aar\276e1c1625073d44d2d473670decb285\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-location-16.0.0.aar\276e1c1625073d44d2d473670decb285\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\2e2f9bd70bf625738cd991d2672d5f45\AndroidManifest.xml:20:5-44
@@ -381,38 +416,6 @@ MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\admin\
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-1.0.0.aar\311eb54dc7dfed5a0ba27c1e5053ba0c\AndroidManifest.xml:20:5-44
 MERGED from [androidx.transition:transition:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\transition-1.1.0.aar\c29a2871d3ac0ee0ec08271f7870a5f4\AndroidManifest.xml:20:5-44
 MERGED from [androidx.transition:transition:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\transition-1.1.0.aar\c29a2871d3ac0ee0ec08271f7870a5f4\AndroidManifest.xml:20:5-44
-MERGED from [com.facebook.fresco:fresco:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\fresco-2.0.0.aar\fabcc21b7ca13b6d666f23478f292264\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fresco:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\fresco-2.0.0.aar\fabcc21b7ca13b6d666f23478f292264\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-2.0.0.aar\2fbb1adb4f1aed9040fe615d86b12dd6\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-2.0.0.aar\2fbb1adb4f1aed9040fe615d86b12dd6\AndroidManifest.xml:5:5-7:41
-MERGED from [com.mapbox.mapboxsdk:mapbox-android-sdk:8.2.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-sdk-8.2.1.aar\5e70b8ec0df6083cf42d30634938e1ea\AndroidManifest.xml:5:5-7:41
-MERGED from [com.mapbox.mapboxsdk:mapbox-android-sdk:8.2.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-sdk-8.2.1.aar\5e70b8ec0df6083cf42d30634938e1ea\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\drawee-2.0.0.aar\367f17e1169fe009c7b85b98f12abc15\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\drawee-2.0.0.aar\367f17e1169fe009c7b85b98f12abc15\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\nativeimagefilters-2.0.0.aar\691c6cd6bdf41ebee5a6c6e6b8cdab13\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\nativeimagefilters-2.0.0.aar\691c6cd6bdf41ebee5a6c6e6b8cdab13\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-2.0.0.aar\7a622e15a809710a52e34aaa5962272d\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-2.0.0.aar\7a622e15a809710a52e34aaa5962272d\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\nativeimagetranscoder-2.0.0.aar\f2b2bdf400a174d850556fccdaae157e\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\nativeimagetranscoder-2.0.0.aar\f2b2bdf400a174d850556fccdaae157e\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-2.0.0.aar\76ea91aa6a9d5869c612e3d65affdd2d\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-2.0.0.aar\76ea91aa6a9d5869c612e3d65affdd2d\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\90834babe9144d5d234ff2fb2e5ae70d\AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\90834babe9144d5d234ff2fb2e5ae70d\AndroidManifest.xml:7:5-9:41
-MERGED from [com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-telemetry-4.5.1.aar\3e9effc6bf5a839fd21526332fe7ee29\AndroidManifest.xml:7:5-9:41
-MERGED from [com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-telemetry-4.5.1.aar\3e9effc6bf5a839fd21526332fe7ee29\AndroidManifest.xml:7:5-9:41
-MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\appcompat-resources-1.1.0.aar\222e09dd6ccc77287f82e7ad8e903f63\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\appcompat-resources-1.1.0.aar\222e09dd6ccc77287f82e7ad8e903f63\AndroidManifest.xml:20:5-22:41
-MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-glide-4.9.0.aar\a3fae5ae5f78fe2c0ebb482daa99d500\AndroidManifest.xml:6:5-8:41
-MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-glide-4.9.0.aar\a3fae5ae5f78fe2c0ebb482daa99d500\AndroidManifest.xml:6:5-8:41
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\vectordrawable-animated-1.1.0.aar\2e00e751ab64e7ae3030c575c6b3bf62\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\vectordrawable-animated-1.1.0.aar\2e00e751ab64e7ae3030c575c6b3bf62\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\vectordrawable-1.1.0.aar\cdc54c4c9bd6f1555ff7e0cc0e8bc0e1\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\vectordrawable-1.1.0.aar\cdc54c4c9bd6f1555ff7e0cc0e8bc0e1\AndroidManifest.xml:20:5-22:41
-MERGED from [com.mapbox.mapboxsdk:mapbox-android-accounts:0.2.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-accounts-0.2.0.aar\0c5e2c9ffad75722656d80681ee3fffa\AndroidManifest.xml:5:5-7:41
-MERGED from [com.mapbox.mapboxsdk:mapbox-android-accounts:0.2.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-accounts-0.2.0.aar\0c5e2c9ffad75722656d80681ee3fffa\AndroidManifest.xml:5:5-7:41
-MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-gifdecoder-4.9.0.aar\e3584acf22f660314cafabe68c6f4f84\AndroidManifest.xml:5:5-7:41
-MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-gifdecoder-4.9.0.aar\e3584acf22f660314cafabe68c6f4f84\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\fragment-1.1.0.aar\7a65b8aaa3c1d327b75eb2e8a2221e9e\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\fragment-1.1.0.aar\7a65b8aaa3c1d327b75eb2e8a2221e9e\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\drawerlayout-1.0.0.aar\1cd0d2e6284b4df171551ea000fab8ab\AndroidManifest.xml:20:5-44
@@ -465,12 +468,28 @@ MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\admin\.g
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-core-2.0.0.aar\0dd1fdf210d5b2e4993cd2e7a7404270\AndroidManifest.xml:20:5-44
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\core-runtime-2.0.0.aar\67d6b7439580d91b4dab639a61d0d379\AndroidManifest.xml:20:5-44
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\core-runtime-2.0.0.aar\67d6b7439580d91b4dab639a61d0d379\AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-2.0.0.aar\2fbb1adb4f1aed9040fe615d86b12dd6\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-2.0.0.aar\2fbb1adb4f1aed9040fe615d86b12dd6\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fresco:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\fresco-2.0.0.aar\fabcc21b7ca13b6d666f23478f292264\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fresco:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\fresco-2.0.0.aar\fabcc21b7ca13b6d666f23478f292264\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\drawee-2.0.0.aar\367f17e1169fe009c7b85b98f12abc15\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\drawee-2.0.0.aar\367f17e1169fe009c7b85b98f12abc15\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\nativeimagefilters-2.0.0.aar\691c6cd6bdf41ebee5a6c6e6b8cdab13\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\nativeimagefilters-2.0.0.aar\691c6cd6bdf41ebee5a6c6e6b8cdab13\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-2.0.0.aar\7a622e15a809710a52e34aaa5962272d\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-2.0.0.aar\7a622e15a809710a52e34aaa5962272d\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\nativeimagetranscoder-2.0.0.aar\f2b2bdf400a174d850556fccdaae157e\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\nativeimagetranscoder-2.0.0.aar\f2b2bdf400a174d850556fccdaae157e\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-2.0.0.aar\76ea91aa6a9d5869c612e3d65affdd2d\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-2.0.0.aar\76ea91aa6a9d5869c612e3d65affdd2d\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\90834babe9144d5d234ff2fb2e5ae70d\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\90834babe9144d5d234ff2fb2e5ae70d\AndroidManifest.xml:7:5-9:41
 MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\0638b046b44ffade37092d5ecc716f37\AndroidManifest.xml:8:5-10:41
 MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\0638b046b44ffade37092d5ecc716f37\AndroidManifest.xml:8:5-10:41
-MERGED from [com.facebook.fresco:fbcore:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-fbcore-2.0.0.aar\66dbea3a802781f5e6bf66fd96a440ed\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fbcore:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-fbcore-2.0.0.aar\66dbea3a802781f5e6bf66fd96a440ed\AndroidManifest.xml:5:5-7:41
 MERGED from [com.jakewharton.timber:timber:4.7.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-timber-4.7.1.aar\76329bb2c17ea74636eb390d8e740e72\AndroidManifest.xml:5:5-43
 MERGED from [com.jakewharton.timber:timber:4.7.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-timber-4.7.1.aar\76329bb2c17ea74636eb390d8e740e72\AndroidManifest.xml:5:5-43
+MERGED from [com.facebook.fresco:fbcore:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-fbcore-2.0.0.aar\66dbea3a802781f5e6bf66fd96a440ed\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:2.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-fbcore-2.0.0.aar\66dbea3a802781f5e6bf66fd96a440ed\AndroidManifest.xml:5:5-7:41
 MERGED from [com.mapbox.mapboxsdk:mapbox-android-core:1.3.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-core-1.3.0.aar\3b95604c01e7b553248dc6704a2d9903\AndroidManifest.xml:7:5-9:41
 MERGED from [com.mapbox.mapboxsdk:mapbox-android-core:1.3.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-core-1.3.0.aar\3b95604c01e7b553248dc6704a2d9903\AndroidManifest.xml:7:5-9:41
 INJECTED from Z:\RotoyaClient\mobile\android\app\src\main\AndroidManifest.xml
@@ -483,6 +502,18 @@ INJECTED from Z:\RotoyaClient\mobile\android\app\src\main\AndroidManifest.xml
 		INJECTED from Z:\RotoyaClient\mobile\android\app\src\main\AndroidManifest.xml
 		ADDED from Z:\RotoyaClient\mobile\android\app\src\main\AndroidManifest.xml
 		INJECTED from Z:\RotoyaClient\mobile\android\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [:react-native-geolocation-service] Z:\RotoyaClient\mobile\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-79
+MERGED from [com.mapbox.mapboxsdk:mapbox-android-sdk:8.2.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-sdk-8.2.1.aar\5e70b8ec0df6083cf42d30634938e1ea\AndroidManifest.xml:17:5-79
+MERGED from [com.mapbox.mapboxsdk:mapbox-android-sdk:8.2.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-sdk-8.2.1.aar\5e70b8ec0df6083cf42d30634938e1ea\AndroidManifest.xml:17:5-79
+MERGED from [com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-telemetry-4.5.1.aar\3e9effc6bf5a839fd21526332fe7ee29\AndroidManifest.xml:14:5-79
+MERGED from [com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-telemetry-4.5.1.aar\3e9effc6bf5a839fd21526332fe7ee29\AndroidManifest.xml:14:5-79
+MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\0638b046b44ffade37092d5ecc716f37\AndroidManifest.xml:13:5-79
+MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\0638b046b44ffade37092d5ecc716f37\AndroidManifest.xml:13:5-79
+MERGED from [com.mapbox.mapboxsdk:mapbox-android-core:1.3.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-core-1.3.0.aar\3b95604c01e7b553248dc6704a2d9903\AndroidManifest.xml:12:5-79
+MERGED from [com.mapbox.mapboxsdk:mapbox-android-core:1.3.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-core-1.3.0.aar\3b95604c01e7b553248dc6704a2d9903\AndroidManifest.xml:12:5-79
+	android:name
+		ADDED from [:react-native-geolocation-service] Z:\RotoyaClient\mobile\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:10:22-76
 uses-permission#android.permission.STORAGE
 ADDED from [:expo-file-system] Z:\RotoyaClient\mobile\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-66
 	android:name
@@ -515,20 +546,6 @@ ADDED from [:expo-location] Z:\RotoyaClient\mobile\node_modules\expo-location\an
 		ADDED from [:expo-location] Z:\RotoyaClient\mobile\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-37
 	android:name
 		ADDED from [:expo-location] Z:\RotoyaClient\mobile\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-78
-activity#com.google.android.gms.common.api.GoogleApiActivity
-ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\2e2f9bd70bf625738cd991d2672d5f45\AndroidManifest.xml:23:9-26:75
-	android:exported
-		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\2e2f9bd70bf625738cd991d2672d5f45\AndroidManifest.xml:25:13-37
-	android:theme
-		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\2e2f9bd70bf625738cd991d2672d5f45\AndroidManifest.xml:26:13-72
-	android:name
-		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\2e2f9bd70bf625738cd991d2672d5f45\AndroidManifest.xml:24:13-79
-meta-data#com.google.android.gms.version
-ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\05d3cf22b16d77455341913bd666f064\AndroidManifest.xml:23:9-25:69
-	android:value
-		ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\05d3cf22b16d77455341913bd666f064\AndroidManifest.xml:25:13-66
-	android:name
-		ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\05d3cf22b16d77455341913bd666f064\AndroidManifest.xml:24:13-58
 uses-feature#0x00020000
 ADDED from [com.mapbox.mapboxsdk:mapbox-android-sdk:8.2.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-sdk-8.2.1.aar\5e70b8ec0df6083cf42d30634938e1ea\AndroidManifest.xml:9:5-11:35
 	android:glEsVersion
@@ -541,16 +558,6 @@ ADDED from [com.mapbox.mapboxsdk:mapbox-android-sdk:8.2.1] C:\Users\admin\.gradl
 		ADDED from [com.mapbox.mapboxsdk:mapbox-android-sdk:8.2.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-sdk-8.2.1.aar\5e70b8ec0df6083cf42d30634938e1ea\AndroidManifest.xml:14:9-33
 	android:name
 		ADDED from [com.mapbox.mapboxsdk:mapbox-android-sdk:8.2.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-sdk-8.2.1.aar\5e70b8ec0df6083cf42d30634938e1ea\AndroidManifest.xml:13:9-45
-uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from [com.mapbox.mapboxsdk:mapbox-android-sdk:8.2.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-sdk-8.2.1.aar\5e70b8ec0df6083cf42d30634938e1ea\AndroidManifest.xml:17:5-79
-MERGED from [com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-telemetry-4.5.1.aar\3e9effc6bf5a839fd21526332fe7ee29\AndroidManifest.xml:14:5-79
-MERGED from [com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-telemetry-4.5.1.aar\3e9effc6bf5a839fd21526332fe7ee29\AndroidManifest.xml:14:5-79
-MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\0638b046b44ffade37092d5ecc716f37\AndroidManifest.xml:13:5-79
-MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\0638b046b44ffade37092d5ecc716f37\AndroidManifest.xml:13:5-79
-MERGED from [com.mapbox.mapboxsdk:mapbox-android-core:1.3.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-core-1.3.0.aar\3b95604c01e7b553248dc6704a2d9903\AndroidManifest.xml:12:5-79
-MERGED from [com.mapbox.mapboxsdk:mapbox-android-core:1.3.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-core-1.3.0.aar\3b95604c01e7b553248dc6704a2d9903\AndroidManifest.xml:12:5-79
-	android:name
-		ADDED from [com.mapbox.mapboxsdk:mapbox-android-sdk:8.2.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-sdk-8.2.1.aar\5e70b8ec0df6083cf42d30634938e1ea\AndroidManifest.xml:17:22-76
 uses-permission#android.permission.ACCESS_WIFI_STATE
 ADDED from [com.mapbox.mapboxsdk:mapbox-android-sdk:8.2.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-sdk-8.2.1.aar\5e70b8ec0df6083cf42d30634938e1ea\AndroidManifest.xml:18:5-76
 MERGED from [com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-telemetry-4.5.1.aar\3e9effc6bf5a839fd21526332fe7ee29\AndroidManifest.xml:15:5-76
@@ -577,6 +584,20 @@ ADDED from [com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\admin\
 		ADDED from [com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-telemetry-4.5.1.aar\3e9effc6bf5a839fd21526332fe7ee29\AndroidManifest.xml:27:13-69
 	android:name
 		ADDED from [com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-mapbox-android-telemetry-4.5.1.aar\3e9effc6bf5a839fd21526332fe7ee29\AndroidManifest.xml:26:13-92
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\2e2f9bd70bf625738cd991d2672d5f45\AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\2e2f9bd70bf625738cd991d2672d5f45\AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\2e2f9bd70bf625738cd991d2672d5f45\AndroidManifest.xml:26:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\2e2f9bd70bf625738cd991d2672d5f45\AndroidManifest.xml:24:13-79
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\05d3cf22b16d77455341913bd666f064\AndroidManifest.xml:23:9-25:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\05d3cf22b16d77455341913bd666f064\AndroidManifest.xml:25:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\05d3cf22b16d77455341913bd666f064\AndroidManifest.xml:24:13-58
 uses-permission#com.google.android.providers.gsf.permission.READ_GSERVICES
 ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\0638b046b44ffade37092d5ecc716f37\AndroidManifest.xml:15:5-98
 	android:name

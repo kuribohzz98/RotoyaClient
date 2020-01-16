@@ -9,7 +9,7 @@ import { argonTheme } from '../../constants';
 
 class DropDown extends React.Component {
   state = {
-    value: 1
+    value: 0
   }
 
   handleOnSelect = (index, value) => {
@@ -19,7 +19,7 @@ class DropDown extends React.Component {
   }
 
   render() {
-    const { onSelect, iconName, iconFamily, iconSize, iconColor, color, textStyle, style, ...props } = this.props;
+    const { onSelect, iconName, iconFamily, iconSize, iconColor, color, textStyle, style, defaultText, ...props } = this.props;
 
     const modalStyles = [
       styles.qty,
@@ -40,7 +40,7 @@ class DropDown extends React.Component {
         dropdownTextStyle={{paddingLeft:16, fontSize:12}}
         {...props}>
         <Block flex row middle space="between">
-          <Text size={12} style={textStyles}>{this.state.value}</Text>
+          <Text size={12} style={textStyles}>{this.state.value || defaultText}</Text>
           <Icon name={iconName || "nav-down"} family={iconFamily || "ArgonExtra"} size={iconSize || 10} color={iconColor || argonTheme.COLORS.WHITE} />
         </Block>
       </ModalDropdown>
