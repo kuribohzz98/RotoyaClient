@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
         height: height,
         padding: 0,
         zIndex: 1,
-        marginTop: "15%"
+        marginTop: "20%"
     },
     profileBackground: {
         width: width,

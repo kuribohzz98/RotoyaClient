@@ -1,10 +1,9 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
-import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import MyHomeScreen from '../components/home/home';
-import MyNotificationsScreen from '../components/notifycation';
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import AuthLoadingScreen from '../components/auth/authLoading';
 import LoginScreen from '../components/auth/login/loginScreen';
 import LeftTopButton from '../components/common/LeftTopButton';
@@ -17,114 +16,130 @@ import SportCenterScreen from '../components/sportCenter/sportCenterScreen';
 
 const { width } = Dimensions.get('window');
 
-const AuthStack = createStackNavigator({
-    Login: {
-        screen: LoginScreen,
-        navigationOptions: {
-            headerShown: false
-        }
-    },
-    Register: {
-        screen: RegisterScreen,
-        navigationOptions: {
-            title: 'Create Account'
-        }
-    }
-}, {
-    initialRouteName: 'Login'
-});
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
-const HomeStack = createStackNavigator({
-    Home: {
-        screen: MyHomeScreen,
-        navigationOptions: ({ navigation }) => ({
-            headerLeft: (<LeftTopButton navigation={navigation} />)
-        })
-    },
-    SportCenter: {
-        screen: SportCenterScreen
-        // createStackNavigator({
-        //     SportCenterScreen: {
-        //         screen: SportCenterScreen,
-        //         params: ({ navigation }) => navigation.getParam('id'),
-        //         navigationOptions: {
-        //             headerShown: false
-        //         }
-        //     }
-        // })
-    }
-}, {
-    initialRouteName: 'Home'
-})
-
-const userInfoStack = createStackNavigator({
-    Main: {
-        screen: UserInfoScreen,
-        // navigationOptions: {
-        //     headerShown: false
-        // }
-    }
-}, {
-    defaultNavigationOptions: ({ navigation }) => ({
-        headerLeft: (<LeftTopButton navigation={navigation} />),
-    }),
-})
-
-const MapStack = createStackNavigator({
-    Main: {
-        screen: RotoyaMap
-    }
-}, {
-    defaultNavigationOptions: ({ navigation }) => ({
-        headerLeft: (<LeftTopButton navigation={navigation} />)
-    })
-})
-
-const MyDrawerNavigator = createDrawerNavigator(
-    {
-        Home: {
-            screen: HomeStack,
-            navigationOptions: {
-                drawerIcon: ({ tintColor }) => (<Icon type="font-awesome" name="home" size={24} color={tintColor}></Icon>)
-            }
-        },
-        // Notifications: {
-        //     screen: MyNotificationsScreen,
-        //     navigationOptions: {
-        //         drawerIcon: ({ tintColor }) => (<Icon type="material-community" name="home" size={24} color={tintColor}></Icon>)
-        //     }
-        // },
-        Map: {
-            screen: MapStack,
-            navigationOptions: {
-                drawerIcon: ({ tintColor }) => (<Icon type="font-awesome" name="map" size={24} color={tintColor}></Icon>)
-            }
-        },
-        UserInfo: {
-            screen: userInfoStack,
-            navigationOptions: {
-                drawerIcon: ({ tintColor }) => (<Icon type="font-awesome" name="user" size={24} color={tintColor}></Icon>)
-            }
-        }
-    },
-    {
-        drawerPosition: 'left',
-        initialRouteName: 'Home',
-        contentComponent: CustomDrawerComponent,
-        drawerBackgroundColor: "white",
-        drawerWidth: width * 3 / 5
-    }
-);
-
-const switchNavigator = createSwitchNavigator(
-    {
-        AuthLoading: AuthLoadingScreen,
-        App: MyDrawerNavigator,
-        Auth: AuthStack,
-    },
-    {
-        initialRouteName: 'AuthLoading',
-    }
+const StackHome = () => (
+    <Stack.Navigator initialRouteName="Main">
+        <Stack.Screen
+            name="Main"
+            component={MyHomeScreen}
+            options={({ navigation }) => ({
+                headerLeft: props => (<LeftTopButton {...props} navigation={navigation} />)
+            })}
+        />
+        <Stack.Screen
+            name="SportCenter"
+            component={SportCenterScreen}
+        />
+    </Stack.Navigator>
 )
 
-export default createAppContainer(switchNavigator);
+const StackMap = () => (
+    <Stack.Navigator initialRouteName="Main">
+        <Stack.Screen
+            name="Main"
+            component={RotoyaMap}
+            options={({ navigation }) => ({
+                headerLeft: props => (<LeftTopButton {...props} navigation={navigation} />)
+            })}
+        />
+    </Stack.Navigator>
+)
+
+const StackUserInfo = () => (
+    <Stack.Navigator initialRouteName="Main">
+        <Stack.Screen
+            name="Main"
+            component={UserInfoScreen}
+            options={({ navigation }) => ({
+                headerLeft: props => (<LeftTopButton {...props} navigation={navigation} />)
+            })}
+        />
+    </Stack.Navigator>
+)
+
+const DrawerNavigation = () => (
+    <Drawer.Navigator initialRouteName="Home"
+        drawerContent={props => <CustomDrawerComponent {...props} />}
+        drawerContentOptions={{
+            activeBackgroundColor: "rgb(7, 184, 178)",
+            activeTintColor: "white"
+        }}
+        drawerStyle={{
+            backgroundColor: "white",
+            width: width * 3.5 / 5
+        }}
+    >
+        <Drawer.Screen
+            name="Home"
+            component={StackHome}
+            options={{
+                drawerIcon: props => (
+                    <Icon type="font-awesome" name="home" size={24} color={props.color}></Icon>
+                )
+            }}
+        />
+        <Drawer.Screen
+            name="Map"
+            component={StackMap}
+            options={{
+                drawerIcon: props => (
+                    <Icon type="font-awesome" name="map" size={24} color={props.color}></Icon>
+                )
+            }}
+        />
+        <Drawer.Screen
+            name="UserInfo"
+            component={StackUserInfo}
+            options={{
+                drawerIcon: props => (
+                    <Icon type="font-awesome" name="user" size={24} color={props.color}></Icon>
+                )
+            }}
+        />
+    </Drawer.Navigator>
+)
+
+const StackAuth = () => (
+    <Stack.Navigator
+        initialRouteName="Login"
+        headerMode="screen"
+    >
+        <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{
+                headerShown: false
+            }}
+        />
+        <Stack.Screen
+            name="Register"
+            component={RegisterScreen}
+            options={{
+                headerTitle: 'Register Account'
+            }}
+        />
+    </Stack.Navigator>
+)
+
+const StackAuthSwitch = () => (
+    <Stack.Navigator
+        initialRouteName="AuthLoading"
+        headerMode='none'
+    >
+        <Stack.Screen name="AuthLoading" component={AuthLoadingScreen} />
+        <Stack.Screen name="App" component={DrawerNavigation} />
+        <Stack.Screen name="Auth" component={StackAuth} />
+    </Stack.Navigator>
+)
+
+function NavigationApp() {
+    return (
+        <NavigationContainer>
+            <StackAuthSwitch />
+        </NavigationContainer>
+    )
+}
+
+export default NavigationApp;

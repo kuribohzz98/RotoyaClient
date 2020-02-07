@@ -15,9 +15,6 @@ class LoginScreen extends React.Component {
             isVisible: false
         }
     }
-    static navigationOptions = {
-
-    };
     onSubmit = values => {
         console.log(values);
         this.setState({
@@ -28,7 +25,7 @@ class LoginScreen extends React.Component {
                 'username': values.username,
                 'password': values.password
             })
-            .then((response) => {
+            .then(async response => {
                 this.setState({
                     isVisible: false
                 })
@@ -44,22 +41,22 @@ class LoginScreen extends React.Component {
                     return;
                 }
                 this.props.loginAction(response.data.user);
-                saveItem(StorageConstants.ACCESS_TOKEN, response.data.access_token);
-                this.props.navigation.navigate('Home');
+                await saveItem(StorageConstants.ACCESS_TOKEN, response.data.access_token);
+                this.props.navigation.navigate('App');
             })
             .catch((err) => {
                 console.log(err);
-                Alert.alert(
-                    'Problem',
-                    'Username or password is correct',
-                    [
-                        { text: 'OK', style: 'cancel' },
-                    ]
-                );
+                // Alert.alert(
+                //     'Problem',
+                //     'Username or password is correct',
+                //     [
+                //         { text: 'OK', style: 'cancel' },
+                //     ]
+                // );
                 this.setState({
                     isVisible: false
                 })
-                // this.props.navigation.navigate('Home');
+                // this.props.navigation.navigate('App');
             })
     }
     render() {

@@ -17,7 +17,7 @@ import { bindActionCreators } from 'redux';
 import { setSportCentersAction } from '../../redux/action/sport.action';
 import { setLocationAction } from '../../redux/action/map.action';
 import { setShowFilterHomeAction } from '../../redux/action/component.action';
-import { Card } from '../common';
+import { Card } from 'react-native-elements';
 import { Block } from 'galio-framework';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import Geolocation from 'react-native-geolocation-service';
@@ -195,15 +195,13 @@ class MyHomeScreen extends React.Component {
                                             onPress={() => this.props.navigation.navigate('SportCenter', { id: sportCenter.id })}
                                         >
                                             <Card
-                                                item={{
-                                                    title: sportCenter.name,
-                                                    image: 'data:image/jpeg;base64,' + sportCenter.avatar,
-                                                    // cta: 'View article',
-                                                    description: `Address: ${sportCenter.address ? sportCenter.address + ", " : ''}${sportCenter.commune}, ${sportCenter.district}, ${sportCenter.city}`,
-                                                    horizontal: true
-                                                }}
-                                                horizontal
-                                            />
+                                                title={sportCenter.name}
+                                                image={'data:image/jpeg;base64,' + sportCenter.avatar}
+                                            >
+                                                <Text style={{ marginBottom: 10 }}>
+                                                    {`Address: ${sportCenter.address ? sportCenter.address + ", " : ''}${sportCenter.commune}, ${sportCenter.district}, ${sportCenter.city}`}
+                                                </Text>
+                                            </Card>
                                         </TouchableWithoutFeedback>
                                     </Block>
                                 )

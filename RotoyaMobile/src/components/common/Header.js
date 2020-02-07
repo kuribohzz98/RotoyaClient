@@ -1,5 +1,5 @@
 import React from 'react';
-import { withNavigation } from 'react-navigation';
+// import { withNavigation } from 'react-navigation';
 import { TouchableOpacity, StyleSheet, Platform, Dimensions } from 'react-native';
 import { Button, Block, NavBar, Text, theme } from 'galio-framework';
 
@@ -276,4 +276,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(Header);
+// export default withNavigation(Header);
+export default Header;
