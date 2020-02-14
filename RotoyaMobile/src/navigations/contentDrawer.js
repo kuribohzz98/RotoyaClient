@@ -1,14 +1,10 @@
 import React from 'react';
 import {
     SafeAreaView,
-    ScrollView,
-    ImageBackground,
-    TouchableOpacity,
     View,
-    StyleSheet,
     Alert
 } from 'react-native';
-import { Block, theme, Text } from "galio-framework";
+import { Block, Text } from "galio-framework";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { logoutAction } from '../redux/action/auth.action';
@@ -18,6 +14,7 @@ import {
     DrawerItemList,
     DrawerItem,
 } from '@react-navigation/drawer';
+import { ColorNavigation } from '../helper/color';
 
 class CustomDrawerComponent extends React.Component {
     logout = () => {
@@ -55,79 +52,21 @@ class CustomDrawerComponent extends React.Component {
                             <Text bold >{this.props.lastName}</Text>
                         </Block>
                     </View>
+                    <Divider style={{ backgroundColor: ColorNavigation.DrawerActiveBackground}} />
+                    <Divider style={{ backgroundColor: ColorNavigation.DrawerActiveBackground, marginBottom: 10 }} />
                     <DrawerItemList {...this.props} />
                     <DrawerItem
                         label="Logout"
                         focused
                         onPress={() => this.alertLogout()}
-                        icon={() => <Icon type="material-community" name="logout" size={24} />}
-                        activeTintColor="#de3535"
+                        icon={() => <Icon type="material-community" name="logout" size={24} color={ColorNavigation.DrawerLogout}/>}
+                        activeTintColor={ColorNavigation.DrawerLogout}
                     />
                 </DrawerContentScrollView>
             </SafeAreaView>
-            // <SafeAreaView style={{ flex: 1 }}>
-            //     <View style={{ padding: 15 }}>
-            //         <View>
-            //             <Avatar
-            //                 rounded
-            //                 size="large"
-            //                 source={{ uri: 'data:image/jpeg;base64,' + this.props.avatar }}
-            //                 showEditButton
-            //                 onPress={() => this.props.navigation.navigate('UserInfo')}
-            //             />
-            //         </View>
-            //         <Block style={{ marginTop: 10 }}>
-            //             <Text bold >{this.props.lastName}</Text>
-            //         </Block>
-            //     </View>
-            //     <Divider style={{ backgroundColor: 'blue', marginBottom: 10 }} />
-            //     <ScrollView>
-            //         <DrawerItems {...this.props} />
-            //         <TouchableOpacity onPress={() =>
-            //             Alert.alert(
-            //                 'Log out',
-            //                 'Do you want to logout?',
-            //                 [
-            //                     { text: 'Cancel' },
-            //                     {
-            //                         text: 'Confirm', onPress: () => this.logout()
-            //                     }
-            //                 ],
-            //                 { cancelable: false }
-            //             )
-            //         }>
-            //             <View style={{ flexDirection: 'row', ...styles.Logout }}>
-            //                 <Icon type="material-community" name="logout" size={24} {...styles.LogoutColor} ></Icon>
-            //                 <Text style={{ ...styles.LogoutText, ...styles.LogoutColor }}>Logout</Text>
-            //             </View>
-            //         </TouchableOpacity>
-            //     </ScrollView>
-            // </SafeAreaView>
         )
     }
 }
-
-const styles = StyleSheet.create({
-    Logout: {
-        margin: 16
-    },
-    LogoutText: {
-        fontWeight: 'bold',
-        marginLeft: 33
-    },
-    LogoutColor: {
-        color: 'red'
-    },
-    container: {
-        flex: 1,
-    },
-    header: {
-        paddingHorizontal: 28,
-        paddingBottom: theme.SIZES.BASE,
-        paddingTop: theme.SIZES.BASE * 3,
-        justifyContent: 'center'
-    }
-})
 
 const mapStateToProps = state => ({
     userId: state.loginReducer.userId,

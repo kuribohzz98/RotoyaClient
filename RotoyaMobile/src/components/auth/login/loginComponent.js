@@ -154,29 +154,6 @@ const styles = StyleSheet.create({
         elevation: 1,
         overflow: "hidden"
     },
-    socialConnect: {
-        backgroundColor: argonTheme.COLORS.WHITE,
-        borderBottomWidth: StyleSheet.hairlineWidth,
-        borderColor: "#8898AA"
-    },
-    socialButtons: {
-        width: 120,
-        height: 40,
-        backgroundColor: "#fff",
-        shadowColor: argonTheme.COLORS.BLACK,
-        shadowOffset: {
-            width: 0,
-            height: 4
-        },
-        shadowRadius: 8,
-        shadowOpacity: 0.1,
-        elevation: 1
-    },
-    socialTextButtons: {
-        color: argonTheme.COLORS.PRIMARY,
-        fontWeight: "800",
-        fontSize: 14
-    },
     inputIcons: {
         marginRight: 12
     },
@@ -188,10 +165,6 @@ const styles = StyleSheet.create({
     createButton: {
         width: width * 0.5,
         marginTop: 25
-    },
-    button: {
-        alignSelf: 'stretch',
-        margin: 10,
     }
 });
 

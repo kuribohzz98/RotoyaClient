@@ -122,7 +122,7 @@ class UserInfoScreen extends React.Component {
                                         <Text
                                             size={16}
                                             color="#525F7F"
-                                            style={{ textAlign: "center", alignSelf: 'center' }}
+                                            style={{ width: width - (120 + theme.SIZES.BASE * 2) }}
                                         >
                                             {this.props.address}
                                         </Text>
@@ -136,7 +136,7 @@ class UserInfoScreen extends React.Component {
                                             color="#525F7F"
                                             style={{ textAlign: "center", alignSelf: 'center' }}
                                         >
-                                            {this.props.phone}
+                                            { '0' + this.props.phone}
                                         </Text>
                                     </Block>
                                     <Block left row style={{marginBottom: 15}}>

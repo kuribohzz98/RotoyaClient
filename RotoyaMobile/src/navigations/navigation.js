@@ -1,18 +1,19 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import MyHomeScreen from '../components/home/home';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Icon } from 'react-native-elements';
+import CustomDrawerComponent from './contentDrawer';
+import MyHomeScreen from '../components/home/home';
 import AuthLoadingScreen from '../components/auth/authLoading';
 import LoginScreen from '../components/auth/login/loginScreen';
 import LeftTopButton from '../components/common/LeftTopButton';
 import RotoyaMap from '../components/map/map';
 import UserInfoScreen from '../components/user/userInfo';
-import CustomDrawerComponent from './contentDrawer';
-import { Icon } from 'react-native-elements';
 import RegisterScreen from '../components/auth/register/registerScreen';
 import SportCenterScreen from '../components/sportCenter/sportCenterScreen';
+import { ColorNavigation } from '../helper/color';
 
 const { width } = Dimensions.get('window');
 
@@ -25,7 +26,8 @@ const StackHome = () => (
             name="Main"
             component={MyHomeScreen}
             options={({ navigation }) => ({
-                headerLeft: props => (<LeftTopButton {...props} navigation={navigation} />)
+                headerLeft: props => (<LeftTopButton {...props} navigation={navigation} />),
+                title: 'Home'
             })}
         />
         <Stack.Screen
@@ -41,7 +43,8 @@ const StackMap = () => (
             name="Main"
             component={RotoyaMap}
             options={({ navigation }) => ({
-                headerLeft: props => (<LeftTopButton {...props} navigation={navigation} />)
+                headerLeft: props => (<LeftTopButton {...props} navigation={navigation} />),
+                title: 'Map'
             })}
         />
     </Stack.Navigator>
@@ -53,7 +56,8 @@ const StackUserInfo = () => (
             name="Main"
             component={UserInfoScreen}
             options={({ navigation }) => ({
-                headerLeft: props => (<LeftTopButton {...props} navigation={navigation} />)
+                headerLeft: props => (<LeftTopButton {...props} navigation={navigation} />),
+                title: 'Info'
             })}
         />
     </Stack.Navigator>
@@ -63,11 +67,11 @@ const DrawerNavigation = () => (
     <Drawer.Navigator initialRouteName="Home"
         drawerContent={props => <CustomDrawerComponent {...props} />}
         drawerContentOptions={{
-            activeBackgroundColor: "rgb(7, 184, 178)",
-            activeTintColor: "white"
+            activeBackgroundColor: ColorNavigation.DrawerActiveBackground,
+            activeTintColor: ColorNavigation.DrawerActiveTint
         }}
         drawerStyle={{
-            backgroundColor: "white",
+            backgroundColor: ColorNavigation.DrawerStyleBackground,
             width: width * 3.5 / 5
         }}
     >
@@ -95,7 +99,8 @@ const DrawerNavigation = () => (
             options={{
                 drawerIcon: props => (
                     <Icon type="font-awesome" name="user" size={24} color={props.color}></Icon>
-                )
+                ),
+                title: 'User Info'
             }}
         />
     </Drawer.Navigator>

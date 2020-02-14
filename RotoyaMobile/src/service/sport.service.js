@@ -4,35 +4,17 @@ export async function getSports() {
     return axiosBase().get('/sport/getAllSport');
 }
 
-export async function getSportCenters() {
-    return axiosBase().get('/sport/getSportCenter');
+
+// const optionsSportCenters = 
+
+export async function getSportCenters(options) {
+    return axiosBase().get('/sport/sportCenters', {
+        params: options
+    });
 }
 
-export async function getSportCentersFilter(latitude, longitude, distance, sport) {
-    return axiosBase().get('/map/getSportCenterByGeolocationAndSport', {
-        params: {
-            latitude,
-            longitude,
-            distance,
-            sport
-        }
-    })
-}
-
-export async function getSportCenterSport(sport) {
-    return axiosBase().get('sport/getSportCenterSport', {
-        params: {
-            sport
-        }
-    })
-}
-
-export async function getSportCentersByGeolocation(latitude, longitude, distance) {
-    return axiosBase().get('/map/getSportCenterByGeolocation', {
-        params: {
-            latitude,
-            longitude,
-            distance
-        }
+export async function getSportCenter(id, time) {
+    return axiosBase().get(`/sport/sportCenter/${id}`, {
+        params: { time }
     })
 }

@@ -6,3 +6,10 @@ export const setShowFilterHomeAction = (showFilterHome) => {
         showFilterHome
     }
 }
+
+export const setOptionsGetSportCenters = (optionsGetSportCenters) => {
+    return {
+        type: EActionRedux.SET_OPTIONS_GET_SPORTCENTERS,
+        optionsGetSportCenters
+    }
+}

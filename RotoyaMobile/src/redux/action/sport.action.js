@@ -6,3 +6,10 @@ export const setSportCentersAction = (sportCenters) => {
         sportCenters
     }
 }
+
+export const addSportCenters = (sportCenters) => {
+    return {
+        type: EActionRedux.ADD_SPORT_CENTER,
+        sportCenters
+    }
+}

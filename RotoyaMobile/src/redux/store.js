@@ -39,6 +39,12 @@ const persistConfig = {
 // let store = createStore(persistedReducer, applyMiddleware(thunk));
 // let persistor = persistStore(store);
 
-const store = createStore(rootReducer, applyMiddleware(thunk))
+const initialState = {
+  componentReducer: {
+    optionsGetSportCenters: {limit: 5, page: 1}
+  }
+};
+
+const store = createStore(rootReducer, initialState, applyMiddleware(thunk))
 
 export default Storage = { store } //, persistor 
