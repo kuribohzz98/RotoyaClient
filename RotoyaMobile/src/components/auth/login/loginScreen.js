@@ -1,13 +1,11 @@
 import React from 'react';
 import { Alert } from 'react-native';
-import { loginService } from '../../../service/auth.service';
 import LoginForm from './loginComponent';
-import { saveItem } from '../../../service/storage.service';
-import { StorageConstants } from '../../../constants/storage.constants';
-import { loginAction } from '../../../redux/action/auth.action';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { setOptionsGetSportCenters } from '../../../redux/action/component.action';
+import { AuthService, StorageService } from '../../../service';
+import { AuthAction } from '../../../redux/action';
+import { StorageConstants } from '../../../constants';
 
 class LoginScreen extends React.Component {
     constructor(props) {
@@ -21,7 +19,7 @@ class LoginScreen extends React.Component {
         this.setState({
             isVisible: true
         })
-        loginService(
+        AuthService.loginService(
             {
                 'username': values.username,
                 'password': values.password
@@ -42,11 +40,7 @@ class LoginScreen extends React.Component {
                     return;
                 }
                 this.props.loginAction(response.data.user);
-                const tempOpts = this.props.optionsGetSportCenters || {};
-                tempOpts.limit = 5;
-                tempOpts.page = 1;
-                this.props.setOptionsGetSportCenters(tempOpts);
-                await saveItem(StorageConstants.ACCESS_TOKEN, response.data.access_token);
+                await StorageService.saveItem(StorageConstants.AccessToken, response.data.access_token);
                 this.props.navigation.navigate('App');
             })
             .catch((err) => {
@@ -70,7 +64,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ loginAction, setOptionsGetSportCenters }, dispatch);
+    return bindActionCreators({ loginAction: AuthAction.loginAction }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

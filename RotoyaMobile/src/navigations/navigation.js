@@ -4,16 +4,9 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
-import CustomDrawerComponent from './contentDrawer';
-import MyHomeScreen from '../components/home/home';
-import AuthLoadingScreen from '../components/auth/authLoading';
-import LoginScreen from '../components/auth/login/loginScreen';
-import LeftTopButton from '../components/common/LeftTopButton';
-import RotoyaMap from '../components/map/map';
-import UserInfoScreen from '../components/user/userInfo';
-import RegisterScreen from '../components/auth/register/registerScreen';
-import SportCenterScreen from '../components/sportCenter/sportCenterScreen';
-import { ColorNavigation } from '../helper/color';
+import { Header } from '../components/common';
+import Components from '../components';
+import { ColorConstants } from '../constants';
 
 const { width } = Dimensions.get('window');
 
@@ -21,18 +14,98 @@ const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const StackHome = () => (
-    <Stack.Navigator initialRouteName="Main">
+    <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
-            name="Main"
-            component={MyHomeScreen}
-            options={({ navigation }) => ({
-                headerLeft: props => (<LeftTopButton {...props} navigation={navigation} />),
-                title: 'Home'
-            })}
+            name="Home"
+            component={Components.HomeScreen}
+            headerMode="screen"
+            options={{
+                header: ({ navigation, scene }) => (
+                    <Header
+                        title="Home"
+                        navigation={navigation}
+                        scene={scene}
+                    />
+                )
+            }}
+        />
+        <Stack.Screen
+            name="Filter"
+            component={Components.HomeFilterScreen}
+            headerMode="screen"
+            options={{
+                header: ({ navigation, scene }) => (
+                    <Header
+                        title="Filter"
+                        back
+                        navigation={navigation}
+                        scene={scene}
+                    />
+                )
+            }}
         />
         <Stack.Screen
             name="SportCenter"
-            component={SportCenterScreen}
+            component={Components.SportCenterScreen}
+            headerMode="screen"
+            options={{
+                header: ({ navigation, scene }) => (
+                    <Header
+                        title="Sport Center"
+                        back
+                        navigation={navigation}
+                        scene={scene}
+                    />
+                )
+            }}
+        />
+        <Stack.Screen
+            name="Bill"
+            component={Components.BillScreen}
+        />
+        <Stack.Screen
+            name="Payment"
+            component={Components.PaymentScreen}
+            headerMode="screen"
+            options={{
+                header: ({ navigation, scene }) => (
+                    <Header
+                        title="Payment"
+                        back
+                        navigation={navigation}
+                        scene={scene}
+                    />
+                )
+            }}
+        />
+        <Stack.Screen
+            name="PaymentWebView"
+            component={Components.PaymentWebViewScreen}
+            headerMode="screen"
+        />
+    </Stack.Navigator>
+)
+
+const StackBooked = () => (
+    <Stack.Navigator initialRouteName="Main">
+        <Stack.Screen
+            name="Main"
+            component={Components.BookedScreen}
+            headerMode="screen"
+            options={{
+                header: ({ navigation, scene }) => (
+                    <Header
+                        title="Booked Ground"
+                        back
+                        navigation={navigation}
+                        scene={scene}
+                    />
+                )
+            }}
+        />
+        <Stack.Screen
+            name="detail"
+            component={Components.BookedDetailScreen}
         />
     </Stack.Navigator>
 )
@@ -41,11 +114,18 @@ const StackMap = () => (
     <Stack.Navigator initialRouteName="Main">
         <Stack.Screen
             name="Main"
-            component={RotoyaMap}
-            options={({ navigation }) => ({
-                headerLeft: props => (<LeftTopButton {...props} navigation={navigation} />),
-                title: 'Map'
-            })}
+            component={Components.MapScreen}
+            headerMode="screen"
+            options={{
+                header: ({ navigation, scene }) => (
+                    <Header
+                        title="Map"
+                        back
+                        navigation={navigation}
+                        scene={scene}
+                    />
+                )
+            }}
         />
     </Stack.Navigator>
 )
@@ -54,26 +134,34 @@ const StackUserInfo = () => (
     <Stack.Navigator initialRouteName="Main">
         <Stack.Screen
             name="Main"
-            component={UserInfoScreen}
-            options={({ navigation }) => ({
-                headerLeft: props => (<LeftTopButton {...props} navigation={navigation} />),
-                title: 'Info'
-            })}
+            component={Components.UserScreen}
+            headerMode="screen"
+            options={{
+                header: ({ navigation, scene }) => (
+                    <Header
+                        title="Info"
+                        back
+                        navigation={navigation}
+                        scene={scene}
+                    />
+                )
+            }}
         />
     </Stack.Navigator>
 )
 
 const DrawerNavigation = () => (
     <Drawer.Navigator initialRouteName="Home"
-        drawerContent={props => <CustomDrawerComponent {...props} />}
+        drawerContent={props => <Components.ContentDrawerScreen {...props} />}
         drawerContentOptions={{
-            activeBackgroundColor: ColorNavigation.DrawerActiveBackground,
-            activeTintColor: ColorNavigation.DrawerActiveTint
+            activeBackgroundColor: ColorConstants.DrawerNavigation.ActiveBackground,
+            activeTintColor: ColorConstants.DrawerNavigation.ActiveTint
         }}
         drawerStyle={{
-            backgroundColor: ColorNavigation.DrawerStyleBackground,
+            backgroundColor: ColorConstants.DrawerNavigation.StyleBackground,
             width: width * 3.5 / 5
         }}
+        edgeWidth={-10}
     >
         <Drawer.Screen
             name="Home"
@@ -82,6 +170,16 @@ const DrawerNavigation = () => (
                 drawerIcon: props => (
                     <Icon type="font-awesome" name="home" size={24} color={props.color}></Icon>
                 )
+            }}
+        />
+        <Drawer.Screen
+            name="Booked Ground"
+            component={StackBooked}
+            options={{
+                drawerIcon: props => (
+                    <Icon type="font-awesome" name="bookmark" size={24} color={props.color}></Icon>
+                ),
+                title: 'Booked Ground'
             }}
         />
         <Drawer.Screen
@@ -113,14 +211,14 @@ const StackAuth = () => (
     >
         <Stack.Screen
             name="Login"
-            component={LoginScreen}
+            component={Components.LoginScreen}
             options={{
                 headerShown: false
             }}
         />
         <Stack.Screen
             name="Register"
-            component={RegisterScreen}
+            component={Components.RegisterScreen}
             options={{
                 headerTitle: 'Register Account'
             }}
@@ -133,7 +231,7 @@ const StackAuthSwitch = () => (
         initialRouteName="AuthLoading"
         headerMode='none'
     >
-        <Stack.Screen name="AuthLoading" component={AuthLoadingScreen} />
+        <Stack.Screen name="AuthLoading" component={Components.AuthLoadingScreen} />
         <Stack.Screen name="App" component={DrawerNavigation} />
         <Stack.Screen name="Auth" component={StackAuth} />
     </Stack.Navigator>

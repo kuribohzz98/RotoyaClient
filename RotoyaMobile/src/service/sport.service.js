@@ -1,20 +1,25 @@
 import { axiosBase } from './base.service';
 
-export async function getSports() {
-    return axiosBase().get('/sport/getAllSport');
+const url = '/sport'
+
+const getSports = async () => {
+    return axiosBase.get(`${url}/getAllSport`);
 }
 
-
-// const optionsSportCenters = 
-
-export async function getSportCenters(options) {
-    return axiosBase().get('/sport/sportCenters', {
+const getSportCenters = async (options) => {
+    return axiosBase.get(`${url}/sportCenters`, {
         params: options
     });
 }
 
-export async function getSportCenter(id, time) {
-    return axiosBase().get(`/sport/sportCenter/${id}`, {
+const getSportCenter = async (id, time) => {
+    return axiosBase.get(`${url}/sportCenter/${id}`, {
         params: { time }
     })
+}
+
+export default {
+    getSports,
+    getSportCenters,
+    getSportCenter
 }

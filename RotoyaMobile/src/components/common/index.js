@@ -6,7 +6,6 @@ import Header from './Header';
 import Input from './Input';
 import Switch from './Switch';
 import Select from './Select';
-import LeftTopButton from './LeftTopButton';
 
 export {
   Button,
@@ -16,6 +15,5 @@ export {
   Input,
   Header,
   Switch, 
-  Select,
-  LeftTopButton
+  Select
 };

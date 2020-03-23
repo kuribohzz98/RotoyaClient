@@ -1,9 +1,13 @@
-import { EActionRedux } from '../../constants/actions.constants';
+import { ActionConstants } from "../../constants";
 
-export const setLocationAction = (location) => {
+const setLocationAction = (location) => {
     console.log(location);
     return {
-        type: EActionRedux.SET_LOCATION,
+        type: ActionConstants.SET_LOCATION,
         location
     }
+}
+
+export default {
+    setLocationAction
 }

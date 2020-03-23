@@ -1,8 +1,8 @@
-import { EActionRedux } from '../../constants/actions.constants';
+import { ActionConstants } from "../../constants";
 
-export const loginReducer = (state = {}, action) => {
+const loginReducer = (state = {}, action) => {
     switch (action.type) {
-        case EActionRedux.LOGIN:
+        case ActionConstants.LOGIN:
             return Object.assign({}, state, {
                 userId: action.user.id,
                 username: action.user.username,
@@ -17,3 +17,5 @@ export const loginReducer = (state = {}, action) => {
     }
     return state;
 }
+
+export default loginReducer;

@@ -1,16 +1,12 @@
+import React from 'react';
 import { Button, View } from 'react-native';
-import React, { Component } from 'react';
 
-export default class MyNotificationsScreen extends Component {
-    static navigationOptions = {
-        drawerLabel: 'Notifications',
-        title: 'Notifications'
-    };
+export default class Booked extends React.Component {
 
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems:'center' }}>
-                <Button
+                {/* <Button
                     onPress={() => this.props.navigation.goBack()}
                     title="Go back home"
                 />
@@ -18,7 +14,7 @@ export default class MyNotificationsScreen extends Component {
                 <Button
                     onPress={() => this.props.navigation.openDrawer()}
                     title="DrawerOpen"
-                />
+                /> */}
             </View>
         );
     }

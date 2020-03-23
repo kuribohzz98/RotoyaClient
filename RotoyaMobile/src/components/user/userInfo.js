@@ -11,11 +11,10 @@ import {
 import React from 'react';
 import { Block, Text, theme } from "galio-framework";
 import { Button } from "../../components/common";
-import { Images, argonTheme } from '../../constants';
+import { Images, argonTheme, ApiConstants } from '../../constants';
 import { HeaderHeight } from "../../constants/utils";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { logoutAction } from '../../redux/action/auth.action';
 
 const { width, height } = Dimensions.get("screen");
 
@@ -42,7 +41,8 @@ class UserInfoScreen extends React.Component {
                                 <Block middle style={styles.avatarContainer}>
                                     <TouchableOpacity onPress={() => null}>
                                         <Image
-                                            source={{ uri: 'data:image/jpeg;base64,' + this.props.avatar }}
+                                            // source={{ uri: 'data:image/jpeg;base64,' + this.props.avatar }}
+                                            source={{ uri: ApiConstants.URL_API + '/image/' + this.props.avatar }}
                                             style={styles.avatar}
                                         />
                                     </TouchableOpacity>
@@ -115,7 +115,7 @@ class UserInfoScreen extends React.Component {
                                     <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
                                         <Block style={styles.divider} />
                                     </Block>
-                                    <Block left row style={{marginBottom: 15}}>
+                                    <Block left row style={{ marginBottom: 15 }}>
                                         <Text size={20} style={{ fontWeight: 'bold', width: 100 }}>
                                             Address:
                                         </Text>
@@ -127,7 +127,7 @@ class UserInfoScreen extends React.Component {
                                             {this.props.address}
                                         </Text>
                                     </Block>
-                                    <Block left row style={{marginBottom: 15}}>
+                                    <Block left row style={{ marginBottom: 15 }}>
                                         <Text size={20} style={{ fontWeight: 'bold', width: 100 }}>
                                             Phone:
                                         </Text>
@@ -136,10 +136,10 @@ class UserInfoScreen extends React.Component {
                                             color="#525F7F"
                                             style={{ textAlign: "center", alignSelf: 'center' }}
                                         >
-                                            { '0' + this.props.phone}
+                                            {'0' + this.props.phone}
                                         </Text>
                                     </Block>
-                                    <Block left row style={{marginBottom: 15}}>
+                                    <Block left row style={{ marginBottom: 15 }}>
                                         <Text size={20} style={{ fontWeight: 'bold', width: 100 }}>
                                             Email:
                                         </Text>
@@ -151,7 +151,7 @@ class UserInfoScreen extends React.Component {
                                             {this.props.email}
                                         </Text>
                                     </Block>
-                                    <Block left row style={{marginBottom: 15}}>
+                                    <Block left row style={{ marginBottom: 15 }}>
                                         <Text size={20} style={{ fontWeight: 'bold', width: 100 }}>
                                             Gender:
                                         </Text>
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-    userId: state.loginReducer.id,
+    userId: state.loginReducer.userId,
     firstName: state.loginReducer.firstName,
     lastName: state.loginReducer.lastName,
     phone: state.loginReducer.phone,
@@ -297,7 +297,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ logoutAction }, dispatch);
+    return bindActionCreators({}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserInfoScreen);

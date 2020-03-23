@@ -1,13 +1,19 @@
 import argonTheme from './Theme';
-import articles from './articles';
 import Images from './Images';
-import tabs from './tabs';
-import EActionRedux from './actions.constants';
+import ActionConstants from './actions.constants';
+import ComponentConstants from './component.constants';
+import PaymentConstants from './payment.constants';
+import StorageConstants from './storage.constants';
+import ApiConstants from './api.constants';
+import ColorConstants from './color.constants';
 
 export {
-  articles, 
   argonTheme,
   Images,
-  tabs,
-  EActionRedux
+  ActionConstants,
+  ComponentConstants,
+  PaymentConstants,
+  StorageConstants,
+  ApiConstants,
+  ColorConstants
 };

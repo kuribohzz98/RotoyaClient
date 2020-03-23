@@ -1,15 +1,20 @@
-import { EActionRedux } from '../../constants/actions.constants';
+import { ActionConstants } from "../../constants"
 
-export const setSportCentersAction = (sportCenters) => {
+const setSportCentersAction = sportCenters => {
     return {
-        type: EActionRedux.SET_SPORT_CENTER,
+        type: ActionConstants.SET_SPORT_CENTER,
         sportCenters
     }
 }
 
-export const addSportCenters = (sportCenters) => {
+const addSportCenters = sportCenters => {
     return {
-        type: EActionRedux.ADD_SPORT_CENTER,
+        type: ActionConstants.ADD_SPORT_CENTER,
         sportCenters
     }
+}
+
+export default {
+    setSportCentersAction,
+    addSportCenters
 }

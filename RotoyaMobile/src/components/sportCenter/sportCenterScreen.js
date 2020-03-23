@@ -8,16 +8,16 @@ import {
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Block, Text, Button, Toast } from "galio-framework";
+import { Block, Text, Button } from "galio-framework";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setSportCentersAction } from '../../redux/action/sport.action';
 import { Image, ListItem } from 'react-native-elements';
-import * as sportService from '../../service/sport.service';
-import { convertFloatToTime } from '../../helper/util/time';
-import { IconSports } from '../../constants/define.constants';
 import { Checkbox } from '../common/Form';
 import { getDateDDMM } from '../../helper/util/date';
+import { BookService, SportService } from '../../service';
+import { NotificationUtil, TimeUtil } from '../../helper/util';
+import { ComponentConstants, ApiConstants } from '../../constants';
 
 const { width, height } = Dimensions.get('window');
 
@@ -27,7 +27,7 @@ function AccordionAnimation({ children, style }) {
     useEffect(() => {
         Animated.timing(fade, {
             toValue: 1,
-            duration: 400,
+            duration: 100,
             useNativeDriver: true
         }).start();
     });
@@ -39,31 +39,41 @@ function AccordionAnimation({ children, style }) {
     );
 }
 
-// const formBook = props => {
-
-//     return (
-
-//     )
-// }
-
 class SportCenterScreen extends React.Component {
+    nativeEventSubscription = null;
     constructor(props) {
         super(props);
         this.state = {
             info: { sportGrounds: [] },
             dateBook: this.getDataSelectDay(),
             showGround: [],
-            showSubGround: [0, 0, 0],
-            showNotify: false
+            showSubGround: []
         }
     }
 
-    async componentDidMount() {
-        const res = await sportService.getSportCenter(this.props.id, new Date().getTime());
-        console.log(res.data);
+    componentDidMount() {
+        this.getSportCenter();
+    }
+
+    async getSportCenter() {
+        const res = await SportService.getSportCenter(this.props.sportCenter.id, new Date().getTime());
+        console.log('____________')
+        console.log(res.data.sportGrounds);
         if (!res.data) console.error('not found sportCenter');
         this.setState({ info: res.data });
-        res.data.sportGrounds.map(sportGround => this.setState({ showGround: [...this.state.showGround, this.state.showGround.push(0)] }));
+        this.setState({
+            sportGround: [],
+            showSubGround: []
+        }, () => {
+            let showGroundTemp = [];
+            let showSubGroundTemp = [];
+            res.data.sportGrounds.map(() => {
+                showGroundTemp.push(0);
+                showSubGroundTemp.push([0, 0, 0]);
+            });
+            this.setState({ showGround: showGroundTemp });
+            this.setState({ showSubGround: showSubGroundTemp })
+        })
     }
 
     getDataSelectDay() {
@@ -76,6 +86,7 @@ class SportCenterScreen extends React.Component {
     }
 
     openGround(index) {
+        console.log(index);
         let showTemp = [...this.state.showGround];
         if (showTemp[index]) {
             showTemp[index] = 0;
@@ -85,40 +96,92 @@ class SportCenterScreen extends React.Component {
         return this.setState({ showGround: showTemp });
     }
 
-    openSubGround(index) {
+    openSubGround(index, subIndex) {
+        console.log(index, subIndex);
         let showTemp = [...this.state.showSubGround];
-        if (showTemp[index]) {
-            showTemp[index] = 0;
+        if (showTemp[index][subIndex]) {
+            showTemp[index][subIndex] = 0;
             return this.setState({ showSubGround: showTemp });
         }
-        showTemp[index] = 1;
+        showTemp[index][subIndex] = 1;
         return this.setState({ showSubGround: showTemp });
     }
 
-    onSubmit(value) {
+    async onSubmit(value) {
         console.log(value);
-        // this.setState({
-        //     showNotify: true
+        const filter = [];
+        Object.keys(value).map(key => {
+            if (value[key]) filter.push(key);
+        })
+        console.log(filter);
+        if (!filter.length) {
+            NotificationUtil.notifyError("Booking failed", "You haven't selected");
+            return;
+        }
+        const params = {};
+        params.userId = this.props.user.userId;
+        params.sportCenterId = this.props.sportCenter.id;
+        params.bookDatas = filter.map(data => {
+            const bookData_temp = {};
+            const data_temp = data.split('_');
+            bookData_temp.timeSlotId = data_temp[1];
+            bookData_temp.bookingDate = new Date().getTime() + data_temp[0] * 1000 * 60 * 60 * 24;
+            bookData_temp.price = data_temp[2];
+            return bookData_temp;
+        })
+
+        const res = await BookService.bookingSportCenter(params);
+        const { data } = res;
+        console.log(data);
+        if (data.error) {
+            if (isNaN(+data.error)) {
+                NotificationUtil.notifyError("Booking failed", data.error);
+                // this.getSportCenter();
+                return;
+            }
+            (this.state.info.sportGrounds || []).map(sportGround => {
+                (sportGround.sportGroundTimeSlots || []).map(timeSlot => {
+                    if (+timeSlot.id == +data.error) {
+                        NotificationUtil.notifyError("Booking failed", `${sportGround.name} is not empty`)
+                        // this.getSportCenter();
+                    }
+                })
+            })
+            return;
+        }
+        // showMessage({
+        //     message: "Booking successful",
+        //     description: "You have successfully booked",
+        //     type: "success",
+        //     icon: "success"
         // })
-        console.log(this);
+        this.props.navigation.navigate('Bill', {
+            sportCenter: this.state.info,
+            bookDatas: params.bookDatas,
+            payment: data.data
+        })
+
+    }
+
+    componentWillUnmount() {
+        console.log('__ahihi');
     }
 
     render() {
         const { handleSubmit } = this.props;
         return (
-            <Block flex safe>
-                <Toast isShow={this.state.showNotify} positionIndicator="top">This is a top positioned toast</Toast>
+            <Block flex safe style={styles.container}>
                 <ScrollView>
                     <View style={styles.spaceRow}>
                         <Image
-                            source={{ uri: 'data:image/jpeg;base64,' + this.props.avatar }}
+                            source={{ uri: ApiConstants.URL_API + '/image/' + this.props.sportCenter.avatar }}
                             style={{ width: width, height: height * 0.3 }}
                             PlaceholderContent={<ActivityIndicator size={50} color="#55a66d" />}
                         />
                     </View>
                     <Block style={styles.content}>
                         <Block style={{ alignItems: 'center', ...styles.spaceRow }}>
-                            <Text style={{ textAlign: 'center' }} h3>{this.props.name}</Text>
+                            <Text style={{ textAlign: 'center' }} h3>{this.props.sportCenter.name}</Text>
                         </Block>
                         <Block row style={styles.spaceRow}>
                             <Text style={styles.lable}>Open time: </Text>
@@ -126,7 +189,7 @@ class SportCenterScreen extends React.Component {
                                 size={15}
                                 color="#525F7F"
                             >
-                                {convertFloatToTime(this.props.timeOpen) + ' - ' + convertFloatToTime(this.props.timeClose)}
+                                {TimeUtil.convertFloatToTime(this.props.sportCenter.timeOpen) + ' - ' + TimeUtil.convertFloatToTime(this.props.sportCenter.timeClose)}
                             </Text>
                         </Block>
                         <Block row style={{ ...styles.spaceRow, width: (width - 120) }}>
@@ -136,13 +199,13 @@ class SportCenterScreen extends React.Component {
                                     size={15}
                                     color="#525F7F"
                                 >
-                                    {`${this.props.address ? this.props.address + ", " : ''}${this.props.commune}, `}
+                                    {`${this.props.sportCenter.address ? this.props.sportCenter.address + ", " : ''}${this.props.sportCenter.commune}, `}
                                 </Text>
                                 <Text
                                     size={15}
                                     color="#525F7F"
                                 >
-                                    {`${this.props.district}, ${this.props.city}`}
+                                    {`${this.props.sportCenter.district}, ${this.props.sportCenter.city}`}
                                 </Text>
                             </Block>
                         </Block>
@@ -153,13 +216,14 @@ class SportCenterScreen extends React.Component {
                                 return (
                                     <Block style={{ marginTop: 10 }}>
                                         <ListItem
+                                            containerStyle={styles.card}
                                             leftIcon={{
                                                 type: "material-community",
-                                                name: IconSports[icon.code]
+                                                name: ComponentConstants.IconSports[icon.code]
                                             }}
                                             rightIcon={{
                                                 type: "material",
-                                                name: `keyboard-arrow-${this.state.showGround[index] ? 'right' : 'down'}`,
+                                                name: `keyboard-arrow-${!this.state.showGround[index] ? 'right' : 'down'}`,
                                                 size: 40
                                             }}
                                             title={sportGround.name}
@@ -167,7 +231,7 @@ class SportCenterScreen extends React.Component {
                                             onPress={() => this.openGround(index)}
                                         />
                                         {
-                                            !this.state.showGround[index] ?
+                                            this.state.showGround[index] ?
                                                 <AccordionAnimation>
                                                     <Block card shadow style={{ backgroundColor: '#FFFFFF', padding: 20 }}>
                                                         {
@@ -176,14 +240,14 @@ class SportCenterScreen extends React.Component {
                                                                     <ListItem
                                                                         rightIcon={{
                                                                             type: "material",
-                                                                            name: `keyboard-arrow-${!this.state.showSubGround[i] ? 'right' : 'down'}`,
+                                                                            name: `keyboard-arrow-${!this.state.showSubGround[index][i] ? 'right' : 'down'}`,
                                                                             size: 30
                                                                         }}
                                                                         title={data}
-                                                                        onPress={() => this.openSubGround(i)}
+                                                                        onPress={() => this.openSubGround(index, i)}
                                                                     />
                                                                     {
-                                                                        this.state.showSubGround[i] ? <AccordionAnimation>
+                                                                        this.state.showSubGround[index][i] ? <AccordionAnimation>
                                                                             <Block style={{ marginLeft: 25 }}>
                                                                                 {
                                                                                     (sportGround.sportGroundTimeSlots || []).map(timeSlot => {
@@ -193,30 +257,31 @@ class SportCenterScreen extends React.Component {
                                                                                             if (+timeSlot.startTime < +`${current.getHours()}.${current.getMinutes()}`) lateTime = true;
                                                                                         }
                                                                                         let totalBooked = (timeSlot.bookeds || []).find(booked => new Date(booked.date).getDate() == data.split(' - ')[0]) || { amount: 0 };
-                                                                                        return (<Block row style={{ marginBottom: 15 }}>
-                                                                                            <Field
-                                                                                                name={i + "_" + timeSlot.id}
-                                                                                                label={convertFloatToTime(timeSlot.startTime) + ' - ' + convertFloatToTime(timeSlot.endTime)}
-                                                                                                component={Checkbox}
-                                                                                                iconName={+totalBooked == +sportGround.quantity || lateTime ? "minus-circle" : "check"}
-                                                                                                iconFamily={"font-awesome"}
-                                                                                                color={+totalBooked == +sportGround.quantity || lateTime ? "#d90e00" : "success"}
-                                                                                                disabled={+totalBooked == +sportGround.quantity || lateTime}
-                                                                                            // initialValue={+totalBooked == +sportGround.quantity || lateTime}
-                                                                                            />
-                                                                                            <Block row style={{ marginLeft: 10, flexWrap: 'wrap' }}>
-                                                                                                <Text
-                                                                                                    muted={+totalBooked == +sportGround.quantity || lateTime}
-                                                                                                >
-                                                                                                    {`(residual: ${+sportGround.quantity - +totalBooked.amount})`}
-                                                                                                </Text>
-                                                                                                {
-                                                                                                    +totalBooked == +sportGround.quantity || lateTime ?
-                                                                                                        <Text muted> - {+totalBooked == +sportGround.quantity ? 'No more' : 'Late time'}</Text>
-                                                                                                        : null
-                                                                                                }
+                                                                                        return (
+                                                                                            <Block row style={{ marginBottom: 15 }}>
+                                                                                                <Field
+                                                                                                    name={i + "_" + timeSlot.id + "_" + timeSlot.price}
+                                                                                                    label={TimeUtil.convertFloatToTime(timeSlot.startTime) + ' - ' + TimeUtil.convertFloatToTime(timeSlot.endTime)}
+                                                                                                    component={Checkbox}
+                                                                                                    iconName={"check"}
+                                                                                                    iconFamily={"font-awesome"}
+                                                                                                    color={"success"}
+                                                                                                    disabled={+totalBooked.amount >= +sportGround.quantity || lateTime}
+                                                                                                />
+                                                                                                <Block row style={{ marginLeft: 10, flexWrap: 'wrap' }}>
+                                                                                                    <Text
+                                                                                                        muted={+totalBooked.amount >= +sportGround.quantity || lateTime}
+                                                                                                    >
+                                                                                                        {`(residual: ${+sportGround.quantity - +totalBooked.amount})`}
+                                                                                                    </Text>
+                                                                                                    {
+                                                                                                        +totalBooked.amount >= +sportGround.quantity || lateTime ?
+                                                                                                            <Text muted> - {+totalBooked.amount == +sportGround.quantity ? 'No more' : 'Late time'}</Text>
+                                                                                                            : null
+                                                                                                    }
+                                                                                                </Block>
                                                                                             </Block>
-                                                                                        </Block>)
+                                                                                        )
                                                                                     })
                                                                                 }
                                                                             </Block>
@@ -241,7 +306,7 @@ class SportCenterScreen extends React.Component {
                         color="error"
                         shadowless
                         uppercase
-                        onPress={handleSubmit(this.onSubmit)}
+                        onPress={handleSubmit(this.onSubmit.bind(this))}
                     // loading
                     >
                         Book
@@ -253,6 +318,9 @@ class SportCenterScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        backgroundColor: 'white'
+    },
     spaceRow: {
         marginBottom: 15
     },
@@ -264,6 +332,17 @@ const styles = StyleSheet.create({
     content: {
         marginLeft: 10,
         marginRight: 10
+    },
+    card: {
+        shadowOffset: {
+            width: 10,
+            height: 10
+        },
+        shadowColor: 'black',
+        shadowOpacity: 0.3,
+        shadowRadius: 10,
+        borderRadius: 10,
+        elevation: 4
     }
 })
 
@@ -278,18 +357,8 @@ const mapStateToProps = (state, ownProps) => {
         sportCenterResult = sportCenters.find(sportCenter => sportCenter.id == ownProps.route.params.id);
     }
     return {
-        id: sportCenterResult.id,
-        name: sportCenterResult.name,
-        country: sportCenterResult.country,
-        city: sportCenterResult.city,
-        district: sportCenterResult.district,
-        commune: sportCenterResult.commune,
-        address: sportCenterResult.address,
-        avatar: sportCenterResult.avatar,
-        latitude: sportCenterResult.latitude,
-        longitude: sportCenterResult.longitude,
-        timeOpen: sportCenterResult.timeOpen,
-        timeClose: sportCenterResult.timeClose
+        sportCenter: sportCenterResult,
+        user: state.loginReducer
     }
 }
 

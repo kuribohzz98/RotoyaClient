@@ -6,7 +6,8 @@ import {
     SafeAreaView,
     Keyboard,
     TouchableWithoutFeedback,
-    ScrollView
+    ScrollView,
+    PermissionsAndroid
 } from 'react-native';
 import { Block, Checkbox } from "galio-framework";
 import { Button, Text } from 'galio-framework';
@@ -14,8 +15,10 @@ import { Slider, Select, Switch } from '../common/Form';
 import { Icon } from 'react-native-elements'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setOptionsGetSportCenters } from '../../redux/action/component.action';
-import { getDateDDMM } from '../../helper/util/date';
+import Geolocation from 'react-native-geolocation-service';
+import { SportService } from '../../service';
+import { ComponentAction, SportAction } from '../../redux/action';
+import { DateUtil } from '../../helper/util';
 
 const checkBoxField = ({ input: { onChange, value }, label, color }) => (
     <View>
@@ -34,8 +37,17 @@ class filterForm extends React.Component {
         this.state = {
             disabledFilterByPosition: false,
             showFilter: true,
-            dataSelectDay: this.getDataSelectDay()
+            dataSelectDay: this.getDataSelectDay(),
+            sportListName: []
         }
+    }
+
+    componentDidMount() {
+        SportService.getSports().then(res => {
+            this.setState({
+                sportListName: res.data.map(sport => sport.name)
+            });
+        })
     }
 
     UNSAFE_componentWillMount() {
@@ -52,9 +64,9 @@ class filterForm extends React.Component {
             isFilterByPosition: isByLocation,
             distance,
             sport,
-            findByDay: getDateDDMM(time)
+            findByDay: DateUtil.getDateDDMM(time)
         });
-        if (isByLocation) this.setState({disabledFilterByPosition: true});
+        if (isByLocation) this.setState({ disabledFilterByPosition: true });
     }
 
     disabledFilterByPosition(disabled) {
@@ -67,31 +79,110 @@ class filterForm extends React.Component {
         const current = new Date();
         let result = [];
         for (let i = 0; i < 3; i++) {
-            result.push(getDateDDMM(current.getTime() + i * 1000 * 60 * 60 * 24));
+            result.push(DateUtil.getDateDDMM(current.getTime() + i * 1000 * 60 * 60 * 24));
         }
         return result;
     }
 
-    render() {
+    async submitFilter(value, dispatch) {
         const {
-            handleSubmit,
-            sportList,
-            width,
-            controlParent,
-            height
-        } = this.props;
+            distance,
+            sport,
+            findByDay,
+            isFilterByPosition,
+            isTimeSlostBlank
+        } = value;
+        console.log(value);
+        const opts = {};
+        if (isFilterByPosition) {
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+            );
+            if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+                console.warn('device not grant rights use location');
+                return;
+            }
+            await new Promise(resolve =>
+                Geolocation.getCurrentPosition(position => {
+                    console.log("current_position: ", position);
+                    opts.latitude = position.coords.latitude;
+                    opts.longitude = position.coords.longitude;
+                    resolve();
+                }));
+        }
+        if (findByDay) {
+            opts.time = new Date(DateUtil.convertDateDDMMToMMDD(findByDay)).getTime();
+        }
+        opts.isTimeSlotBlank = isTimeSlostBlank;
+        opts.isByLocation = isFilterByPosition;
+        if (sport) opts.sport = sport;
+        if (distance) opts.distance = distance;
+        opts.limit = 5;
+        opts.page = 1;
+        console.log(opts);
+        SportService.getSportCenters(opts).then(res => {
+            dispatch(SportAction.setSportCentersAction(res.data));
+            dispatch(ComponentAction.setOptionsGetSportCenters(opts));
+        })
+    }
+
+    async submitFilter(value, dispatch) {
+        const {
+            distance,
+            sport,
+            findByDay,
+            isFilterByPosition,
+            isTimeSlostBlank
+        } = value;
+        console.log(value);
+        const opts = {};
+        if (isFilterByPosition) {
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+            );
+            if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+                console.warn('device not grant rights use location');
+                return;
+            }
+            await new Promise(resolve =>
+                Geolocation.getCurrentPosition(position => {
+                    console.log("current_position: ", position);
+                    opts.latitude = position.coords.latitude;
+                    opts.longitude = position.coords.longitude;
+                    resolve();
+                }));
+        }
+        if (findByDay) {
+            opts.time = new Date(DateUtil.convertDateDDMMToMMDD(findByDay)).getTime();
+        }
+        opts.isTimeSlotBlank = isTimeSlostBlank;
+        opts.isByLocation = isFilterByPosition;
+        if (sport) opts.sport = sport;
+        if (distance) opts.distance = distance;
+        opts.limit = 5;
+        opts.page = 1;
+        console.log(opts);
+        SportService.getSportCenters(opts).then(res => {
+            dispatch(SportAction.setSportCentersAction(res.data));
+            dispatch(ComponentAction.setOptionsGetSportCenters(opts));
+            this.props.navigation.navigate('Home');
+        })
+    }
+
+    render() {
+        const { handleSubmit } = this.props;
         return (
             <Block flex middle>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                     <Block flex>
-                        <Block style={styles.iconX}>
+                        {/* <Block style={styles.iconX}>
                             <Icon type="foundation" name="x" size={24} />
-                        </Block>
+                        </Block> */}
                         <SafeAreaView>
                             <Block flex style={styles.container}>
-                                <View style={{ alignItems: 'center' }}>
+                                {/* <View style={{ alignItems: 'center' }}>
                                     <Text h3 >Search filter</Text>
-                                </View>
+                                </View> */}
                                 <ScrollView style={{ flex: 1 }}>
                                     <View style={{ marginTop: 50, flex: 1 }}>
                                         <Field
@@ -112,11 +203,11 @@ class filterForm extends React.Component {
                                         // initialValue={}
                                         />
                                     </View>
-                                    <View style={{ marginTop: 50, width: width * 0.8, flex: 1 }}>
+                                    <View style={{ marginTop: 50, flex: 1 }}>
                                         <Field
                                             name="sport"
                                             label="Sport"
-                                            options={sportList}
+                                            options={this.state.sportListName}
                                             component={Select}
                                             width={200}
                                         // row
@@ -148,7 +239,7 @@ class filterForm extends React.Component {
                                             size="small"
                                             color="error"
                                             round
-                                            onPress={handleSubmit(this.props.onSubmit)}
+                                            onPress={handleSubmit(this.submitFilter.bind(this))}
                                         >
                                             Submit
                                         </Button>
@@ -191,7 +282,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ setOptionsGetSportCenters }, dispatch);
+    return bindActionCreators({}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(filterScreen);

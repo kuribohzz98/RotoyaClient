@@ -1,3 +1,5 @@
-export const StorageConstants = {
-    ACCESS_TOKEN: 'access_token'
+const AccessToken = 'access_token';
+
+export default {
+    AccessToken
 }

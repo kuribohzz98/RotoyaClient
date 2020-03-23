@@ -7,14 +7,15 @@ import {
 import { Block, Text } from "galio-framework";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { logoutAction } from '../redux/action/auth.action';
 import { Avatar, Icon, Divider } from 'react-native-elements';
 import {
     DrawerContentScrollView,
     DrawerItemList,
     DrawerItem,
 } from '@react-navigation/drawer';
-import { ColorNavigation } from '../helper/color';
+import { ColorNavigation } from '../../helper/color';
+import { AuthAction } from '../../redux/action';
+import { ApiConstants } from '../../constants';
 
 class CustomDrawerComponent extends React.Component {
     logout = () => {
@@ -43,7 +44,7 @@ class CustomDrawerComponent extends React.Component {
                             <Avatar
                                 rounded
                                 size="large"
-                                source={{ uri: 'data:image/jpeg;base64,' + this.props.avatar }}
+                                source={{uri: ApiConstants.URL_API + '/image/' + this.props.avatar}}
                                 showEditButton
                                 onPress={() => this.props.navigation.navigate('UserInfo')}
                             />
@@ -75,7 +76,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ logoutAction }, dispatch);
+    return bindActionCreators({ logoutAction: AuthAction.logoutAction }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomDrawerComponent);

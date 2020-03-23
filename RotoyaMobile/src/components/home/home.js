@@ -2,33 +2,20 @@ import React from 'react';
 import {
     View,
     StyleSheet,
-    Dimensions,
-    PermissionsAndroid,
-    TouchableOpacity,
     Text,
     FlatList,
     TouchableWithoutFeedback,
-    ActivityIndicator
+    ActivityIndicator,
+    Linking
 } from 'react-native';
-import { Icon, Divider } from 'react-native-elements';
-import * as sportService from '../../service/sport.service';
-import { IconSports } from '../../constants/define.constants';
-import FilterScreen from './filterScreen';
+import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setSportCentersAction, addSportCenters } from '../../redux/action/sport.action';
-import { setLocationAction } from '../../redux/action/map.action';
-import {
-    setShowFilterHomeAction,
-    setOptionsGetSportCenters
-} from '../../redux/action/component.action';
 import { Card } from 'react-native-elements';
-import { Block } from 'galio-framework';
-import Geolocation from 'react-native-geolocation-service';
-import Modal from "react-native-modal";
-import { convertDateDDMMToMMDD } from '../../helper/util/date';
+import { SportService } from '../../service';
+import { ComponentAction, SportAction } from '../../redux/action';
+import { ApiConstants } from '../../constants';
 
-const { height, width } = Dimensions.get('window');
 class MyHomeScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -38,43 +25,34 @@ class MyHomeScreen extends React.Component {
             sportListName: [],
         }
     }
-    UNSAFE_componentWillMount() {
-        this.addHeaderRight();
-    }
-    addHeaderRight() {
-        this.props.navigation.setOptions({
-            headerRight: () => (
-                <View style={{ marginRight: 5 }}>
-                    <TouchableOpacity onPress={() => this.openFilterModel()}>
-                        <Icon name="filter" type="font-awesome" />
-                    </TouchableOpacity>
-                </View>
-            )
-        });
-    }
 
     async componentDidMount() {
         //network
-        sportService.getSports().then(res => {
+        SportService.getSports().then(res => {
             this.setState({
                 sports: res.data,
                 sportListName: res.data.map(sport => sport.name)
             });
         })
         console.log(this.props.optionsGetSportCenters);
-        sportService.getSportCenters(this.props.optionsGetSportCenters).then(res => {
+        SportService.getSportCenters(this.props.optionsGetSportCenters).then(res => {
             const { data } = res;
-            // this.setPage(data.length);
             this.props.setSportCentersAction(data);
         })
+        Linking.getInitialURL().then((url) => {
+            // console.log(url, '-=====');
+            if (url) {
+                console.log('Initial url is: ' + url);
+            }
+        }).catch(err => console.error('An error occurred', err));
+        // Linking.addEventListener('url', event => console.log(event.url));
 
     }
-
-    openFilterModel() {
-        this.props.setShowFilterHomeAction(true);
+    componentWillUnmount() {
+        console.log('ahihi');
     }
 
-    async loadMore() {  
+    async loadMore() {
         const { limit, page } = this.props.optionsGetSportCenters;
         if (this.props.sportCenters.length < limit) return;
         if (this.props.sportCenters.length < limit * page) return;
@@ -84,7 +62,7 @@ class MyHomeScreen extends React.Component {
         const tempOptions = { ...this.props.optionsGetSportCenters };
         tempOptions.page = tempOptions.page + 1;
         this.props.setOptionsGetSportCenters(tempOptions);
-        sportService.getSportCenters(tempOptions)
+        SportService.getSportCenters(tempOptions)
             .then(res => {
                 this.setState({
                     isLoading: false
@@ -92,53 +70,6 @@ class MyHomeScreen extends React.Component {
                 this.props.addSportCenters(res.data || []);
             })
             .catch(err => this.setState({ isLoading: false }));
-    }
-
-    async submitFilter(value, dispatch) {
-        const {
-            distance,
-            sport,
-            findByDay,
-            isFilterByPosition,
-            isTimeSlostBlank
-        } = value;
-        dispatch(setShowFilterHomeAction(false));
-        console.log(value);
-        const opts = {};
-        if (isFilterByPosition) {
-            const granted = await PermissionsAndroid.request(
-                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
-            );
-            if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-                console.warn('device not grant rights use location');
-                return;
-            }
-            await new Promise(resolve =>
-                Geolocation.getCurrentPosition(position => {
-                    console.log("current_position: ", position);
-                    opts.latitude = position.coords.latitude;
-                    opts.longitude = position.coords.longitude;
-                    resolve();
-                }));
-        }
-        if (findByDay) {
-            opts.time = new Date(convertDateDDMMToMMDD(findByDay)).getTime();
-        }
-        opts.isTimeSlotBlank = isTimeSlostBlank;
-        opts.isByLocation = isFilterByPosition;
-        if (sport) opts.sport = sport;
-        if (distance) opts.distance = distance;
-        opts.limit = 5;
-        opts.page = 1;
-        console.log(opts);
-        sportService.getSportCenters(opts).then(res => {
-            dispatch(setSportCentersAction(res.data));
-            dispatch(setOptionsGetSportCenters(opts));
-        })
-    }
-
-    setShowFilter(control) {
-        control.props.showFilterHome ? control.props.setShowFilterHomeAction(false) : null;
     }
 
     footerLoadMore() {
@@ -150,43 +81,9 @@ class MyHomeScreen extends React.Component {
     }
 
     render() {
-        const { sports, sportListName } = this.state;
         return (
             <View style={styles.container}>
-                <Modal
-                    isVisible={this.props.showFilterHome}
-                    onBackdropPress={() => this.props.setShowFilterHomeAction(false)}
-                    onSwipeComplete={() => this.props.setShowFilterHomeAction(false)}
-                    swipeDirection="left"
-                    style={{ backgroundColor: 'white', borderRadius: 15 }}
-                >
-                    <View style={{ flex: 1 }}>
-                        <FilterScreen
-                            width={width * 0.9}
-                            height={height * 0.85}
-                            sportList={sportListName}
-                            sports={sports}
-                            onSubmit={this.submitFilter}
-                            controlParent={this}
-                        />
-                    </View>
-                </Modal>
-                <View style={styles.listIcon}>
-                    {
-                        sports.map(sport => {
-                            return (
-                                <Icon
-                                    type="material-community"
-                                    name={IconSports[sport.code.toUpperCase()]}
-                                    style={{ flex: 1 }}
-                                    raised
-                                />
-                            )
-                        })
-                    }
-                </View>
                 <View style={styles.listItems}>
-                    <Divider style={styles.drivider} />
                     <FlatList
                         onEndReached={() => this.loadMore()}
                         onEndReachedThreshold={1}
@@ -197,9 +94,10 @@ class MyHomeScreen extends React.Component {
                                 onPress={() => this.props.navigation.navigate('SportCenter', { id: item.id })}
                             >
                                 <Card
+                                    containerStyle={styles.card}
                                     title={item.name}
-                                    image={{ uri: 'data:image/jpeg;base64,' + item.avatar }}
-                                    imageProps={{PlaceholderContent: <ActivityIndicator size={50} color="#55a66d" />}}
+                                    image={{ uri: ApiConstants.URL_API + '/image/' + item.avatar }}
+                                    imageProps={{ PlaceholderContent: <ActivityIndicator size={50} color="#55a66d" /> }}
                                 >
                                     <Text style={{ marginBottom: 10 }}>
                                         {`Address: ${item.address ? item.address + ", " : ''}${item.commune}, ${item.district}, ${item.city}`}
@@ -228,26 +126,36 @@ const styles = StyleSheet.create({
         backgroundColor: 'red'
     },
     listItems: {
-        flex: 8
+        flex: 8,
+        backgroundColor: 'white'
     },
     loadMore: {
         marginTop: 10,
         alignSelf: 'center'
+    },
+    card: {
+        shadowOffset: {
+            width: 30,
+            height: 30
+        },
+        shadowColor: 'black',
+        shadowOpacity: 1,
+        shadowRadius: 10,
+        borderRadius: 10,
+        elevation: 10
     }
 });
 
 const mapStateToProps = state => ({
     sportCenters: state.sportReducer.sportCenters,
-    showFilterHome: state.componentReducer.showFilterHome,
     optionsGetSportCenters: state.componentReducer.optionsGetSportCenters
 });
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        setSportCentersAction,
-        setShowFilterHomeAction,
-        setOptionsGetSportCenters,
-        addSportCenters
+        setSportCentersAction: SportAction.setSportCentersAction,
+        setOptionsGetSportCenters: ComponentAction.setOptionsGetSportCenters,
+        addSportCenters: SportAction.addSportCenters
     }, dispatch);
 }
 
