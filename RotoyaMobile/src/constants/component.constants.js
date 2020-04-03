@@ -1,4 +1,4 @@
-const TimeOutBooking = 1000 * 60 * 60 * 7 // 7 minute
+const TimeOutBooking = (7 * 60 - 5) * 1000; // 6'55'' 
 
 const IconSports = {
     SOCCER: 'soccer',

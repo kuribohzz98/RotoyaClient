@@ -1,6 +1,6 @@
 import { ActionConstants } from '../../constants';
 
-const setOptionsGetSportCenters = (optionsGetSportCenters) => {
+export const setOptionsGetSportCenters = (optionsGetSportCenters) => {
     return {
         type: ActionConstants.SET_OPTIONS_GET_SPORTCENTERS,
         optionsGetSportCenters

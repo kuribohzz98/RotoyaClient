@@ -6,9 +6,9 @@ import {
     FlatList,
     TouchableWithoutFeedback,
     ActivityIndicator,
+    Platform,
     Linking
 } from 'react-native';
-import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Card } from 'react-native-elements';
@@ -27,6 +27,7 @@ class MyHomeScreen extends React.Component {
     }
 
     async componentDidMount() {
+        console.log(this.props.navigation);
         //network
         SportService.getSports().then(res => {
             this.setState({
@@ -39,17 +40,26 @@ class MyHomeScreen extends React.Component {
             const { data } = res;
             this.props.setSportCentersAction(data);
         })
-        Linking.getInitialURL().then((url) => {
-            // console.log(url, '-=====');
-            if (url) {
-                console.log('Initial url is: ' + url);
-            }
-        }).catch(err => console.error('An error occurred', err));
-        // Linking.addEventListener('url', event => console.log(event.url));
-
+        // if (this.props.route.params.orderId) {
+        //     this.props.navigation.navigate('BookedDetail', { orderId: this.props.route.params.orderId });
+        // }
+        if (Platform.OS === 'android') {
+            const url = await Linking.getInitialURL();
+            this.navigate(url);
+        } else {
+            Linking.addEventListener('url', this.handleOpenURL);
+        }
     }
+
     componentWillUnmount() {
-        console.log('ahihi');
+        Linking.removeEventListener('url', this.handleOpenURL);
+    }
+    handleOpenURL = (event) => {
+        this.navigate(event.url);
+    }
+
+    navigate = (url) => {
+        console.log('home_____', url);
     }
 
     async loadMore() {
@@ -80,6 +90,25 @@ class MyHomeScreen extends React.Component {
         )
     }
 
+    renderItem({ item }) {
+        return (
+            <TouchableWithoutFeedback
+                onPress={() => this.props.navigation.navigate('SportCenter', { id: item.id })}
+            >
+                <Card
+                    containerStyle={styles.card}
+                    title={item.name}
+                    image={{ uri: ApiConstants.URL_API + '/image/' + item.avatar }}
+                    imageProps={{ PlaceholderContent: <ActivityIndicator size={50} color="#55a66d" /> }}
+                >
+                    <Text style={{ marginBottom: 10 }}>
+                        {`Address: ${item.address ? item.address + ", " : ''}${item.commune}, ${item.district}, ${item.city}`}
+                    </Text>
+                </Card>
+            </TouchableWithoutFeedback>
+        )
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -89,22 +118,8 @@ class MyHomeScreen extends React.Component {
                         onEndReachedThreshold={1}
                         data={this.props.sportCenters}
                         ListFooterComponent={() => this.footerLoadMore()}
-                        renderItem={({ item }) => (
-                            <TouchableWithoutFeedback
-                                onPress={() => this.props.navigation.navigate('SportCenter', { id: item.id })}
-                            >
-                                <Card
-                                    containerStyle={styles.card}
-                                    title={item.name}
-                                    image={{ uri: ApiConstants.URL_API + '/image/' + item.avatar }}
-                                    imageProps={{ PlaceholderContent: <ActivityIndicator size={50} color="#55a66d" /> }}
-                                >
-                                    <Text style={{ marginBottom: 10 }}>
-                                        {`Address: ${item.address ? item.address + ", " : ''}${item.commune}, ${item.district}, ${item.city}`}
-                                    </Text>
-                                </Card>
-                            </TouchableWithoutFeedback>
-                        )}
+                        renderItem={this.renderItem.bind(this)}
+                        keyExtractor={(item, index) => index.toString()}
                     />
                 </View>
             </View>

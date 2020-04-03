@@ -46,8 +46,8 @@ const SearchButton = ({ isWhite, style, navigation }) => (
 
 class Header extends React.Component {
   handleLeftPress = () => {
-    const { back, goBack, navigation } = this.props;
-    return (back ? (goBack ? goBack() : navigation.goBack()) : navigation.openDrawer());
+    const { back, remove, goBack, navigation } = this.props;
+    return (back || remove ? (goBack ? goBack() : navigation.goBack()) : navigation.openDrawer());
   }
 
   renderRight = () => {
@@ -128,7 +128,7 @@ class Header extends React.Component {
     }
   }
   render() {
-    const { back, title, white, transparent, bgColor, iconColor, titleColor, navigation, scene, ...props } = this.props;
+    const { back, remove, title, white, transparent, bgColor, iconColor, titleColor, navigation, scene, ...props } = this.props;
     const { name } = scene.route;
     const noShadow = ['Search', 'Categories', 'Deals', 'Pro', 'Profile'].includes(name);
     const headerStyles = [
@@ -152,7 +152,7 @@ class Header extends React.Component {
           left={
             <TouchableOpacity onPress={this.handleLeftPress}>
               <Icon
-                name={back ? 'chevron-left' : 'th-list'}
+                name={back ? 'chevron-left' : (remove ? 'remove' : 'th-list')}
                 type="font-awesome"
                 size={24}
                 color={iconColor || argonTheme.COLORS.ICON} />

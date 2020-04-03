@@ -14,9 +14,8 @@ import { bindActionCreators } from 'redux';
 import { setSportCentersAction } from '../../redux/action/sport.action';
 import { Image, ListItem } from 'react-native-elements';
 import { Checkbox } from '../common/Form';
-import { getDateDDMM } from '../../helper/util/date';
 import { BookService, SportService } from '../../service';
-import { NotificationUtil, TimeUtil } from '../../helper/util';
+import { NotificationUtil, TimeUtil, DateUtil } from '../../helper/util';
 import { ComponentConstants, ApiConstants } from '../../constants';
 
 const { width, height } = Dimensions.get('window');
@@ -80,7 +79,7 @@ class SportCenterScreen extends React.Component {
         const current = new Date();
         let result = [];
         for (let i = 0; i < 3; i++) {
-            result.push(getDateDDMM(current.getTime() + i * 1000 * 60 * 60 * 24));
+            result.push(DateUtil.getDateDDMM(current.getTime() + i * 1000 * 60 * 60 * 24));
         }
         return result;
     }
@@ -115,7 +114,7 @@ class SportCenterScreen extends React.Component {
         })
         console.log(filter);
         if (!filter.length) {
-            NotificationUtil.notifyError("Booking failed", "You haven't selected");
+            NotificationUtil.error("Booking failed", "You haven't selected");
             return;
         }
         const params = {};
@@ -135,14 +134,14 @@ class SportCenterScreen extends React.Component {
         console.log(data);
         if (data.error) {
             if (isNaN(+data.error)) {
-                NotificationUtil.notifyError("Booking failed", data.error);
+                NotificationUtil.error("Booking failed", data.error);
                 // this.getSportCenter();
                 return;
             }
             (this.state.info.sportGrounds || []).map(sportGround => {
                 (sportGround.sportGroundTimeSlots || []).map(timeSlot => {
                     if (+timeSlot.id == +data.error) {
-                        NotificationUtil.notifyError("Booking failed", `${sportGround.name} is not empty`)
+                        NotificationUtil.error("Booking failed", `${sportGround.name} is not empty`)
                         // this.getSportCenter();
                     }
                 })
@@ -358,7 +357,7 @@ const mapStateToProps = (state, ownProps) => {
     }
     return {
         sportCenter: sportCenterResult,
-        user: state.loginReducer
+        user: state.authReducer
     }
 }
 

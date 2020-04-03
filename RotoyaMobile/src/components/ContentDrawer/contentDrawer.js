@@ -13,9 +13,9 @@ import {
     DrawerItemList,
     DrawerItem,
 } from '@react-navigation/drawer';
-import { ColorNavigation } from '../../helper/color';
 import { AuthAction } from '../../redux/action';
 import { ApiConstants } from '../../constants';
+import ColorConstants from '../../constants/color.constants';
 
 class CustomDrawerComponent extends React.Component {
     logout = () => {
@@ -53,15 +53,15 @@ class CustomDrawerComponent extends React.Component {
                             <Text bold >{this.props.lastName}</Text>
                         </Block>
                     </View>
-                    <Divider style={{ backgroundColor: ColorNavigation.DrawerActiveBackground}} />
-                    <Divider style={{ backgroundColor: ColorNavigation.DrawerActiveBackground, marginBottom: 10 }} />
+                    <Divider style={{ backgroundColor: ColorConstants.DrawerNavigation.ActiveBackground}} />
+                    <Divider style={{ backgroundColor: ColorConstants.DrawerNavigation.ActiveBackground, marginBottom: 10 }} />
                     <DrawerItemList {...this.props} />
                     <DrawerItem
                         label="Logout"
                         focused
                         onPress={() => this.alertLogout()}
-                        icon={() => <Icon type="material-community" name="logout" size={24} color={ColorNavigation.DrawerLogout}/>}
-                        activeTintColor={ColorNavigation.DrawerLogout}
+                        icon={() => <Icon type="material-community" name="logout" size={24} color={ColorConstants.DrawerNavigation.Logout}/>}
+                        activeTintColor={ColorConstants.DrawerNavigation.Logout}
                     />
                 </DrawerContentScrollView>
             </SafeAreaView>
@@ -70,9 +70,9 @@ class CustomDrawerComponent extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    userId: state.loginReducer.userId,
-    avatar: state.loginReducer.avatar,
-    lastName: state.loginReducer.lastName
+    userId: state.authReducer.userId,
+    avatar: state.authReducer.avatar,
+    lastName: state.authReducer.lastName
 });
 
 const mapDispatchToProps = (dispatch) => {

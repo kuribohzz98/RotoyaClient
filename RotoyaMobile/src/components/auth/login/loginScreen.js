@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { AuthService, StorageService } from '../../../service';
 import { AuthAction } from '../../../redux/action';
 import { StorageConstants } from '../../../constants';
+import { NotificationUtil } from '../../../helper/util';
 
 class LoginScreen extends React.Component {
     constructor(props) {
@@ -14,41 +15,37 @@ class LoginScreen extends React.Component {
             isVisible: false
         }
     }
-    onSubmit = values => {
+    onSubmit = async values => {
         console.log(values);
-        this.setState({
-            isVisible: true
-        })
-        AuthService.loginService(
-            {
-                'username': values.username,
-                'password': values.password
-            })
-            .then(async response => {
-                this.setState({
-                    isVisible: false
-                })
-                if (!response.data.user) {
-                    console.log('login fail');
-                    Alert.alert(
-                        'Problem',
-                        'Username or password is correct',
-                        [
-                            { text: 'OK', style: 'cancel' },
-                        ]
-                    );
-                    return;
-                }
-                this.props.loginAction(response.data.user);
-                await StorageService.saveItem(StorageConstants.AccessToken, response.data.access_token);
-                this.props.navigation.navigate('App');
-            })
-            .catch((err) => {
-                console.error(err);
-                this.setState({
-                    isVisible: false
-                })
-            })
+        if (!values || Object.keys(values).length != 2) {
+            NotificationUtil.error('Thiếu thông tin đăng nhập');
+            return;
+        }
+        this.setState({ isVisible: true });
+        const res = await AuthService.loginService({
+            username: values.username,
+            password: values.password
+        });
+        this.setState({ isVisible: false });
+        if (!res.data || res.status >= 400) {
+            NotificationUtil.errorServer(res);
+            return;
+        }
+        this.setState({ isVisible: false });
+        if (!res.data.user) {
+            console.log('login faild');
+            Alert.alert(
+                'Problem',
+                'Username or password is correct',
+                [
+                    { text: 'OK', style: 'cancel' },
+                ]
+            );
+            return;
+        }
+        this.props.loginAction(res.data.user);
+        await StorageService.saveItem(StorageConstants.AccessToken, res.data.access_token);
+        this.props.navigation.navigate('App');
     }
     render() {
         return <LoginForm

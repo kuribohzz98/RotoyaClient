@@ -38,14 +38,16 @@ class filterForm extends React.Component {
             disabledFilterByPosition: false,
             showFilter: true,
             dataSelectDay: this.getDataSelectDay(),
-            sportListName: []
+            sportListName: [],
+            sports: []
         }
     }
 
     componentDidMount() {
         SportService.getSports().then(res => {
             this.setState({
-                sportListName: res.data.map(sport => sport.name)
+                sportListName: res.data.map(sport => sport.name),
+                sport: res.data
             });
         })
     }
@@ -102,66 +104,30 @@ class filterForm extends React.Component {
                 console.warn('device not grant rights use location');
                 return;
             }
-            await new Promise(resolve =>
+            await new Promise(resolve => {
                 Geolocation.getCurrentPosition(position => {
                     console.log("current_position: ", position);
                     opts.latitude = position.coords.latitude;
                     opts.longitude = position.coords.longitude;
-                    resolve();
-                }));
-        }
-        if (findByDay) {
-            opts.time = new Date(DateUtil.convertDateDDMMToMMDD(findByDay)).getTime();
-        }
-        opts.isTimeSlotBlank = isTimeSlostBlank;
-        opts.isByLocation = isFilterByPosition;
-        if (sport) opts.sport = sport;
-        if (distance) opts.distance = distance;
-        opts.limit = 5;
-        opts.page = 1;
-        console.log(opts);
-        SportService.getSportCenters(opts).then(res => {
-            dispatch(SportAction.setSportCentersAction(res.data));
-            dispatch(ComponentAction.setOptionsGetSportCenters(opts));
-        })
-    }
+                    resolve(position);
+                })
+            });
 
-    async submitFilter(value, dispatch) {
-        const {
-            distance,
-            sport,
-            findByDay,
-            isFilterByPosition,
-            isTimeSlostBlank
-        } = value;
-        console.log(value);
-        const opts = {};
-        if (isFilterByPosition) {
-            const granted = await PermissionsAndroid.request(
-                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
-            );
-            if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-                console.warn('device not grant rights use location');
-                return;
-            }
-            await new Promise(resolve =>
-                Geolocation.getCurrentPosition(position => {
-                    console.log("current_position: ", position);
-                    opts.latitude = position.coords.latitude;
-                    opts.longitude = position.coords.longitude;
-                    resolve();
-                }));
         }
-        if (findByDay) {
-            opts.time = new Date(DateUtil.convertDateDDMMToMMDD(findByDay)).getTime();
-        }
+        opts.time = findByDay ?
+            new Date(DateUtil.convertDateDDMMToMMDD(findByDay)).getTime() :
+            new Date().getTime();
         opts.isTimeSlotBlank = isTimeSlostBlank;
         opts.isByLocation = isFilterByPosition;
         if (sport) opts.sport = sport;
         if (distance) opts.distance = distance;
         opts.limit = 5;
         opts.page = 1;
-        console.log(opts);
+        if (sport) {
+            const sportTemp = this.state.sports.find(sport => sport.name == sport);
+            if (sportTemp) opts.sportId = sportTemp.id;
+        }
+        console.log(opts, '-----');
         SportService.getSportCenters(opts).then(res => {
             dispatch(SportAction.setSportCentersAction(res.data));
             dispatch(ComponentAction.setOptionsGetSportCenters(opts));

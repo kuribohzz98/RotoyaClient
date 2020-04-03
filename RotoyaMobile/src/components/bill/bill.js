@@ -5,18 +5,17 @@ import {
   Text,
   ImageBackground,
   Platform,
-  BackHandler
+  BackHandler,
+  TouchableOpacity
 } from "react-native";
-import { getDateDDMM } from "../../helper/util/date";
-import { Icon } from 'react-native-elements';
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { Header } from "../common";
 import componentConstants from "../../constants/component.constants";
 import { BookService } from "../../service";
-import { NumberUtil, TimeUtil } from "../../helper/util";
+import { NumberUtil, TimeUtil, NotificationUtil, DateUtil } from "../../helper/util";
 
 class BillScreen extends React.Component {
   nativeEventSubscription = null;
+  timeOutBook = null;
 
   constructor(props) {
     super(props);
@@ -41,24 +40,30 @@ class BillScreen extends React.Component {
     })
   }
 
-  goBackUseButtonBackAndroid() {
+  rollbackBooking() {
     BookService.rollbackBooking({ orderId: this.props.route.params.payment.orderId });
   }
 
   componentDidMount() {
+    // press back android
     if (Platform.OS == "android" && this.props.route.name == "Bill") {
       this.nativeEventSubscription = BackHandler.addEventListener("hardwareBackPress", () => {
-        if (this.props.navigation.isFocused()) this.goBackUseButtonBackAndroid();
+        if (this.props.navigation.isFocused()) this.rollbackBooking();
       })
     }
-    setTimeout(() => {
-      console.log('hihi______________');
+
+    this.timeOutBook = setTimeout(() => {
+      NotificationUtil.info("Your session has expired", "You will be redirected 'Home' screen");
+      this.props.navigation.popToTop();
     }, componentConstants.TimeOutBooking)
   }
 
   componentWillUnmount() {
     if (this.nativeEventSubscription) {
       this.nativeEventSubscription.remove();
+    }
+    if (this.timeOutBook) {
+      clearTimeout(this.timeOutBook);
     }
   }
 
@@ -119,7 +124,7 @@ class BillScreen extends React.Component {
                       </View>
                       <View style={styles.amountRow}>
                         <Text style={styles.amount}>Date / time</Text>
-                        <Text style={styles.style}>{getDateDDMM(timeSlot.bookingDate)} / {TimeUtil.convertFloatToTime(timeSlot.startTime)} - {TimeUtil.convertFloatToTime(timeSlot.endTime)}</Text>
+                        <Text style={styles.style}>{DateUtil.getDateDDMM(timeSlot.bookingDate)} / {TimeUtil.convertFloatToTime(timeSlot.startTime)} - {TimeUtil.convertFloatToTime(timeSlot.endTime)}</Text>
                       </View>
                       <View style={styles.sportGroundRow}>
                         <Text style={styles.sportGround}>Price</Text>
@@ -206,7 +211,7 @@ const styles = StyleSheet.create({
   transactionNo: {
     backgroundColor: "transparent",
     color: "rgba(204,204,204,1)",
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: "poppins-600",
     letterSpacing: 0.3
   },
@@ -215,7 +220,7 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: "transparent",
     color: "rgba(104,108,113,1)",
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: "verdana-regular",
     letterSpacing: 0.3,
     textAlign: "right",
@@ -229,7 +234,7 @@ const styles = StyleSheet.create({
   dateTime: {
     backgroundColor: "transparent",
     color: "rgba(204,204,204,1)",
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: "poppins-600",
     letterSpacing: 0.3
   },
@@ -238,7 +243,7 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: "transparent",
     color: "rgba(104,108,113,1)",
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: "verdana-regular",
     letterSpacing: 0.3,
     textAlign: "right",
@@ -253,7 +258,7 @@ const styles = StyleSheet.create({
   toWallet: {
     backgroundColor: "transparent",
     color: "rgba(204,204,204,1)",
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: "poppins-600",
     letterSpacing: 0.3,
     marginTop: 11
@@ -261,7 +266,7 @@ const styles = StyleSheet.create({
   transactionStatus: {
     backgroundColor: "transparent",
     color: "rgba(204,204,204,1)",
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: "poppins-600",
     letterSpacing: 0.3
   },
@@ -270,11 +275,11 @@ const styles = StyleSheet.create({
     height: 20,
     backgroundColor: "transparent",
     color: "rgba(104,108,113,1)",
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: "verdana-regular",
     letterSpacing: 0.3,
     textAlign: "left",
-    marginLeft: 14
+    marginLeft: 16
   },
   transactionStatusRow: {
     height: 20,
@@ -286,7 +291,7 @@ const styles = StyleSheet.create({
   amount: {
     backgroundColor: "transparent",
     color: "rgba(204,204,204,1)",
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: "poppins-600",
     letterSpacing: 0.3
   },
@@ -295,7 +300,7 @@ const styles = StyleSheet.create({
     height: 20,
     backgroundColor: "transparent",
     color: "rgba(104,108,113,1)",
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: "poppins-500",
     letterSpacing: 0.3,
     textAlign: "right",
@@ -310,7 +315,7 @@ const styles = StyleSheet.create({
   sportGround: {
     backgroundColor: "transparent",
     color: "rgba(204,204,204,1)",
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: "poppins-600",
     letterSpacing: 0.3
   },
@@ -319,7 +324,7 @@ const styles = StyleSheet.create({
     height: 20,
     backgroundColor: "transparent",
     color: "rgba(104,108,113,1)",
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: "poppins-500",
     letterSpacing: 0.3,
     textAlign: "right",

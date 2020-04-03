@@ -23,7 +23,6 @@ class AuthLoadingScreen extends React.Component {
         this.navigate(event.url);
     }
     navigate = (url) => {
-        console.log('___+++_____', url);
         this._bootstrapAsync(url);
         // const { navigate } = this.props.navigation;
         // const route = url.replace(/.*?:\/\//g, '');
@@ -36,7 +35,8 @@ class AuthLoadingScreen extends React.Component {
     }
 
     // Fetch the token from storage then navigate to our appropriate place
-    _bootstrapAsync = async (url) => {
+    _bootstrapAsync = async url => {
+        console.log('___+++_____', url);
         const userToken = await StorageService.getItem('userToken');
         const tempOpts = this.props.optionsGetSportCenters || {};
         tempOpts.limit = 5;
@@ -46,6 +46,12 @@ class AuthLoadingScreen extends React.Component {
         // screen will be unmounted and thrown away.
         // console.log(this.deepLink, '--hihi');
         if (url) {
+            // const route = url.replace(/.*?:\/\//g, '');
+            // const params = (route + '').split('&');
+            // params.map(param => {
+            //     const query = param.split('=');
+            //     if (query[0] == 'requestId') this.props.navigation.navigate('App');
+            // })
             this.props.navigation.navigate('App');
             return;
         };

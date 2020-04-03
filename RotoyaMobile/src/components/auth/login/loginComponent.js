@@ -10,13 +10,11 @@ import {
     Keyboard,
     TouchableWithoutFeedback,
     KeyboardAvoidingView,
-    StatusBar,
-    ActivityIndicator
+    StatusBar
 } from 'react-native';
-// import { RotoyaButton } from '../../common/index';
 import { SocialIcon } from 'react-native-elements';
-import { Block, Checkbox, Text, theme } from "galio-framework";
-import { Button, Icon, Input, Select } from "../../common";
+import { Block, Text } from "galio-framework";
+import { Button, Icon, Input } from "../../common";
 import { Images, argonTheme } from "../../../constants";
 import SpinnerLoading from '../../common/spinnerLoading';
 
@@ -86,7 +84,7 @@ let LoginForm = props => {
                                                 />
                                             </Block>
                                             <View style={{ flexDirection: 'row', width: width * 0.8, justifyContent: 'center', marginBottom: 15 }}>
-                                                <Text style={{alignSelf: 'center', fontWeight: 'bold'}}>or login with </Text>
+                                                <Text style={{ alignSelf: 'center', fontWeight: 'bold' }}>or login with </Text>
                                                 <SocialIcon
                                                     type='facebook'
                                                     // title='Facebook'

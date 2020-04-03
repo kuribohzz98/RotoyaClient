@@ -1,11 +1,6 @@
-const getDateDDMM = (inpDate) =>{
-    let date;
+const getDateDDMM = (inpDate) => {
     if (!inpDate) return;
-    if (typeof inpDate == 'number') {
-        date = new Date(inpDate);
-    } else {
-        date = inpDate;
-    }
+    let date = new Date(inpDate);
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();

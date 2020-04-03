@@ -14,8 +14,13 @@ const getPayment = async (params) => {
     return axiosBase.get(`${url}/get-one`, { params })
 }
 
+const getPayments = async (params) => {
+    return axiosBase.get(url, {params});
+}
+
 export default {
     atmInland,
     paymentMomo,
-    getPayment
+    getPayment,
+    getPayments
 }

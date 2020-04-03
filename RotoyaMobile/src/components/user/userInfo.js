@@ -286,14 +286,14 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-    userId: state.loginReducer.userId,
-    firstName: state.loginReducer.firstName,
-    lastName: state.loginReducer.lastName,
-    phone: state.loginReducer.phone,
-    address: state.loginReducer.address,
-    email: state.loginReducer.email,
-    avatar: state.loginReducer.avatar,
-    gender: state.loginReducer.gender
+    userId: state.authReducer.userId,
+    firstName: state.authReducer.firstName,
+    lastName: state.authReducer.lastName,
+    phone: state.authReducer.phone,
+    address: state.authReducer.address,
+    email: state.authReducer.email,
+    avatar: state.authReducer.avatar,
+    gender: state.authReducer.gender
 });
 
 const mapDispatchToProps = (dispatch) => {

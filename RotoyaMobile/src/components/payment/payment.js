@@ -16,14 +16,14 @@ class PaymnetScreen extends React.Component {
     async payment(bankCode) {
         const { amount, orderId } = this.props.route.params;
         const body = {};
-        body.returnUrl = 'rotoya://app/home';
+        body.returnUrl = 'rotoya://bill';
         body.amount = amount;
         body.orderId = orderId;
         if (bankCode) body.bankCode = bankCode;
         const res = bankCode ? await PaymentService.atmInland(body) : await PaymentService.paymentMomo(body);
         console.log('_0***', res.data);
-        if (!res.data || res.status != 200) {
-            NotificationUtil.notifyError(`Server Error ${res.status}`, res.statusText);
+        if (!res.data || res.status >= 400) {
+            NotificationUtil.error(`Server Error ${res.status}`, res.statusText);
             return;
         }
         this.props.navigation.navigate('PaymentWebView', {
@@ -56,9 +56,9 @@ class PaymnetScreen extends React.Component {
         return (
             <View style={styles.root}>
                 <View>
-                    <Text>Momo</Text>
+                    <Text style={styles.cardTitle}>Momo</Text>
                     <TouchableOpacity onPress={this.payment.bind(this, null)}>
-                        <View style={styles.rect14}>
+                        <View style={styles.momo}>
                             <Image
                                 source={require('../../../assets/imgs/logo-momo.jpg')}
                                 resizeMode="contain"
@@ -67,12 +67,14 @@ class PaymnetScreen extends React.Component {
                         </View>
                     </TouchableOpacity>
                 </View>
-                <Text>Bank Inland</Text>
-                <ScrollView>
-                    <View style={styles.scroll}>
-                        {this.renderBank()}
-                    </View>
-                </ScrollView>
+                <View style={{ marginTop: 10 }}>
+                    <Text style={styles.cardTitle}>Bank Inland</Text>
+                    <ScrollView>
+                        <View style={styles.scroll}>
+                            {this.renderBank()}
+                        </View>
+                    </ScrollView>
+                </View>
             </View>
         )
     }
@@ -81,7 +83,15 @@ class PaymnetScreen extends React.Component {
 const styles = StyleSheet.create({
     root: {
         flex: 1,
-        backgroundColor: "white"
+        backgroundColor: "white",
+        padding: 15
+    },
+    cardTitle: {
+        backgroundColor: "transparent",
+        fontSize: 16,
+        fontFamily: "poppins-600",
+        letterSpacing: 0.3,
+        textAlign: 'left'
     },
     scroll: {
         flexDirection: 'row',
@@ -102,6 +112,22 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 10,
         elevation: 8
+    },
+    momo: {
+        marginBottom: 10,
+        backgroundColor: "rgba(255,255,255,1)",
+        borderRadius: 10,
+        shadowOffset: {
+            height: 30,
+            width: 30
+        },
+        shadowColor: "black",
+        shadowOpacity: 0.3,
+        shadowRadius: 10,
+        elevation: 8,
+        width: 95,
+        paddingBottom: 10
+
     },
     image1: {
         width: 96,

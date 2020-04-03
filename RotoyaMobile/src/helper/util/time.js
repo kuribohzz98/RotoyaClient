@@ -7,6 +7,15 @@ const convertFloatToTime = (inp) => {
     return `${hour}:${minute}`;
 }
 
+const getTime = (inpDate) => {
+    if (!inpDate) return;
+    let date = new Date(inpDate);
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+    return `${hour}:${minute}`;
+}
+
 export default {
-    convertFloatToTime
+    convertFloatToTime,
+    getTime
 }

@@ -83,20 +83,23 @@ const StackHome = () => (
             component={Components.PaymentWebViewScreen}
             headerMode="screen"
         />
+        <Stack.Screen
+            name="BookedDetail"
+            component={Components.BookedDetailScreen}
+        />
     </Stack.Navigator>
 )
 
 const StackBooked = () => (
-    <Stack.Navigator initialRouteName="Main">
+    <Stack.Navigator initialRouteName="Booked">
         <Stack.Screen
-            name="Main"
+            name="Booked"
             component={Components.BookedScreen}
             headerMode="screen"
             options={{
                 header: ({ navigation, scene }) => (
                     <Header
                         title="Booked Ground"
-                        back
                         navigation={navigation}
                         scene={scene}
                     />
@@ -104,7 +107,7 @@ const StackBooked = () => (
             }}
         />
         <Stack.Screen
-            name="detail"
+            name="BookedDetail"
             component={Components.BookedDetailScreen}
         />
     </Stack.Navigator>
@@ -173,7 +176,7 @@ const DrawerNavigation = () => (
             }}
         />
         <Drawer.Screen
-            name="Booked Ground"
+            name="Booked"
             component={StackBooked}
             options={{
                 drawerIcon: props => (

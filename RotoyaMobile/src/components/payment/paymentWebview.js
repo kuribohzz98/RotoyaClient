@@ -4,6 +4,7 @@ import { WebView } from 'react-native-webview';
 import { Header } from "../common";
 import { PaymentService } from "../../service";
 import { NotificationUtil } from "../../helper/util";
+import { CommonActions } from '@react-navigation/native';
 
 class PaymnetWebViewScreen extends React.Component {
     nativeEventSubscription = null;
@@ -30,12 +31,20 @@ class PaymnetWebViewScreen extends React.Component {
     async goBackUseButtonBackAndroid() {
         const res = await PaymentService.getPayment({ orderId: this.props.route.params.orderId });
         if (res.status != 200) {
-            NotificationUtil.notifyError(`Server error ${res.status}`, res.statusText);
+            NotificationUtil.error(`Server error ${res.status}`, res.statusText);
             return;
         }
         const payment = res.data;
         if (payment && payment.transactionId) {
-            this.props.navigation.popToTop();
+            // this.props.navigation.popToTop();
+            this.props.navigation.dispatch(
+                CommonActions.reset({
+                    index: 0,
+                    routes: [
+                        { name: 'BookedDetail', params: { orderId: payment.orderId } }
+                    ]
+                })
+            )
             return true;
         }
         return;
