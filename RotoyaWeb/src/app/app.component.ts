@@ -1,3 +1,4 @@
+import { NotifyService } from './helper/service/notify.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'RotoyaWeb';
+  title = 'Rotoya';
 }
