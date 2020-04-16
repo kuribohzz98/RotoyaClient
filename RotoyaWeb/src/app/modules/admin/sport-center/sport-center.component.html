@@ -1,0 +1,199 @@
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <p class="font-weight-bold">Tên:</p>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <p>{{sportCenter.name}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <p class="font-weight-bold">Địa chỉ:</p>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <p>
+                            {{sportCenter.address ? sportCenter.address + ", " : ""}}
+                            {{sportCenter.commune + ", " + sportCenter.district + ", " + sportCenter.city + ", " + sportCenter.country}}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <p class="font-weight-bold">Giờ mở cửa:</p>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <p class="text-danger">{{sportCenter.timeOpen | numberToTime}} -
+                            {{sportCenter.timeClose | numberToTime}}</p>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-left: 15px; margin-right: 15px;">
+                <mat-divider></mat-divider>
+            </div>
+            <div class="card-footer text-right">
+                <button mat-raised-button color="primary">
+                    <i class="material-icons">edit</i>
+                    Sửa
+                </button>
+            </div>
+        </div>
+        <div class="card">
+            <img [src]="host + '/image/' + sportCenter.avatar"
+                style="height: 300px; margin: 15px; border-radius: 10px;">
+            <div style="margin-left: 15px; margin-right: 15px;">
+                <mat-divider></mat-divider>
+            </div>
+            <div class="card-footer">
+                <button mat-raised-button color="primary">
+                    <i class="material-icons">edit</i>
+                    Sửa
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="card" style="height: 600px;">
+            <div class="card-body">
+                <app-sport-center-map [latitude]="sportCenter.latitude" [longitude]="sportCenter.longitude">
+                </app-sport-center-map>
+            </div>
+            <div style="margin-left: 15px; margin-right: 15px">
+                <mat-divider></mat-divider>
+            </div>
+            <div class="card-footer">
+                <ng-container *ngIf="!isEditMap; else editMap">
+                    <button mat-raised-button color="primary" (click)="openEditMap()">
+                        <i class="material-icons">edit</i>
+                        Sửa
+                    </button>
+                </ng-container>
+                <ng-template #editMap>
+                    <button mat-raised-button class="btn btn-default" (click)="openEditMap()">
+                        <i class="material-icons">close</i>
+                        Hủy bỏ
+                    </button>
+                    <button mat-raised-button class="btn btn-success" (click)="saveEditMap()">
+                        <i class="material-icons">save</i>
+                        Lưu
+                    </button>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-container *ngFor="let sportGround of sportCenter.sportGrounds; let i=index">
+    <div class="row">
+        <div class="col-md-7">
+            <h3 *ngIf="!isChangeNameSportGround[i]">
+                {{sportGround.name}}
+                <button mat-icon-button color="primary"
+                    (click)="isChangeNameSportGround[i] = !isChangeNameSportGround[i]">
+                    <i class="material-icons">edit</i>
+                </button>
+            </h3>
+            <form *ngIf="isChangeNameSportGround[i]">
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field style="width: 100%;">
+                            <input matInput placeholder="Tên sân" [value]="sportGround.name">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <button mat-icon-button color="primary">
+                            <i class="material-icons">check</i>
+                        </button>
+                        <button mat-icon-button color="accent"
+                            (click)="isChangeNameSportGround[i] = !isChangeNameSportGround[i]">
+                            <i class="material-icons">close</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-5">
+            <div class="row">
+                <div class="col-md-7">
+                    <h3 *ngIf="!isChangeQuantitySportGround[i]">
+                        Số lượng: {{sportGround.quantity}}
+                        <button mat-icon-button color="primary"
+                            (click)="isChangeQuantitySportGround[i] = !isChangeQuantitySportGround[i]">
+                            <i class="material-icons">edit</i>
+                        </button>
+                    </h3>
+                    <form *ngIf="isChangeQuantitySportGround[i]">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field style="width: 100%;">
+                                    <input matInput placeholder="Số lượng" [value]="sportGround.quantity">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <button mat-icon-button color="primary">
+                                    <i class="material-icons">check</i>
+                                </button>
+                                <button mat-icon-button color="accent"
+                                    (click)="isChangeQuantitySportGround[i] = !isChangeQuantitySportGround[i]">
+                                    <i class="material-icons">close</i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-5">
+                    <button mat-raised-button color="accent">
+                        <i class="material-icons">delete</i>
+                        Xóa Sân
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <mat-divider></mat-divider>
+    <div class="card">
+        <div class="card-header card-header-danger">
+            <h3 class="card-title">Các khung giờ thuê sân</h3>
+            <p class="card-category">Những thay đổi tại đây sẽ được cập nhập cho ngày tiếp theo</p>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <th scope="col">#</th>
+                                <th scope="col" class="text-center">Start Time</th>
+                                <th scope="col" class="text-center">End Time</th>
+                                <th scope="col" class="text-center">Price (VNĐ)</th>
+                                <th scope="col" class="text-center"></th>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngFor="let timeSlot of sportGround.sportGroundTimeSlots; let j=index">
+                                    <tr>
+                                        <th scope="row">{{j + 1}}</th>
+                                        <td class="text-center">{{timeSlot.startTime | numberToTime}}</td>
+                                        <td class="text-center">{{timeSlot.endTime | numberToTime}}</td>
+                                        <td class="text-center">{{timeSlot.price | number}}</td>
+                                        <td class="text-center">
+                                            <button mat-icon-button color="primary">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+                                            <button mat-icon-button color="accent">
+                                                <i class="material-icons">delete</i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
