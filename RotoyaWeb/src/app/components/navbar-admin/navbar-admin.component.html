@@ -1,7 +1,15 @@
-<nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute fixed-top">
+<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute">
     <div class="container-fluid">
         <div class="navbar-wrapper">
-          <!-- <a class="navbar-brand" href="javascript:void(0)">{{getTitle()}}</a> -->
+            <mat-form-field>
+                <mat-select [(value)]="sportCenterControl" (selectionChange)="onchange($event)">
+                    <mat-option>---</mat-option>
+                    <mat-option *ngFor="let sportCenter of sportCenters" [value]="sportCenter">
+                        {{sportCenter.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- <a class="navbar-brand" href="javascript:void(0)">{{getTitle()}}</a> -->
         </div>
         <button mat-raised-button class="navbar-toggler" type="button" (click)="sidebarToggle()">
             <span class="sr-only">Toggle navigation</span>
@@ -20,14 +28,9 @@
                 </div>
             </form> -->
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0)">
-                        <i class="material-icons">dashboard</i>
-                        <p>
-                            <span class="d-lg-none d-md-block">Stats</span>
-                        </p>
-                    </a>
-                </li>
+                <!-- <li class="nav-item"> -->
+
+                <!-- </li> -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="material-icons">notifications</i>

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import * as NotifyConstants from './../../constants/notify.constants';
+import * as NotifyConstants from '../../constants/notify.constants';
 
 declare var $: any;
 @Injectable({ providedIn: 'root' })

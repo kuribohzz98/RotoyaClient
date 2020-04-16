@@ -1,4 +1,3 @@
-
 <div class="wrapper">
     <div class="sidebar" data-color="danger" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
         <app-sidebar></app-sidebar>
@@ -9,7 +8,10 @@
             <button mat-raised-button class="btn btn-primary" (click)="notify()">Primary</button>
         </div> -->
         <app-navbar-admin></app-navbar-admin>
-        <router-outlet></router-outlet>
-        
+        <div class="main-content">
+            <div class="container-fluid">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
     </div>
 </div>

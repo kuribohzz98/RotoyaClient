@@ -1,5 +1,5 @@
 <div class="logo">
-    <a href="https://www.creative-tim.com" class="simple-text">
+    <a [routerLink]="['/sport-center']" class="simple-text">
         <!-- <div class="logo-img">
             <img src="/assets/img/angular2-logo-red.png"/>
         </div> -->
@@ -56,7 +56,8 @@
         </ul> -->
     </div>
     <ul class="nav">
-        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+        <li routerLinkActive="active" *ngFor="let menuItem of menuItems; let i=index"
+            class="{{menuItem.class}} nav-item">
             <a class="nav-link" [routerLink]="[menuItem.path]">
                 <i class="material-icons">{{menuItem.icon}}</i>
                 <p>{{menuItem.title}}</p>

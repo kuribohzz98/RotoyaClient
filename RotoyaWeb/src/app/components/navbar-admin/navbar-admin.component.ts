@@ -1,22 +1,37 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatSelectChange } from '@angular/material/select';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ROUTES } from '../sidebar/sidebar.component';
+import { AdminLayoutService } from './../../shared/service/admin-layout.service';
+import { SportCenter } from './../../shared/models/sport-center';
 
 @Component({
     selector: 'app-navbar-admin',
     templateUrl: './navbar-admin.component.html'
 })
-export class NavbarAdminComponent implements OnInit {
+export class NavbarAdminComponent implements OnInit, OnDestroy {
     private listTitles: any[];
     mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    sportCenters: SportCenter[];
+    sportCenterControl: SportCenter;
 
-    constructor(private element: ElementRef, private router: Router) {
+    private _destroy$: Subject<boolean> = new Subject();
+
+    constructor(
+        private element: ElementRef,
+        private router: Router,
+        private readonly adminLayoutService: AdminLayoutService
+    ) {
         this.sidebarVisible = false;
     }
 
     ngOnInit() {
+        this.sportCenters = this.adminLayoutService.sportCenters;
+        this.sportCenterControl = this.adminLayoutService.sportCenterSelected;
         this.listTitles = ROUTES.filter(listTitle => listTitle);
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
@@ -28,6 +43,19 @@ export class NavbarAdminComponent implements OnInit {
                 this.mobile_menu_visible = 0;
             }
         });
+        this.watchSportCenters();
+    }
+
+    onchange(event: MatSelectChange) {
+        this.adminLayoutService.sportCenterSelected = event.value;
+        this.adminLayoutService.sportCenterSelectedSubject$.next(event.value);
+    }
+
+    watchSportCenters() {
+        this.adminLayoutService.sportCenterSubject$
+            .pipe(takeUntil(this._destroy$)).subscribe(() => {
+                this.sportCenters = this.adminLayoutService.sportCenters;
+            })
     }
 
     sidebarOpen() {
@@ -104,6 +132,11 @@ export class NavbarAdminComponent implements OnInit {
 
         }
     };
+
+    ngOnDestroy() {
+        this._destroy$.next(true);
+        this._destroy$.complete();
+    }
 
     // getTitle() {
     //     var titlee = this.location.prepareExternalUrl(this.location.path());
