@@ -1,6 +1,6 @@
 const API_CONFIG = {
     PROTOCOL: 'http',
-    HOST: 'a9b3e5b7.ngrok.io',
+    HOST: '5891ead2.ngrok.io',
     // PORT: '3000'
 };
 

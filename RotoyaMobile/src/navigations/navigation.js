@@ -123,7 +123,6 @@ const StackMap = () => (
                 header: ({ navigation, scene }) => (
                     <Header
                         title="Map"
-                        back
                         navigation={navigation}
                         scene={scene}
                     />

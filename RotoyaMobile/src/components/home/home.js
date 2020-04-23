@@ -12,7 +12,7 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Card } from 'react-native-elements';
-import { SportService } from '../../service';
+import { SportService, SportCenterService } from '../../service';
 import { ComponentAction, SportAction } from '../../redux/action';
 import { ApiConstants } from '../../constants';
 
@@ -36,7 +36,7 @@ class MyHomeScreen extends React.Component {
             });
         })
         console.log(this.props.optionsGetSportCenters);
-        SportService.getSportCenters(this.props.optionsGetSportCenters).then(res => {
+        SportCenterService.getSportCenters(this.props.optionsGetSportCenters).then(res => {
             const { data } = res;
             this.props.setSportCentersAction(data);
         })
@@ -72,7 +72,7 @@ class MyHomeScreen extends React.Component {
         const tempOptions = { ...this.props.optionsGetSportCenters };
         tempOptions.page = tempOptions.page + 1;
         this.props.setOptionsGetSportCenters(tempOptions);
-        SportService.getSportCenters(tempOptions)
+        SportCenterService.getSportCenters(tempOptions)
             .then(res => {
                 this.setState({
                     isLoading: false

@@ -16,7 +16,7 @@ import { Icon } from 'react-native-elements'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Geolocation from 'react-native-geolocation-service';
-import { SportService } from '../../service';
+import { SportService, SportCenterService } from '../../service';
 import { ComponentAction, SportAction } from '../../redux/action';
 import { DateUtil } from '../../helper/util';
 
@@ -128,7 +128,7 @@ class filterForm extends React.Component {
             if (sportTemp) opts.sportId = sportTemp.id;
         }
         console.log(opts, '-----');
-        SportService.getSportCenters(opts).then(res => {
+        SportCenterService.getSportCenters(opts).then(res => {
             dispatch(SportAction.setSportCentersAction(res.data));
             dispatch(ComponentAction.setOptionsGetSportCenters(opts));
             this.props.navigation.navigate('Home');

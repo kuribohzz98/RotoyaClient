@@ -14,7 +14,7 @@ import { bindActionCreators } from 'redux';
 import { setSportCentersAction } from '../../redux/action/sport.action';
 import { Image, ListItem } from 'react-native-elements';
 import { Checkbox } from '../common/Form';
-import { BookService, SportService } from '../../service';
+import { BookService, SportCenterService } from '../../service';
 import { NotificationUtil, TimeUtil, DateUtil } from '../../helper/util';
 import { ComponentConstants, ApiConstants } from '../../constants';
 
@@ -55,7 +55,7 @@ class SportCenterScreen extends React.Component {
     }
 
     async getSportCenter() {
-        const res = await SportService.getSportCenter(this.props.sportCenter.id, new Date().getTime());
+        const res = await SportCenterService.getSportCenter(this.props.sportCenter.id, new Date().getTime());
         console.log('____________')
         console.log(res.data.sportGrounds);
         if (!res.data) console.error('not found sportCenter');
