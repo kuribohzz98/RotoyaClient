@@ -1,6 +1,7 @@
-import { SportGroundTimeSlot } from './time-slot';
+import { IPagination } from './base';
+import { ISportGroundTimeSlot } from './time-slot';
 
-export interface SportGround {
+export interface ISportGround {
     id?: number;
     sportCenterId?: number;
     sportId?: number;
@@ -11,5 +12,7 @@ export interface SportGround {
     quantity?: number;
     quantityInStock?: number;
     description?: string;
-    sportGroundTimeSlots?: SportGroundTimeSlot[];
+    sportGroundTimeSlots?: ISportGroundTimeSlot[];
 }
+
+export interface ISportGroundQuery extends ISportGround, IPagination { }

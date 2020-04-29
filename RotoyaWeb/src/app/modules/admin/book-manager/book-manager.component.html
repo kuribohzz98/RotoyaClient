@@ -1,74 +1,93 @@
-<div class="row">
-    <div class="col-lg-4 col-md-4 col-sm-4">
-        <mat-form-field>
-            <mat-label>Chọn ngày</mat-label>
-            <mat-select [(value)]="dateSelected">
-                <mat-option *ngFor="let date of listDate" [value]="date">{{date}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-    <div class="col-lg-4 col-md-4"></div>
-    <div class="col-lg-4 col-md-4 col-sm-4">
-        <button mat-raised-button class="btn btn-info" (click)="reloadData()">Tải lại</button>
-    </div>
-</div>
-
-<ng-container *ngFor="let sportGround of sportCenter.sportGrounds; let i=index">
+<ng-container *ngIf="!!sportCenter && !!sportCenter.sportGrounds; else bookmanagerElse">
     <div class="row">
-        <div class="col-md-7">
-            <h3>{{sportGround.name}}</h3>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <mat-form-field>
+                <mat-label>Chọn ngày</mat-label>
+                <mat-select [(value)]="dateSelected">
+                    <mat-option *ngFor="let date of listDate" [value]="date">{{date}}</mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
-        <div class="col-md-5">
-            <h3>Số lượng: {{sportGround.quantity}}</h3>
+        <div class="col-lg-4 col-md-4"></div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <button mat-raised-button class="btn btn-info" (click)="reloadData()">Tải lại</button>
         </div>
     </div>
 
-    <mat-divider></mat-divider>
+    <ng-container *ngFor="let sportGround of sportCenter.sportGrounds; let i=index">
+        <div class="row">
+            <div class="col-md-7">
+                <h3>{{sportGround.name}}</h3>
+            </div>
+            <div class="col-md-5">
+                <h3>Số lượng: {{sportGround.quantity}}</h3>
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h3 class="card-title">Các khung giờ thuê sân</h3>
+                <p class="card-category">Những thay đổi tại đây sẽ được cập nhập cho ngày tiếp theo</p>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <th scope="col">#</th>
+                                    <th scope="col" class="text-center">Start Time</th>
+                                    <th scope="col" class="text-center">End Time</th>
+                                    <th scope="col" class="text-center">Giá (VNĐ)</th>
+                                    <th scope="col" class="text-center">Số lượng còn lại</th>
+                                    <th scope="col" class="text-center"></th>
+                                </thead>
+                                <tbody>
+                                    <ng-container
+                                        *ngFor="let timeSlot of sportGround.sportGroundTimeSlots; let j=index">
+                                        <tr>
+                                            <th scope="row">{{j + 1}}</th>
+                                            <td class="text-center">{{timeSlot.startTime | numberToTime}}</td>
+                                            <td class="text-center">{{timeSlot.endTime | numberToTime}}</td>
+                                            <td class="text-center">{{timeSlot.price | number}}</td>
+                                            <td class="text-center">
+                                                <ng-container *ngFor="let booked of timeSlot.bookeds">
+                                                    <span
+                                                        *ngIf="compareDate(booked.date)">{{ sportGround.quantity - booked.amount}}</span>
+                                                </ng-container>
+                                                <span *ngIf="!timeSlot.bookeds.length">{{sportGround.quantity}}</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <button mat-raised-button color="primary"
+                                                    [disabled]="!timeSlot.bookeds.length">
+                                                    <i class="material-icons">info</i> Chi tiết
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</ng-container>
+<ng-template #bookmanagerElse>
     <div class="card">
         <div class="card-header card-header-danger">
-            <h3 class="card-title">Các khung giờ thuê sân</h3>
-            <p class="card-category">Những thay đổi tại đây sẽ được cập nhập cho ngày tiếp theo</p>
+            <p class="card-category">Tạo mới ngay các sân của bạn để đi vào hoạt động</p>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <th scope="col">#</th>
-                                <th scope="col" class="text-center">Start Time</th>
-                                <th scope="col" class="text-center">End Time</th>
-                                <th scope="col" class="text-center">Giá (VNĐ)</th>
-                                <th scope="col" class="text-center">Số lượng còn lại</th>
-                                <th scope="col" class="text-center"></th>
-                            </thead>
-                            <tbody>
-                                <ng-container *ngFor="let timeSlot of sportGround.sportGroundTimeSlots; let j=index">
-                                    <tr>
-                                        <th scope="row">{{j + 1}}</th>
-                                        <td class="text-center">{{timeSlot.startTime | numberToTime}}</td>
-                                        <td class="text-center">{{timeSlot.endTime | numberToTime}}</td>
-                                        <td class="text-center">{{timeSlot.price | number}}</td>
-                                        <td class="text-center">
-                                            <ng-container *ngFor="let booked of timeSlot.bookeds">
-                                                <span
-                                                    *ngIf="compareDate(booked.date)">{{ sportGround.quantity - booked.amount}}</span>
-                                            </ng-container>
-                                            <span *ngIf="!timeSlot.bookeds.length">{{sportGround.quantity}}</span>
-                                        </td>
-                                        <td class="text-center">
-                                            <button mat-raised-button color="primary"
-                                                [disabled]="!timeSlot.bookeds.length">
-                                                <i class="material-icons">info</i> Chi tiết
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </ng-container>
-                            </tbody>
-                        </table>
+                    <app-table-empty message="Chưa có thông tin sân"></app-table-empty>
+                    <div style="margin-top: 20px; text-align: center;">
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</ng-container>
+</ng-template>

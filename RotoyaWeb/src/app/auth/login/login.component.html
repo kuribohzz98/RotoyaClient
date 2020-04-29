@@ -1,0 +1,23 @@
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-form-title" style="background-image: url(assets/img/login-background.jpg);">
+                <span class="login100-form-title-1">
+                    Đăng nhập
+                </span>
+            </div>
+            <form [formGroup]="loginFrom" class="login100-form" (ngSubmit)="onSubmit()">
+                <mat-form-field class="wrap-input100">
+                    <input formControlName="username" matInput placeholder="Tên đăng nhập">
+                </mat-form-field>
+                <mat-form-field class="wrap-input100">
+                    <input formControlName="password" type="password" matInput placeholder="Mật khẩu">
+                </mat-form-field>
+                <div class="wrap-input100">
+                    <a [routerLink]="['/request-co-operate']" class="text-success" >Bạn muốn hợp tác với chúng tôi >>></a>
+                </div>
+                <button type="submit" mat-raised-button class="btn btn-success" [disabled]="!loginFrom.valid">Đăng nhập</button>
+            </form>
+        </div>
+    </div>
+</div>

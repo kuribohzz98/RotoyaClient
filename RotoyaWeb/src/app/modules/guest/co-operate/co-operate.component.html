@@ -1,0 +1,77 @@
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-form-title" style="background-image: url(assets/img/login-background.jpg);">
+                <span class="login100-form-title-1">
+                    Yêu cầu hợp tác
+                </span>
+            </div>
+            <form [formGroup]="formCoOperate" class="login100-form" (ngSubmit)="onSubmit()">
+                <div class="row wrap-input100">
+                    <div class="col-md-5 col-sm-6">
+                        <mat-form-field>
+                            <input formControlName="firstName" matInput placeholder="Họ, tên đệm">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-5 col-sm-6">
+                        <mat-form-field>
+                            <input formControlName="lastName" matInput placeholder="Tên">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row wrap-input100">
+                    <div class="col-md-5 col-sm-6">
+                        <mat-form-field>
+                            <mat-label>Tỉnh/ Thành phố</mat-label>
+                            <mat-select formControlName="city">
+                                <mat-option>None</mat-option>
+                                <ng-container *ngFor="let city of cities">
+                                    <mat-option [value]="city.id">{{city.name}}</mat-option>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-5 col-sm-6">
+                        <mat-form-field>
+                            <mat-label>Quận/ Huyện/ Thị xã</mat-label>
+                            <mat-select formControlName="district">
+                                <mat-option>None</mat-option>
+                                <ng-container *ngFor="let district of districts">
+                                    <mat-option [value]="district.id">{{district.name}}</mat-option>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row wrap-input100">
+                    <div class="col-md-5 col-sm-6">
+                        <mat-form-field>
+                            <mat-label>Phường/ Xã</mat-label>
+                            <mat-select formControlName="commune">
+                                <mat-option>None</mat-option>
+                                <ng-container *ngFor="let ward of wards">
+                                    <mat-option [value]="ward.id">{{ward.name}}</mat-option>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-5 col-sm-6">
+                        <mat-form-field class="wrap-input100">
+                            <input formControlName="address" matInput placeholder="Địa chỉ">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <mat-form-field class="wrap-input100">
+                    <input formControlName="phone" matInput placeholder="Số điện thoại">
+                </mat-form-field>
+                <mat-form-field class="wrap-input100">
+                    <input formControlName="email" matInput placeholder="Email">
+                </mat-form-field>
+                <button type="submit" mat-raised-button class="btn btn-success" [disabled]="!formCoOperate.valid">Gửi yêu cầu</button>
+            </form>
+        </div>
+    </div>
+</div>

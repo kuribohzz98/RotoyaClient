@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~9.1.0",
     "@angular/platform-browser-dynamic": "~9.1.0",
     "@angular/router": "~9.1.0",
+    "@mapbox/mapbox-gl-geocoder": "^4.5.1",
     "@types/mapbox-gl": "^1.8.3",
     "bootstrap": "^4.4.1",
     "bootstrap-notify": "^3.1.3",

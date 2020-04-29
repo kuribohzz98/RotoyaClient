@@ -58,10 +58,18 @@
     <ul class="nav">
         <li routerLinkActive="active" *ngFor="let menuItem of menuItems; let i=index"
             class="{{menuItem.class}} nav-item">
-            <a class="nav-link" [routerLink]="[menuItem.path]">
-                <i class="material-icons">{{menuItem.icon}}</i>
-                <p>{{menuItem.title}}</p>
-            </a>
+            <ng-container *ngIf="!menuItem.isLogout && acceptView(menuItem.roles)">
+                <a class="nav-link" [routerLink]="[menuItem.path]">
+                    <i class="material-icons">{{menuItem.icon}}</i>
+                    <p>{{menuItem.title}}</p>
+                </a>
+            </ng-container>
+            <ng-container *ngIf="menuItem.isLogout">
+                <a class="nav-link" href="javascript:void(0)" (click)="logout()">
+                    <i class="material-icons">{{menuItem.icon}}</i>
+                    <p>{{menuItem.title}}</p>
+                </a>
+            </ng-container>
         </li>
     </ul>
 </div>

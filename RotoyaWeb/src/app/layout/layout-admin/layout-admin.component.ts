@@ -3,8 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import PerfectScrollbar from 'perfect-scrollbar';
-import { NotifyService } from '../../shared/service/notify.service';
-import { SportCenter } from 'src/app/shared/models/sport-center';
+
 @Component({
   selector: 'app-layout-admin',
   templateUrl: './layout-admin.component.html'
@@ -13,8 +12,7 @@ export class LayoutAdminComponent implements OnInit, OnDestroy {
   private _destroys$: Subject<boolean> = new Subject();
 
   constructor(
-    private readonly notifyService: NotifyService,
-    private activatedRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -58,10 +56,6 @@ export class LayoutAdminComponent implements OnInit, OnDestroy {
       return true;
     }
     return false;
-  }
-
-  notify() {
-    this.notifyService.showNotifySuccess("hihi");
   }
 
   ngOnDestroy() {

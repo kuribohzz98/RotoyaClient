@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AccountService } from './../../auth/account.service';
+import { AuthServerProvider } from './../../auth/auth-jwt.service';
+import { Authorities } from './../../constants/auth.constants';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -6,15 +10,14 @@ declare interface RouteInfo {
   title: string;
   icon: string;
   class: string;
+  isLogout?: boolean;
+  roles?: string[];
 }
 export const ROUTES: RouteInfo[] = [
-  { path: '/sport-center', title: 'Sport Center', icon: 'dashboard', class: ''},
-  { path: '/book-manager', title: 'Book Manager', icon: 'book', class: '' },
-  // { path: '/table-list', title: 'Table List', icon: 'content_paste', class: '' },
-  // { path: '/typography', title: 'Typography', icon: 'library_books', class: '' },
-  // { path: '/icons', title: 'Icons', icon: 'bubble_chart', class: '' },
-  // { path: '/maps', title: 'Maps', icon: 'location_on', class: '' },
-  // { path: '/notifications', title: 'Notifications', icon: 'notifications', class: '' }
+  { path: '/manager/sport-center', title: 'Sport Center', icon: 'dashboard', class: '', roles: [Authorities.PROVIDER] },
+  { path: '/manager/book-manager', title: 'Book Manager', icon: 'book', class: '', roles: [Authorities.PROVIDER] },
+  { path: '/manager/request-co-operate-manager', title: 'Yêu cầu hợp tác', icon: 'layers', class: '', roles: [Authorities.ADMIN] },
+  { path: '/logout', title: 'Đăng xuất', icon: 'forward', class: 'logout', isLogout: true }
 ];
 
 @Component({
@@ -24,15 +27,30 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   menuItems: any[];
 
-  constructor() { }
+  constructor(
+    private readonly router: Router,
+    private readonly authServerProvider: AuthServerProvider,
+    private readonly accountService: AccountService
+  ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
   }
-  isMobileMenu() {
+
+  isMobileMenu(): boolean {
     if ($(window).width() > 991) {
       return false;
     }
     return true;
   };
+
+  acceptView(roles?: string[]): boolean {
+    if (!roles) return true;
+    return this.accountService.hasAnyAuthority(roles);
+  }
+
+  logout(): void {
+    this.authServerProvider.logout();
+    this.router.navigate(['']);
+  }
 }

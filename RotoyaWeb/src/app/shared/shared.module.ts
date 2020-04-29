@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { ConvertNumberToTime } from './pipes/convert-number-time.pipe';
+import { ConvertDatetimeToDate } from './pipes/convert-date.pipe';
+import { TableEmptyComponent } from './components/table-empty/table-empty.component';
 
 @NgModule({
     imports: [
@@ -8,11 +10,15 @@ import { ConvertNumberToTime } from './pipes/convert-number-time.pipe';
     ],
     declarations: [
         SpinnerComponent,
-        ConvertNumberToTime
+        ConvertNumberToTime,
+        ConvertDatetimeToDate,
+        TableEmptyComponent
     ],
     exports: [
         SpinnerComponent,
-        ConvertNumberToTime
+        ConvertNumberToTime,
+        ConvertDatetimeToDate,
+        TableEmptyComponent
     ]
 })
 export class SharedModule { }

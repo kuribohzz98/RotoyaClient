@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute">
     <div class="container-fluid">
-        <div class="navbar-wrapper">
-            <mat-form-field>
+        <div class="navbar-wrapper" style="padding-left: 20px">
+            <mat-form-field *ngIf="!isAdmin()">
                 <mat-select [(value)]="sportCenterControl" (selectionChange)="onchange($event)">
-                    <mat-option>---</mat-option>
+                    <mat-option *ngIf="!sportCenters || !sportCenters.length">---</mat-option>
                     <mat-option *ngFor="let sportCenter of sportCenters" [value]="sportCenter">
                         {{sportCenter.name}}
                     </mat-option>
@@ -31,8 +31,9 @@
                 <!-- <li class="nav-item"> -->
 
                 <!-- </li> -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <!-- <li class="nav-item dropdown">
+                    <a class="nav-link" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                         <i class="material-icons">notifications</i>
                         <span class="notification">5</span>
                         <p>
@@ -46,15 +47,7 @@
                         <a class="dropdown-item" href="javascript:void(0)">Another Notification</a>
                         <a class="dropdown-item" href="javascript:void(0)">Another One</a>
                     </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0)">
-                        <i class="material-icons">person</i>
-                        <p>
-                            <span class="d-lg-none d-md-block">Account</span>
-                        </p>
-                    </a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>

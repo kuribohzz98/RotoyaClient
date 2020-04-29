@@ -2,10 +2,14 @@ import { Component, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSelectChange } from '@angular/material/select';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, mergeMap } from 'rxjs/operators';
 import { ROUTES } from '../sidebar/sidebar.component';
 import { AdminLayoutService } from './../../shared/service/admin-layout.service';
-import { SportCenter } from './../../shared/models/sport-center';
+import { ISportCenter } from './../../shared/models/sport-center';
+import { AccountService } from './../../auth/account.service';
+import { SportCenterService } from './../../service/sport-center.service';
+import { StorageService } from './../../shared/service/storage.service';
+import { KeySessionStorage } from '../../constants/storage.constants';
 
 @Component({
     selector: 'app-navbar-admin',
@@ -16,49 +20,67 @@ export class NavbarAdminComponent implements OnInit, OnDestroy {
     mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
-    sportCenters: SportCenter[];
-    sportCenterControl: SportCenter;
+    sportCenters: ISportCenter[];
+    sportCenterControl: ISportCenter;
 
     private _destroy$: Subject<boolean> = new Subject();
 
     constructor(
         private element: ElementRef,
         private router: Router,
-        private readonly adminLayoutService: AdminLayoutService
+        private readonly adminLayoutService: AdminLayoutService,
+        private readonly accountService: AccountService,
+        private readonly sportCenterService: SportCenterService,
+        private readonly storageService: StorageService
     ) {
         this.sidebarVisible = false;
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.sportCenters = this.adminLayoutService.sportCenters;
         this.sportCenterControl = this.adminLayoutService.sportCenterSelected;
         this.listTitles = ROUTES.filter(listTitle => listTitle);
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
-        this.router.events.subscribe((event) => {
-            this.sidebarClose();
-            var $layer: any = document.getElementsByClassName('close-layer')[0];
-            if ($layer) {
-                $layer.remove();
-                this.mobile_menu_visible = 0;
-            }
-        });
+        this.router.events
+            .pipe(takeUntil(this._destroy$))
+            .subscribe((event) => {
+                console.log(event);
+                this.sidebarClose();
+                var $layer: any = document.getElementsByClassName('close-layer')[0];
+                if ($layer) {
+                    $layer.remove();
+                    this.mobile_menu_visible = 0;
+                }
+            });
+
         this.watchSportCenters();
     }
 
-    onchange(event: MatSelectChange) {
+    isAdmin(): boolean {
+        return this.accountService.isAdmin();
+    }
+
+    onchange(event: MatSelectChange): void {
         this.adminLayoutService.sportCenterSelected = event.value;
         this.adminLayoutService.sportCenterSelectedSubject$.next(event.value);
     }
 
-    watchSportCenters() {
+    watchSportCenters(): void {
         this.adminLayoutService.sportCenterSubject$
-            .pipe(takeUntil(this._destroy$)).subscribe(() => {
-                this.sportCenters = this.adminLayoutService.sportCenters;
+            .pipe(
+                mergeMap(() => this.sportCenterService.get({ userId: +this.storageService.getItemSession(KeySessionStorage.userId) })),
+                takeUntil(this._destroy$)
+            ).subscribe((sportCenters: ISportCenter[]) => {
+                this.sportCenters = sportCenters;
+                this.adminLayoutService.sportCenters = sportCenters;
+                this.adminLayoutService.sportCenterSelected = sportCenters[0];
+                this.adminLayoutService.sportCenterSelectedSubject$.next(null);
+                this.sportCenterControl = this.adminLayoutService.sportCenterSelected;
             })
     }
 
-    sidebarOpen() {
+    sidebarOpen(): void {
         const toggleButton = this.toggleButton;
         const body = document.getElementsByTagName('body')[0];
         setTimeout(function () {
@@ -69,13 +91,13 @@ export class NavbarAdminComponent implements OnInit, OnDestroy {
 
         this.sidebarVisible = true;
     };
-    sidebarClose() {
+    sidebarClose(): void {
         const body = document.getElementsByTagName('body')[0];
         this.toggleButton.classList.remove('toggled');
         this.sidebarVisible = false;
         body.classList.remove('nav-open');
     };
-    sidebarToggle() {
+    sidebarToggle(): void {
         // const toggleButton = this.toggleButton;
         // const body = document.getElementsByTagName('body')[0];
         var $toggle = document.getElementsByClassName('navbar-toggler')[0];
@@ -133,7 +155,7 @@ export class NavbarAdminComponent implements OnInit, OnDestroy {
         }
     };
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this._destroy$.next(true);
         this._destroy$.complete();
     }

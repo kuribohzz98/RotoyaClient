@@ -1,7 +1,8 @@
-import { SportGround } from './sport-ground';
-import { Sport } from './sport';
+import { IPagination } from './base';
+import { ISportGround } from './sport-ground';
+import { ISport } from './sport';
 
-export interface SportCenter {
+export interface ISportCenter {
     id?: number;
     userId?: number;
     name?: string;
@@ -18,7 +19,9 @@ export interface SportCenter {
     timeClose?: number;
 }
 
-export interface SportCenterFull extends SportCenter {
-    sportGrounds: SportGround[];
-    sports: Sport[];
+export interface ISportCenterFull extends ISportCenter {
+    sportGrounds: ISportGround[];
+    sports: ISport[];
 }
+
+export interface ISportCenterQuery extends ISportCenter, IPagination { }

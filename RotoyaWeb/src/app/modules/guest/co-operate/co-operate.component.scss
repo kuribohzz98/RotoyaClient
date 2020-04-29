@@ -1,0 +1,141 @@
+* {
+	margin: 0px; 
+	padding: 0px; 
+	box-sizing: border-box;
+}
+.container-login100 {
+    width: 100%;  
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background: #ebeeef;
+}
+
+.limiter {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.wrap-login100 {
+    width: 670px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.login100-form-title {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+  
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  
+    padding: 70px 15px 74px 15px;
+}
+  
+.login100-form-title-1 {
+    font-family: Poppins-Bold;
+    font-size: 30px;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 1.2;
+    text-align: center;
+}
+  
+.login100-form-title::before {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(54,84,99,0.7);
+}
+
+.login100-form {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 43px 88px 93px 100px;
+}
+
+.wrap-input100 {
+    width: 100%;
+    position: relative;
+    margin-bottom: 26px;
+}
+
+.label-input100 {
+    font-size: 15px;
+    color: #808080;
+    line-height: 1.2;
+    text-align: right;
+  
+    position: absolute;
+    top: 14px;
+    left: -105px;
+    width: 80px;
+  
+}
+
+.input100 {
+    font-family: Poppins-Regular;
+    font-size: 15px;
+    color: #555555;
+    line-height: 1.2;
+  
+    display: block;
+    width: 100%;
+    background: transparent;
+    padding: 0 5px;
+}
+
+.input100:focus + .focus-input100::before {
+    width: 100%;
+  }
+
+@media (max-width: 576px) {
+    .login100-form {
+        padding: 43px 15px 57px 117px;
+    }
+}
+  
+@media (max-width: 480px) {
+    .login100-form {
+        padding: 43px 15px 57px 15px;
+    }
+  
+    .label-input100 {
+      text-align: left;
+      position: unset;
+      top: unset;
+      left: unset;
+      width: 100%;
+      padding: 0 5px;
+    }
+}

@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
+import { UserRouteAccessService } from './../../auth/user-route-access-service';
+import { Authorities } from './../../constants/auth.constants';
 import { BookManagerComponent } from './book-manager/book-manager.component';
-import { SportCenterComponent } from './sport-center/sport-center.component';
+import { RequestCoOperateManagerComponent } from './request-co-operate-manager/request-co-operate-manager.component';
 
 export const adminRoutes: Routes = [
     {
@@ -10,10 +12,26 @@ export const adminRoutes: Routes = [
     },
     {
         path: 'sport-center',
+        data: {
+            authorities: [Authorities.PROVIDER]
+        },
+        canActivate: [UserRouteAccessService],
         loadChildren: () => import('./sport-center/sport-center.module').then(m => m.SportCenterModule)
     },
     {
         path: 'book-manager',
+        data: {
+            authorities: [Authorities.PROVIDER]
+        },
+        canActivate: [UserRouteAccessService],
         component: BookManagerComponent
+    },
+    {
+        path: 'request-co-operate-manager',
+        data: {
+            authorities: [Authorities.ADMIN]
+        },
+        canActivate: [UserRouteAccessService],
+        component: RequestCoOperateManagerComponent
     }
 ];

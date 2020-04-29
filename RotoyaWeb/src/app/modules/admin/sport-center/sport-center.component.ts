@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil, filter, mergeMap } from 'rxjs/operators';
 import { AdminLayoutService } from './../../../shared/service/admin-layout.service';
 import { NotifyService } from './../../../shared/service/notify.service';
 import { environment } from './../../../../environments/environment.prod';
-import { SportService } from './../../../service/sport.service';
-import { SportCenterFull } from './../../../shared/models/sport-center';
+import { SportCenterService } from '../../../service/sport-center.service';
+import { ISportCenterFull } from './../../../shared/models/sport-center';
 import { SportCenterComponentService } from './sport-center-component.service';
 
 @Component({
@@ -15,7 +16,7 @@ import { SportCenterComponentService } from './sport-center-component.service';
 export class SportCenterComponent implements OnInit, OnDestroy {
     _destroy$: Subject<boolean> = new Subject();
 
-    sportCenter: SportCenterFull;
+    sportCenter: ISportCenterFull;
     isChangeNameSportGround: boolean[] = [];
     isChangeQuantitySportGround: boolean[] = [];
     isEditMap: boolean = false;
@@ -23,27 +24,36 @@ export class SportCenterComponent implements OnInit, OnDestroy {
 
 
     constructor(
-        private readonly sportService: SportService,
+        private readonly sportCenterService: SportCenterService,
         private readonly notifyService: NotifyService,
         private readonly sportCenterComponentService: SportCenterComponentService,
-        private readonly adminLayoutService: AdminLayoutService
+        private readonly adminLayoutService: AdminLayoutService,
+        private readonly router: Router
     ) { }
 
-    ngOnInit() {
-        this.sportService.getSportCenter(+(this.adminLayoutService.sportCenterSelected || {}).id || 1).subscribe(sportCenter => {
+    ngOnInit(): void {
+        const { sportCenters } = this.adminLayoutService;
+        if (sportCenters && sportCenters.length) {
+            this.initSportCenters();
+        }
+
+        this.watchMapEditComponent();
+
+        this.watchSportCenterSelected();
+    }
+
+    initSportCenters(): void {
+        this.sportCenterService.getSportCenter(+(this.adminLayoutService.sportCenterSelected || {}).id).subscribe(sportCenter => {
             this.sportCenter = sportCenter;
             console.log(this.sportCenter);
             this.initBooleanView(this.sportCenter);
         })
-        this.watchMapEditComponent();
-        
-        this.watchSportCenterSelected();
     }
 
-    watchSportCenterSelected() {
+    watchSportCenterSelected(): void {
         this.adminLayoutService.sportCenterSelectedSubject$
             .pipe(
-                mergeMap(() => this.sportService.getSportCenter(+this.adminLayoutService.sportCenterSelected.id)),
+                mergeMap(() => this.sportCenterService.getSportCenter(+this.adminLayoutService.sportCenterSelected.id)),
                 takeUntil(this._destroy$)
             ).subscribe(sportCenter => {
                 this.sportCenter = sportCenter;
@@ -55,7 +65,7 @@ export class SportCenterComponent implements OnInit, OnDestroy {
             })
     }
 
-    watchMapEditComponent() {
+    watchMapEditComponent(): void {
         this.sportCenterComponentService.mapSubject$
             .pipe(
                 filter(data => data && data.latitude && !!data.longitude && !data.reload),
@@ -70,12 +80,12 @@ export class SportCenterComponent implements OnInit, OnDestroy {
             })
     }
 
-    initBooleanView(sportCenter: SportCenterFull) {
+    initBooleanView(sportCenter: ISportCenterFull): void {
         this.isChangeNameSportGround = sportCenter.sportGrounds.map(() => false);
         this.isChangeQuantitySportGround = [...this.isChangeNameSportGround];
     }
 
-    openEditMap() {
+    openEditMap(): void {
         this.isEditMap = !this.isEditMap;
         if (this.isEditMap) {
             this.notifyService.showNotifyInfo(
@@ -88,12 +98,16 @@ export class SportCenterComponent implements OnInit, OnDestroy {
         this.sportCenterComponentService.mapSubject$.next({ cancel: true });
     }
 
-    saveEditMap() {
+    saveEditMap(): void {
         this.isEditMap = !this.isEditMap;
         this.sportCenterComponentService.mapSubject$.next({ save: true });
     }
 
-    ngOnDestroy() {
+    createSportCenter(): void {
+        this.router.navigate(['/manager/sport-center/create']);
+    }
+
+    ngOnDestroy(): void {
         this._destroy$.next(true);
         this._destroy$.complete();
     }
