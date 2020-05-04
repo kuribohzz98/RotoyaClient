@@ -228,6 +228,21 @@
   }
 }
 
+.collapse{
+  .navbar-nav{
+    .nav-item .nav-text{
+      position: relative;
+      padding: 10px 15px;
+      font-weight: $font-weight-default;
+      font-size: $mdb-btn-font-size-base;
+      border-radius: $border-radius-base;
+      line-height: 20px;
+      margin-left: 5px;
+      color: inherit;
+    }
+  }
+}
+
 .off-canvas-sidebar{
   .navbar{
     .navbar-collapse{

@@ -14,9 +14,11 @@ declare interface RouteInfo {
   roles?: string[];
 }
 export const ROUTES: RouteInfo[] = [
-  { path: '/manager/sport-center', title: 'Sport Center', icon: 'dashboard', class: '', roles: [Authorities.PROVIDER] },
-  { path: '/manager/book-manager', title: 'Book Manager', icon: 'book', class: '', roles: [Authorities.PROVIDER] },
+  { path: '/manager/sport-center', title: 'Trung tâm thể thao', icon: 'dashboard', class: '', roles: [Authorities.PROVIDER] },
+  { path: '/manager/book-manager', title: 'Quản lý đặt sân', icon: 'book', class: '', roles: [Authorities.PROVIDER] },
   { path: '/manager/request-co-operate-manager', title: 'Yêu cầu hợp tác', icon: 'layers', class: '', roles: [Authorities.ADMIN] },
+  { path: '/manager/account', title: 'Quản lý tài khoản', icon: 'person_outline', class: '', roles: [Authorities.ADMIN] },
+  { path: '/manager/payment', title: 'Quản lý hóa đơn', icon: 'payment', class: '', roles: [Authorities.PROVIDER] },
   { path: '/logout', title: 'Đăng xuất', icon: 'forward', class: 'logout', isLogout: true }
 ];
 

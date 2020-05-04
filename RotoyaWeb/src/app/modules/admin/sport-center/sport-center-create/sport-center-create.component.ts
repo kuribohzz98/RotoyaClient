@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { of, Subject } from 'rxjs';
-import { map, mergeMap, filter, takeUntil } from 'rxjs/operators';
+import { Subject, of } from 'rxjs';
+import { takeUntil, mergeMap } from 'rxjs/operators';
 import * as Mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import { environment } from './../../../../../environments/environment.prod';
 import { ISport } from './../../../../shared/models/sport';
-import { ICity, City } from './../../../../shared/models/address';
+import { ICity } from './../../../../shared/models/address';
 import { AddressService } from './../../../../shared/service/address.service';
 import { SportService } from './../../../../service/sport.service';
 import { SportCenterService } from './../../../../service/sport-center.service';
@@ -17,6 +17,7 @@ import { KeySessionStorage } from '../../../../constants/storage.constants';
 import { ISportCenterFull } from './../../../../shared/models/sport-center';
 import { NotifyService } from './../../../../shared/service/notify.service';
 import { AdminLayoutService } from './../../../../shared/service/admin-layout.service';
+import { UploadFileService } from './../../../../shared/service/file-upload.service';
 
 @Component({
     selector: 'app-sport-center-create',
@@ -24,6 +25,7 @@ import { AdminLayoutService } from './../../../../shared/service/admin-layout.se
     styles: [`
         .field {margin-bottom: 20px;}
         #map { width: 100%; height: 600px; margin: 0px; }
+        .load-image {display: none;}
     `]
 })
 export class SportCenterCreateComponent implements OnInit, OnDestroy, AfterViewInit {
@@ -43,6 +45,10 @@ export class SportCenterCreateComponent implements OnInit, OnDestroy, AfterViewI
     latMouseMove: number;
     lonMouseMove: number;
 
+    fileUpload: File;
+    avatarUpload: string;
+    isLoadImage: boolean = false;
+
     private _destroy$: Subject<boolean> = new Subject<boolean>();
 
     constructor(
@@ -53,7 +59,8 @@ export class SportCenterCreateComponent implements OnInit, OnDestroy, AfterViewI
         private readonly sportCenterService: SportCenterService,
         private readonly storageService: StorageService,
         private readonly notifyService: NotifyService,
-        private readonly adminLayoutService: AdminLayoutService
+        private readonly adminLayoutService: AdminLayoutService,
+        private readonly uploadFileService: UploadFileService
     ) { }
 
     ngOnInit(): void {
@@ -61,9 +68,7 @@ export class SportCenterCreateComponent implements OnInit, OnDestroy, AfterViewI
             this.sports = sports;
         })
         this.initForm();
-
-        this.initAddressCity();
-        this.watchValueFormChange();
+        this.initPackageAddress();
     }
 
     ngAfterViewInit(): void {
@@ -86,49 +91,17 @@ export class SportCenterCreateComponent implements OnInit, OnDestroy, AfterViewI
         })
     }
 
-    initAddressCity(): void {
-        this.addressService.getCity()
-            .pipe(map(res => res.map(data => new City(data)))).subscribe(data => {
-                this.cities = data;
-            });
-    }
+    initPackageAddress(): void {
+        const subjectChange$ = this.addressService.initPackage(
+            this.formStep1,
+            this._destroy$
+        );
 
-    watchValueFormChange(): void {
-        this.formStep1.get('city').valueChanges
-            .pipe(
-                mergeMap(value => {
-                    this.districts = [];
-                    this.wards = [];
-                    if (value) return this.addressService.getDistrict(+value);
-                    return of(null);
-                }),
-                filter(value => !!value),
-                map(value => value.map(data => new City(data))),
-                takeUntil(this._destroy$)
-            ).subscribe(value => {
-                this.districts = value;
-                this.formStep1.patchValue({
-                    district: '',
-                    commune: ''
-                })
-            })
-
-        this.formStep1.get('district').valueChanges
-            .pipe(
-                mergeMap(value => {
-                    this.wards = [];
-                    if (value) return this.addressService.getWard(+value);
-                    return of(null);
-                }),
-                filter(value => !!value),
-                map(value => value.map(data => new City(data))),
-                takeUntil(this._destroy$)
-            ).subscribe(value => {
-                this.wards = value;
-                this.formStep1.patchValue({
-                    commune: ''
-                })
-            })
+        subjectChange$.pipe(takeUntil(this._destroy$)).subscribe(data => {
+            if (data.cities) this.cities = data.cities;
+            if (data.districts) this.districts = data.districts;
+            if (data.wards) this.wards = data.wards;
+        })
     }
 
     initMap(longitude: number, latitude: number) {
@@ -201,6 +174,23 @@ export class SportCenterCreateComponent implements OnInit, OnDestroy, AfterViewI
         this.marker = this.addMarker(this.longitude, this.latitude, true);
     }
 
+    watchFileData($event: File): void {
+        this.fileUpload = $event;
+    }
+
+    onFileComplete(data: any): void {
+        if (data.success) {
+            this.avatarUpload = data.link;
+        } else {
+            this.notifyService.showNotifyDanger(data.message);
+        }
+        this.isLoadImage = true;
+    }
+
+    onLoadImage(): void {
+        this.isLoadImage = false;
+    }
+
     onSubmit(): void {
         if (this.formStep1.invalid || this.formStep2.invalid || !this.latitude || !this.longitude) return;
         const sportCenterData = {} as ISportCenterFull;
@@ -215,17 +205,22 @@ export class SportCenterCreateComponent implements OnInit, OnDestroy, AfterViewI
         sportCenterData.longitude = this.longitude;
         sportCenterData.sports = this.formStep2.value.sports;
         sportCenterData.userId = +this.storageService.getItemSession(KeySessionStorage.userId);
-        console.log(sportCenterData);
-        this.sportCenterService.post(sportCenterData).subscribe(res => {
-            if (res.message == 'success') {
-                this.notifyService.showNotifySuccess('Bạn đã tạo trung tâm thành công');
-                this.adminLayoutService.sportCenterSubject$.next(null);
-                this.adminLayoutService.sportCenterSelectedSubject$.next(null)
-                this.router.navigate(['/manager']);
-                return;
-            }
-            this.notifyService.showNotifyDanger('Yêu cầu tạo thất bại. Vui lòng kiểm tra lại');
-        })
+        (this.fileUpload ? this.uploadFileService.upload(this.fileUpload) : of(null))
+            .pipe(
+                mergeMap(res => {
+                    if (res && res.filename) sportCenterData.avatar = res.filename;
+                    return this.sportCenterService.post(sportCenterData);
+                })
+            ).subscribe(res => {
+                if (res.message == 'success') {
+                    this.notifyService.showNotifySuccess('Bạn đã tạo trung tâm thành công');
+                    this.adminLayoutService.sportCenterSubject$.next(null);
+                    this.adminLayoutService.sportCenterSelectedSubject$.next(null)
+                    this.router.navigate(['/manager']);
+                    return;
+                }
+                this.notifyService.showNotifyDanger('Yêu cầu tạo thất bại. Vui lòng kiểm tra lại');
+            })
     }
 
     ngOnDestroy(): void {

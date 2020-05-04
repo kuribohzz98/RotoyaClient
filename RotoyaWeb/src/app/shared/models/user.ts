@@ -1,3 +1,4 @@
+import { IPagination } from './base';
 export interface Login {
     username: string;
     password: string;
@@ -25,7 +26,9 @@ export interface IUser {
     roles?: string[];
 }
 
+export interface IUserQuery extends IUser, IPagination { }
+
 export type JwtToken = {
     access_token: string;
     user: IUser;
-};
+}

@@ -36,23 +36,48 @@
                     <mat-divider></mat-divider>
                 </div>
                 <div class="card-footer text-right">
-                    <button mat-raised-button color="primary">
+                    <button mat-raised-button color="primary" (click)="openDialog()">
                         <i class="material-icons">edit</i>
                         Sửa
                     </button>
                 </div>
             </div>
             <div class="card">
-                <img [src]="host + '/image/' + sportCenter.avatar"
-                    style="height: 300px; margin: 15px; border-radius: 10px;">
+                <img [ngClass]="isLoadImage ? 'load-image' : ''"
+                    [src]="avatarUpload || (sportCenter.avatar ? host + '/image/' + sportCenter.avatar : 'assets/img/image-default.jpg')"
+                    style="height: 300px; margin: 15px; border-radius: 10px;" (load)="onLoadImage()">
+                <div *ngIf="isLoadImage" class="row" style="height: 300px; padding-top: 140px;">
+                    <div class="col-md-5 col-sm-5 col-xs-5"></div>
+                    <div class="col-md-2 col-sm-2 col-xs-2">
+                        <app-spinner></app-spinner>
+                    </div>
+                    <div class="col-md-5 col-sm-5 col-xs-5"></div>
+                </div>
                 <div style="margin-left: 15px; margin-right: 15px;">
                     <mat-divider></mat-divider>
                 </div>
                 <div class="card-footer">
-                    <button mat-raised-button color="primary">
-                        <i class="material-icons">edit</i>
-                        Sửa
-                    </button>
+                    <ng-container *ngIf="!isEditAvatar; else editAvatar">
+                        <button mat-raised-button color="primary" (click)="isEditAvatar = !isEditAvatar">
+                            <i class="material-icons">edit</i>
+                            Sửa
+                        </button>
+                    </ng-container>
+                    <ng-template #editAvatar>
+                        <button mat-icon-button matTooltip="Huỷ" matTooltipPosition="above"
+                            matTooltipClass="primary-tooltip" color="warn" (click)="cancelEditAvatar()">
+                            <i class="material-icons">close</i>
+                        </button>
+                        <div class="text-center">
+                            <app-upload-file (complete)="onFileComplete($event)" (fileData)="watchFileData($event)">
+                            </app-upload-file>
+                        </div>
+                        <button mat-icon-button color="primary" matTooltip="Lưu" matTooltipClass="primary-tooltip"
+                            matTooltipPosition="above" (click)="submitEditAvatar()" [disabled]="!fileUpload">
+                            <i class="material-icons">save</i>
+                        </button>
+                    </ng-template>
+
                 </div>
             </div>
         </div>
@@ -73,13 +98,13 @@
                         </button>
                     </ng-container>
                     <ng-template #editMap>
-                        <button mat-raised-button class="btn btn-default" (click)="openEditMap()">
+                        <button mat-icon-button matTooltip="Huỷ" matTooltipPosition="above"
+                            matTooltipClass="primary-tooltip" color="warn" (click)="openEditMap()">
                             <i class="material-icons">close</i>
-                            Hủy bỏ
                         </button>
-                        <button mat-raised-button class="btn btn-success" (click)="saveEditMap()">
+                        <button mat-icon-button color="primary" matTooltip="Lưu" matTooltipClass="primary-tooltip"
+                            matTooltipPosition="above" (click)="saveEditMap()">
                             <i class="material-icons">save</i>
-                            Lưu
                         </button>
                     </ng-template>
                 </div>
@@ -97,7 +122,7 @@
                         <i class="material-icons">edit</i>
                     </button>
                 </h3>
-                <form *ngIf="isChangeNameSportGround[i]">
+                <div *ngIf="isChangeNameSportGround[i]">
                     <div class="row">
                         <div class="col-md-6">
                             <mat-form-field style="width: 100%;">
@@ -105,16 +130,18 @@
                             </mat-form-field>
                         </div>
                         <div class="col-md-6">
-                            <button mat-icon-button color="primary">
+                            <button mat-icon-button color="primary" matTooltip="Lưu" matTooltipPosition="above"
+                                matTooltipClass="primary-tooltip">
                                 <i class="material-icons">check</i>
                             </button>
-                            <button mat-icon-button color="accent"
+                            <button mat-icon-button color="warn" matTooltip="Huỷ" matTooltipPosition="above"
+                                matTooltipClass="primary-tooltip"
                                 (click)="isChangeNameSportGround[i] = !isChangeNameSportGround[i]">
                                 <i class="material-icons">close</i>
                             </button>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
             <div class="col-md-5">
                 <div class="row">
@@ -126,27 +153,29 @@
                                 <i class="material-icons">edit</i>
                             </button>
                         </h3>
-                        <form *ngIf="isChangeQuantitySportGround[i]">
+                        <div *ngIf="isChangeQuantitySportGround[i]">
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field style="width: 100%;">
-                                        <input matInput placeholder="Số lượng" [value]="sportGround.quantity">
+                                        <input matInput type="number" min="1" placeholder="Số lượng" [value]="sportGround.quantity">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-6">
-                                    <button mat-icon-button color="primary">
+                                    <button mat-icon-button color="primary" matTooltip="Lưu" matTooltipPosition="above"
+                                        matTooltipClass="primary-tooltip">
                                         <i class="material-icons">check</i>
                                     </button>
-                                    <button mat-icon-button color="accent"
+                                    <button mat-icon-button color="warn" matTooltip="Huỷ" matTooltipPosition="above"
+                                        matTooltipClass="primary-tooltip"
                                         (click)="isChangeQuantitySportGround[i] = !isChangeQuantitySportGround[i]">
                                         <i class="material-icons">close</i>
                                     </button>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <div class="col-md-5">
-                        <button mat-raised-button color="accent">
+                        <button mat-raised-button color="warn">
                             <i class="material-icons">delete</i>
                             Xóa Sân
                         </button>
@@ -185,7 +214,7 @@
                                                 <button mat-icon-button color="primary">
                                                     <i class="material-icons">edit</i>
                                                 </button>
-                                                <button mat-icon-button color="accent">
+                                                <button mat-icon-button color="warn">
                                                     <i class="material-icons">delete</i>
                                                 </button>
                                             </td>

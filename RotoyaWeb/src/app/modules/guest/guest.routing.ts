@@ -4,7 +4,8 @@ import { LoginComponent } from './../../auth/login/login.component';
 import { UserRouteAccessService } from './../../auth/user-route-access-service';
 import { CoOperateComponent } from './co-operate/co-operate.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { Authorities } from 'src/app/constants/auth.constants';
+import { Authorities } from './../../constants/auth.constants';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 export const guestRoutes: Routes = [
     {
@@ -31,5 +32,9 @@ export const guestRoutes: Routes = [
         },
         canActivate: [UserRouteAccessService],
         component: ChangePasswordComponent
+    },
+    {
+        path: 'forget-password',
+        component: ForgetPasswordComponent
     }
 ];

@@ -14,9 +14,14 @@
                     <input formControlName="password" type="password" matInput placeholder="Mật khẩu">
                 </mat-form-field>
                 <div class="wrap-input100">
-                    <a [routerLink]="['/request-co-operate']" class="text-success" >Bạn muốn hợp tác với chúng tôi >>></a>
+                    <a [routerLink]="['/request-co-operate']" class="text-success">Bạn muốn hợp tác với chúng tôi
+                        >>></a>
                 </div>
-                <button type="submit" mat-raised-button class="btn btn-success" [disabled]="!loginFrom.valid">Đăng nhập</button>
+                <div class="wrap-input100">
+                    <a [routerLink]="['/forget-password']" class="text-warning">Quên mật khẩu</a>
+                </div>
+                <button type="submit" mat-raised-button class="btn btn-success" [disabled]="!loginFrom.valid">Đăng
+                    nhập</button>
             </form>
         </div>
     </div>

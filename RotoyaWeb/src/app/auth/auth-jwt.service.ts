@@ -43,6 +43,10 @@ export class AuthServerProvider extends BaseService {
     return this._http.post<ResponseMessage>(this.url + '/change-password', data);
   }
 
+  forgetPassword(email: string): Observable<ResponseMessage> {
+    return this._http.post<ResponseMessage>(this.url + '/forget-password', { email });
+  }
+
   private authenticateSuccess(response: JwtToken): IUser {
     console.log(response.user);
     if (!response) return;

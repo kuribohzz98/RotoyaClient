@@ -1,0 +1,34 @@
+<ng-container *ngIf="payments.length; else elseTableTimeslot">
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <th scope="col">#</th>
+                <th scope="col" class="text-center">Nguời đặt</th>
+                <th scope="col" class="text-center">Số điện thoại</th>
+                <th scope="col" class="text-center">Email</th>
+                <th scope="col" class="text-center">Giá (VNĐ)</th>
+                <th scope="col" class="text-center">Mã đơn</th>
+                <th scope="col" class="text-center">Số lượng sân đã đặt (Bao gồm cả khác khung giờ này)</th>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let payment of payments; let i=index">
+                    <tr>
+                        <th scope="row">{{i + 1}}</th>
+                        <td class="text-center">
+                            {{payment.user.userInfo.firstName + ' ' + payment.user.userInfo.lastName}}</td>
+                        <td class="text-center">{{payment.user.userInfo.phone}}</td>
+                        <td class="text-center">{{payment.user.userInfo.email}}</td>
+                        <td class="text-center">{{payment.amount | number}}</td>
+                        <td class="text-center">{{payment.orderId}}</td>
+                        <td class="text-center">{{payment.bookings.length}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</ng-container>
+<ng-template #elseTableTimeslot>
+    <div class="text-center">
+        <p class="text-danger" style="font-size: 30px;">Trống</p>
+    </div>
+</ng-template>

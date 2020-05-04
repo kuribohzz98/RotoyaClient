@@ -45,7 +45,6 @@ export class NavbarAdminComponent implements OnInit, OnDestroy {
         this.router.events
             .pipe(takeUntil(this._destroy$))
             .subscribe((event) => {
-                console.log(event);
                 this.sidebarClose();
                 var $layer: any = document.getElementsByClassName('close-layer')[0];
                 if ($layer) {
@@ -59,6 +58,10 @@ export class NavbarAdminComponent implements OnInit, OnDestroy {
 
     isAdmin(): boolean {
         return this.accountService.isAdmin();
+    }
+
+    get nameAccount() {
+        return this.accountService.userIdentity.userInfo.firstName + ' ' + this.accountService.userIdentity.userInfo.lastName;
     }
 
     onchange(event: MatSelectChange): void {

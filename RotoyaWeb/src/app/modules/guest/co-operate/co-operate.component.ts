@@ -1,10 +1,10 @@
 import { OnInit, Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subject, of } from 'rxjs';
-import { map, takeUntil, mergeMap, filter } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil} from 'rxjs/operators';
 import { AddressService } from './../../../shared/service/address.service';
-import { ICity, City } from './../../../shared/models/address';
+import { ICity } from './../../../shared/models/address';
 import { RequestCoOperateService } from './../../../service/request-co-operate.service';
 import { NotifyService } from './../../../shared/service/notify.service';
 
@@ -41,54 +41,21 @@ export class CoOperateComponent implements OnInit, OnDestroy {
             phone: ['', Validators.required],
             email: ['', Validators.required]
         })
-
-        this.initAddressCity();
-        this.watchValueFormChange();
+        
+        this.initPackageAddress();
     }
 
-    initAddressCity(): void {
-        this.addressService.getCity()
-            .pipe(map(res => res.map(data => new City(data)))).subscribe(data => {
-                this.cities = data;
-            });
-    }
+    initPackageAddress(): void {
+        const subjectChange$ = this.addressService.initPackage(
+            this.formCoOperate,
+            this._destroy$
+        );
 
-    watchValueFormChange(): void {
-        this.formCoOperate.get('city').valueChanges
-            .pipe(
-                mergeMap(value => {
-                    this.districts = [];
-                    this.wards = [];
-                    if (value) return this.addressService.getDistrict(+value);
-                    return of(null);
-                }),
-                filter(value => !!value),
-                map(value => value.map(data => new City(data))),
-                takeUntil(this._destroy$)
-            ).subscribe(value => {
-                this.districts = value;
-                this.formCoOperate.patchValue({
-                    district: '',
-                    commune: ''
-                })
-            })
-
-        this.formCoOperate.get('district').valueChanges
-            .pipe(
-                mergeMap(value => {
-                    this.wards = [];
-                    if (value) return this.addressService.getWard(+value);
-                    return of(null);
-                }),
-                filter(value => !!value),
-                map(value => value.map(data => new City(data))),
-                takeUntil(this._destroy$)
-            ).subscribe(value => {
-                this.wards = value;
-                this.formCoOperate.patchValue({
-                    commune: ''
-                })
-            })
+        subjectChange$.pipe(takeUntil(this._destroy$)).subscribe(data => {
+            if (data.cities) this.cities = data.cities;
+            if (data.districts) this.districts = data.districts;
+            if (data.wards) this.wards = data.wards;
+        })
     }
 
     onSubmit(): void {

@@ -1,0 +1,69 @@
+<h1 mat-dialog-title>Sửa thông tin chính</h1>
+<form [formGroup]="formEditInfo" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content>
+        <mat-form-field class="field">
+            <input matInput placeholder="Tên trung tâm" formControlName="name" required>
+        </mat-form-field>
+        <div class="row field">
+            <div class="col-md-5 col-sm-6">
+                <mat-form-field>
+                    <mat-label>Tỉnh/ Thành phố</mat-label>
+                    <mat-select formControlName="city" required>
+                        <mat-option>None</mat-option>
+                        <ng-container *ngFor="let city of cities">
+                            <mat-option [value]="city.id">{{city.name}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-5 col-sm-6">
+                <mat-form-field>
+                    <mat-label>Quận/ Huyện/ Thị xã</mat-label>
+                    <mat-select formControlName="district" required>
+                        <mat-option>None</mat-option>
+                        <ng-container *ngFor="let district of districts">
+                            <mat-option [value]="district.id">{{district.name}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row field">
+            <div class="col-md-5 col-sm-6">
+                <mat-form-field>
+                    <mat-label>Phường/ Xã</mat-label>
+                    <mat-select formControlName="commune" required>
+                        <mat-option>None</mat-option>
+                        <ng-container *ngFor="let ward of wards">
+                            <mat-option [value]="ward.id">{{ward.name}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-5 col-sm-6">
+                <mat-form-field>
+                    <input formControlName="address" matInput placeholder="Địa chỉ">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row field">
+            <div class="col-md-5 col-sm-6">
+                <mat-form-field>
+                    <input formControlName="timeOpen" matInput placeholder="Giờ mở cửa" required>
+                </mat-form-field>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-5 col-sm-6">
+                <mat-form-field>
+                    <input formControlName="timeClose" matInput placeholder="Giờ đóng cửa" required>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div mat-dialog-actions [align]="'end'">
+        <button mat-button mat-dialog-close>Đóng</button>
+        <button type="submit" mat-button class="btn btn-info" cdkFocusInitial>Lưu</button>
+    </div>
+</form>

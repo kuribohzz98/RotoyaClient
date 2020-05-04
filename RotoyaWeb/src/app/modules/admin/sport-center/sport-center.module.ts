@@ -8,11 +8,14 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { SharedModule } from './../../../shared/shared.module';
 import { sportCenterRoutes } from './sport-center.routing';
 import { SportCenterComponent } from './sport-center.component';
 import { SportCenterMapComponent } from './map/sport-center-map.component';
 import { SportCenterCreateComponent } from './sport-center-create/sport-center-create.component';
+import { MainInfoEditDialogComponent } from './sport-center-edit/main-info-dialog/main-info-dialog.component';
 
 @NgModule({
     imports: [
@@ -25,12 +28,15 @@ import { SportCenterCreateComponent } from './sport-center-create/sport-center-c
         MatInputModule,
         MatSelectModule,
         MatFormFieldModule,
-        MatStepperModule
+        MatStepperModule,
+        MatDialogModule,
+        MatTooltipModule
     ],
     declarations: [
         SportCenterComponent,
         SportCenterMapComponent,
-        SportCenterCreateComponent
-    ],
+        SportCenterCreateComponent,
+        MainInfoEditDialogComponent
+    ]
 })
 export class SportCenterModule { }

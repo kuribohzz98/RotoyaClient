@@ -2,14 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, ReplaySubject, of } from 'rxjs';
-import { shareReplay, tap, catchError } from 'rxjs/operators';
-import { IUser } from './../shared/models/user';
+import { tap, catchError } from 'rxjs/operators';
+import { IUser, IUserQuery } from './../shared/models/user';
 import { StorageService } from './../shared/service/storage.service';
 import { KeySessionStorage } from '../constants/storage.constants';
 import { BaseService } from '../service/base.service';
 
 @Injectable({ providedIn: 'root' })
-export class AccountService extends BaseService {
+export class AccountService extends BaseService<IUser, IUserQuery> {
   path_url: string = '/user';
   private _userIdentity: IUser | null = null;
   private authenticationState: ReplaySubject<IUser | null> = new ReplaySubject<IUser | null>(1);
@@ -47,7 +47,7 @@ export class AccountService extends BaseService {
       const idUser = this.storageService.getItemSession(KeySessionStorage.userId);
       if (!idUser) return of(null);
       if (this._userIdentity) return of(this._userIdentity);
-      this.accountCache$ = this.fetch(+idUser).pipe(
+      this.accountCache$ = this.getOne(+idUser).pipe(
         catchError(() => {
           return of(null);
         }),
@@ -78,10 +78,6 @@ export class AccountService extends BaseService {
 
   getImageUrl(): string {
     return this.userIdentity ? this.userIdentity.userMeta.avatar : '';
-  }
-
-  private fetch(id: number): Observable<IUser> {
-    return this._http.get<IUser>(this.url + `/${id}`);
   }
 
   // private navigateToStoredUrl(): void {

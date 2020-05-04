@@ -4,14 +4,14 @@
             <mat-form-field>
                 <mat-label>Chọn ngày</mat-label>
                 <mat-select [(value)]="dateSelected">
-                    <mat-option *ngFor="let date of listDate" [value]="date">{{date}}</mat-option>
+                    <mat-option *ngFor="let date of listDate" [value]="date.value">{{date.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
         <div class="col-lg-4 col-md-4"></div>
-        <div class="col-lg-4 col-md-4 col-sm-4">
+        <!-- <div class="col-lg-4 col-md-4 col-sm-4">
             <button mat-raised-button class="btn btn-info" (click)="reloadData()">Tải lại</button>
-        </div>
+        </div> -->
     </div>
 
     <ng-container *ngFor="let sportGround of sportCenter.sportGrounds; let i=index">
@@ -41,12 +41,14 @@
                                     <th scope="col" class="text-center">End Time</th>
                                     <th scope="col" class="text-center">Giá (VNĐ)</th>
                                     <th scope="col" class="text-center">Số lượng còn lại</th>
-                                    <th scope="col" class="text-center"></th>
+                                    <!-- <th scope="col" class="text-center"></th> -->
                                 </thead>
                                 <tbody>
                                     <ng-container
                                         *ngFor="let timeSlot of sportGround.sportGroundTimeSlots; let j=index">
-                                        <tr>
+                                        <tr class="primary-tooltip-info" matTooltip="Chi tiết"
+                                            matTooltipPosition="above" matTooltipClass="primary-tooltip"
+                                            (click)="openInfo(timeSlot.id)">
                                             <th scope="row">{{j + 1}}</th>
                                             <td class="text-center">{{timeSlot.startTime | numberToTime}}</td>
                                             <td class="text-center">{{timeSlot.endTime | numberToTime}}</td>
@@ -58,12 +60,12 @@
                                                 </ng-container>
                                                 <span *ngIf="!timeSlot.bookeds.length">{{sportGround.quantity}}</span>
                                             </td>
-                                            <td class="text-center">
-                                                <button mat-raised-button color="primary"
-                                                    [disabled]="!timeSlot.bookeds.length">
-                                                    <i class="material-icons">info</i> Chi tiết
-                                                </button>
-                                            </td>
+                                            <!-- <td class="text-center">
+                                                    <button mat-raised-button color="primary"
+                                                        [disabled]="!timeSlot.bookeds.length">
+                                                        <i class="material-icons">info</i> Chi tiết
+                                                    </button>
+                                                </td> -->
                                         </tr>
                                     </ng-container>
                                 </tbody>
