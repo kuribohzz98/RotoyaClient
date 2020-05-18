@@ -9,6 +9,7 @@ type Object = {
 
 export type ResponseMessage = {
     message: string;
+    id?: number;
 }
 
 @Injectable({ providedIn: 'root' })

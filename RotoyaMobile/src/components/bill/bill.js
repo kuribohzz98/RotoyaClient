@@ -3,15 +3,15 @@ import {
   StyleSheet,
   View,
   Text,
-  ImageBackground,
   Platform,
   BackHandler,
-  TouchableOpacity
+  ScrollView
 } from "react-native";
 import { Header } from "../common";
 import componentConstants from "../../constants/component.constants";
 import { BookService } from "../../service";
 import { NumberUtil, TimeUtil, NotificationUtil, DateUtil } from "../../helper/util";
+import { Button } from 'galio-framework';
 
 class BillScreen extends React.Component {
   nativeEventSubscription = null;
@@ -30,7 +30,7 @@ class BillScreen extends React.Component {
     this.props.navigation.setOptions({
       header: ({ navigation, scene }) => (
         <Header
-          title="Bill"
+          title="Hóa đơn"
           back
           goBack={this.goBack.bind(this)}
           navigation={navigation}
@@ -76,43 +76,25 @@ class BillScreen extends React.Component {
 
   render() {
     const {
-      sportCenter,
       bookDatas,
-      payment
+      payment,
+      equipments,
+      sportCenter
     } = this.props.route.params;
     return (
       <View style={styles.root}>
-        <TouchableOpacity onPress={this.payment.bind(this)}>
-          <View style={styles.group9}>
-            <ImageBackground
-              style={styles.rectangle}
-              imageStyle={styles.rectangle_imageStyle}
-              source={require("../../../assets/imgs/Gradient_0.png")}
-            >
-              <Text style={styles.reportIssue}>Payment</Text>
-            </ImageBackground>
+        <ScrollView style={styles.rect2} showsVerticalScrollIndicator={false}>
+          <View style={styles.cardRowContainer}>
+            <Text style={styles.cardTitle}>Mã đơn</Text>
+            <Text style={styles.cardContent}>{payment.orderId}</Text>
           </View>
-        </TouchableOpacity>
-        <View style={styles.billingRow}>
-          <Text style={styles.billing}>Total</Text>
-          <Text style={styles.billing2}>{NumberUtil.convertNumberToCurrency(payment.amount)} VNĐ</Text>
-        </View>
-        <View style={styles.rect2}>
-          <View style={styles.transactionNoRow}>
-            <Text style={styles.transactionNo}>TransactionId</Text>
-            <Text style={styles.style1}>
-              {payment.orderId}
-            </Text>
+          <View style={styles.cardRowContainer}>
+            <Text style={styles.cardTitle}>Trung tâm thể thao</Text>
+            <Text style={styles.cardContent}>{sportCenter.name}</Text>
           </View>
-          <View style={styles.dateTimeRow}>
-            <Text style={styles.dateTime}>Sport Center</Text>
-            <Text style={styles.pm12092018}>
-              {sportCenter.name}
-            </Text>
-          </View>
-          <Text style={styles.toWallet}>SportGround</Text>
+          <Text style={styles.cardTitle}>Sân</Text>
           {
-            (sportCenter.sportGrounds || []).map((sportGround, index) => {
+            (sportCenter.sportGrounds || []).map(sportGround => {
               return (sportGround.sportGroundTimeSlots || []).map(timeSlot => {
                 const bookData = bookDatas.find(bookData => bookData.timeSlotId == timeSlot.id);
                 if (bookData) {
@@ -122,13 +104,17 @@ class BillScreen extends React.Component {
                         <Text style={styles.transactionStatus}>-</Text>
                         <Text style={styles.success}>{sportGround.name}</Text>
                       </View>
-                      <View style={styles.amountRow}>
-                        <Text style={styles.amount}>Date / time</Text>
-                        <Text style={styles.style}>{DateUtil.getDateDDMM(timeSlot.bookingDate)} / {TimeUtil.convertFloatToTime(timeSlot.startTime)} - {TimeUtil.convertFloatToTime(timeSlot.endTime)}</Text>
+                      <View style={styles.cardRowContainer}>
+                        <Text style={styles.cardLitteTitle}>Ngày</Text>
+                        <Text style={styles.cardLitteContent}>{DateUtil.getDateDDMM(bookData.bookingDate)}</Text>
                       </View>
-                      <View style={styles.sportGroundRow}>
-                        <Text style={styles.sportGround}>Price</Text>
-                        <Text style={styles.usdWallet}>{NumberUtil.convertNumberToCurrency(timeSlot.price)} VNĐ</Text>
+                      <View style={styles.cardRowContainer}>
+                        <Text style={styles.cardLitteTitle}>Thời gian</Text>
+                        <Text style={styles.cardLitteContent}>{TimeUtil.convertFloatToTime(timeSlot.startTime)} - {TimeUtil.convertFloatToTime(timeSlot.endTime)}</Text>
+                      </View>
+                      <View style={styles.cardRowContainer}>
+                        <Text style={styles.cardLitteTitle}>Giá</Text>
+                        <Text style={styles.cardLitteContent}>{NumberUtil.convertNumberToCurrency(timeSlot.price)} đ</Text>
                       </View>
                     </View>
                   )
@@ -136,6 +122,58 @@ class BillScreen extends React.Component {
               })
             })
           }
+          {
+            equipments && equipments.length ?
+              <View>
+                <Text style={styles.cardTitle}>Dụng cụ thể thao</Text>
+                {
+                  equipments.map(equipment => {
+                    let timeSlot;
+                    (sportCenter.sportGrounds || []).map(sportGround => {
+                      timeSlot = (sportGround.sportGroundTimeSlots || []).find(timeSlot_ => timeSlot_.id == equipment.timeSlotId);
+                    })
+                    return (
+                      <View>
+                        <View style={styles.transactionStatusRow}>
+                          <Text style={styles.transactionStatus}>-</Text>
+                          <Text style={styles.success}>{equipment.name}</Text>
+                        </View>
+                        <View style={styles.cardRowContainer}>
+                          <Text style={styles.cardLitteTitle}>Số lượng</Text>
+                          <Text style={styles.cardLitteContent}>{equipment.amount}</Text>
+                        </View>
+                        <View style={styles.cardRowContainer}>
+                          <Text style={styles.cardLitteTitle}>Ngày</Text>
+                          <Text style={styles.cardLitteContent}>{DateUtil.getDateDDMM(new Date().getTime() + equipment.time * 1000 * 60 * 60 * 24)}</Text>
+                        </View>
+                        <View style={styles.cardRowContainer}>
+                          <Text style={styles.cardLitteTitle}>Thời gian</Text>
+                          <Text style={styles.cardLitteContent}>{TimeUtil.convertFloatToTime(timeSlot.startTime)} - {TimeUtil.convertFloatToTime(timeSlot.endTime)}</Text>
+                        </View>
+                        <View style={styles.cardRowContainer}>
+                          <Text style={styles.cardLitteTitle}>Giá</Text>
+                          <Text style={styles.cardLitteContent}>{NumberUtil.convertNumberToCurrency(equipment.price)} đ</Text>
+                        </View>
+                      </View>
+                    )
+                  })
+                }
+              </View> : null
+          }
+        </ScrollView>
+        <View style={styles.billingRow}>
+          <Text style={styles.billing}>Tổng</Text>
+          <Text style={styles.billing2}>{NumberUtil.convertNumberToCurrency(payment.amount || 0)} đ</Text>
+        </View>
+        <View style={{ justifyContent: 'flex-end', alignSelf: 'center', marginBottom: 20, flex: 0.2 }}>
+          <Button
+            color="error"
+            shadowless
+            uppercase
+            onPress={this.payment.bind(this)}
+          >
+            Thanh toán
+          </Button>
         </View>
       </View>
     );
@@ -145,40 +183,67 @@ class BillScreen extends React.Component {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: "white"
+    backgroundColor: "white",
+    padding: 20
   },
-  transactions: {
-    color: "rgba(78,80,83,1)",
-    fontSize: 32,
-    fontFamily: "poppins-600",
-    marginTop: 20,
-    marginLeft: 25
+  cardRowContainer: {
+    flexDirection: "row",
+    marginBottom: 15
   },
-  group9: {
-    width: 345,
-    height: 60,
-    shadowOpacity: 1,
-    marginTop: 540,
-    marginLeft: 25
-  },
-  rectangle: {
-    borderRadius: 10,
-    justifyContent: "center",
-    flex: 1,
-    overflow: "hidden"
-  },
-  rectangle_imageStyle: {},
-  reportIssue: {
-    width: 250,
-    height: 30,
+  cardTitle: {
     backgroundColor: "transparent",
-    color: "rgba(255,255,255,1)",
-    fontSize: 20,
-    fontFamily: "poppins-500",
+    color: "rgba(204,204,204,1)",
+    fontSize: 16,
+    fontFamily: "poppins-600",
     letterSpacing: 0.3,
-    textAlign: "center",
-    marginLeft: 35,
-    alignSelf: "center"
+    textAlign: 'left',
+    width: 130,
+  },
+  cardLitteTitle: {
+    backgroundColor: "transparent",
+    color: "rgba(204,204,204,1)",
+    fontSize: 16,
+    fontFamily: "poppins-600",
+    letterSpacing: 0.3,
+    textAlign: 'left',
+    width: 80,
+    marginLeft: 50
+  },
+  cardContent: {
+    width: 230,
+    backgroundColor: "transparent",
+    color: "rgba(104,108,113,1)",
+    fontSize: 16,
+    fontFamily: "verdana-regular",
+    letterSpacing: 0.3,
+    textAlign: "left"
+  },
+  cardLitteContent: {
+    width: 150,
+    backgroundColor: "transparent",
+    color: "rgba(104,108,113,1)",
+    fontSize: 16,
+    fontFamily: "verdana-regular",
+    letterSpacing: 0.3,
+    textAlign: "left"
+  },
+  cardContentRed: {
+    width: 230,
+    backgroundColor: "transparent",
+    color: "rgba(219, 59, 59,1)",
+    fontSize: 16,
+    fontFamily: "verdana-regular",
+    letterSpacing: 0.3,
+    textAlign: "left",
+  },
+  cardContentGreen: {
+    width: 250,
+    backgroundColor: "transparent",
+    color: "rgba(66, 179, 78,1)",
+    fontSize: 16,
+    fontFamily: "verdana-regular",
+    letterSpacing: 0.3,
+    textAlign: "left",
   },
   billing: {
     width: 90,
@@ -198,70 +263,12 @@ const styles = StyleSheet.create({
   billingRow: {
     height: 35,
     flexDirection: "row",
-    marginTop: -106,
+    flex: 0.01,
     marginLeft: 25,
     marginRight: 27
   },
   rect2: {
-    width: 360,
-    height: 450,
-    marginTop: -514,
-    marginLeft: 25
-  },
-  transactionNo: {
-    backgroundColor: "transparent",
-    color: "rgba(204,204,204,1)",
-    fontSize: 16,
-    fontFamily: "poppins-600",
-    letterSpacing: 0.3
-  },
-  style1: {
-    width: 230,
-    height: 50,
-    backgroundColor: "transparent",
-    color: "rgba(104,108,113,1)",
-    fontSize: 16,
-    fontFamily: "verdana-regular",
-    letterSpacing: 0.3,
-    textAlign: "right",
-    marginLeft: 10
-  },
-  transactionNoRow: {
-    height: 50,
-    flexDirection: "row",
-    marginTop: 36
-  },
-  dateTime: {
-    backgroundColor: "transparent",
-    color: "rgba(204,204,204,1)",
-    fontSize: 16,
-    fontFamily: "poppins-600",
-    letterSpacing: 0.3
-  },
-  pm12092018: {
-    width: 230,
-    height: 50,
-    backgroundColor: "transparent",
-    color: "rgba(104,108,113,1)",
-    fontSize: 16,
-    fontFamily: "verdana-regular",
-    letterSpacing: 0.3,
-    textAlign: "right",
-    marginLeft: 21,
-    marginTop: 3
-  },
-  dateTimeRow: {
-    height: 53,
-    flexDirection: "row",
-    marginRight: -1
-  },
-  toWallet: {
-    backgroundColor: "transparent",
-    color: "rgba(204,204,204,1)",
-    fontSize: 16,
-    fontFamily: "poppins-600",
-    letterSpacing: 0.3,
-    marginTop: 11
+    flex: 1
   },
   transactionStatus: {
     backgroundColor: "transparent",
@@ -285,56 +292,14 @@ const styles = StyleSheet.create({
     height: 20,
     flexDirection: "row",
     marginTop: 9,
+    marginBottom: 10,
     marginLeft: 25,
     marginRight: -1
   },
-  amount: {
-    backgroundColor: "transparent",
-    color: "rgba(204,204,204,1)",
-    fontSize: 16,
-    fontFamily: "poppins-600",
-    letterSpacing: 0.3
-  },
-  style: {
-    width: 200,
-    height: 20,
-    backgroundColor: "transparent",
-    color: "rgba(104,108,113,1)",
-    fontSize: 16,
-    fontFamily: "poppins-500",
-    letterSpacing: 0.3,
-    textAlign: "right",
-    marginLeft: 6
-  },
-  amountRow: {
-    height: 20,
-    flexDirection: "row",
-    marginTop: 13,
-    marginLeft: 47
-  },
-  sportGround: {
-    backgroundColor: "transparent",
-    color: "rgba(204,204,204,1)",
-    fontSize: 16,
-    fontFamily: "poppins-600",
-    letterSpacing: 0.3
-  },
-  usdWallet: {
-    width: 210,
-    height: 20,
-    backgroundColor: "transparent",
-    color: "rgba(104,108,113,1)",
-    fontSize: 16,
-    fontFamily: "poppins-500",
-    letterSpacing: 0.3,
-    textAlign: "right",
-    marginLeft: 39
-  },
-  sportGroundRow: {
-    height: 20,
-    flexDirection: "row",
-    marginTop: 11,
-    marginLeft: 47
+  qrcode: {
+    alignSelf: 'center',
+    margin: 10,
+    flex: 0.6
   }
 });
 

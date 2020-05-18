@@ -2,8 +2,10 @@ import React from 'react';
 import { StatusBar, ActivityIndicator, View, Platform, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Geolocation from 'react-native-geolocation-service';
 import { StorageService } from '../../service';
 import { ComponentAction } from '../../redux/action';
+import { PermissionsAndroid } from 'react-native';
 
 class AuthLoadingScreen extends React.Component {
     
@@ -41,7 +43,22 @@ class AuthLoadingScreen extends React.Component {
         const tempOpts = this.props.optionsGetSportCenters || {};
         tempOpts.limit = 5;
         tempOpts.page = 1;
-        this.props.setOptionsGetSportCenters(tempOpts);
+        this.props.setOptionsGetSportCenters(tempOpts)
+        // const granted = await PermissionsAndroid.request(
+        //     PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+        // );
+        // if (granted == PermissionsAndroid.RESULTS.GRANTED) {
+        //     new Promise(resolve => {
+        //         Geolocation.getCurrentPosition(position => {
+        //             tempOpts.latitude = position.coords.latitude;
+        //             tempOpts.longitude = position.coords.longitude;
+        //             tempOpts.isByLocation = true;
+        //             tempOpts.distance = 10;
+        //             console.log(tempOpts, '___+++______');
+        //             resolve(position);
+        //         })
+        //     });
+        // }
         // This will switch to the App screen or Auth screen and this loading
         // screen will be unmounted and thrown away.
         // console.log(this.deepLink, '--hihi');

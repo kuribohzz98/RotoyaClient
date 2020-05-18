@@ -57,6 +57,7 @@ class UserInfoScreen extends React.Component {
                                         <Button
                                             small
                                             style={{ backgroundColor: argonTheme.COLORS.INFO }}
+                                            onPress={this.addCalendar.bind(this)}
                                         >
                                             CONNECT
                                         </Button>

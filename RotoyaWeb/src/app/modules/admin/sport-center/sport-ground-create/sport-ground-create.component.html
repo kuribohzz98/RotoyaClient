@@ -1,0 +1,101 @@
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="formCreate">
+            <div class="row field">
+                <div class="col-md-10">
+                    <h1>Thông tin chính</h1>
+                </div>
+                <div class="col-md-2">
+                    <button mat-raised-button color="primary" (click)="onSubmit()">
+                        <i class="material-icons">save</i> Lưu
+                    </button>
+                </div>
+            </div>
+            <div class="row field">
+                <div class="col">
+                    <mat-form-field class="field">
+                        <input matInput placeholder="Tên sân" formControlName="name" required>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row field">
+                <div class="col-md-5 col-sm-6">
+                    <mat-form-field class="field">
+                        <input matInput type="number" min="1" placeholder="Số lượng" formControlName="quantity"
+                            required>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-5 col-sm-6">
+                    <mat-form-field>
+                        <mat-label>Môn thể thao</mat-label>
+                        <mat-select formControlName="sport" required>
+                            <mat-option *ngFor="let sport of sports" [value]="sport.id">{{sport.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <mat-divider style="margin-left: 100px; margin-right: 100px; margin-bottom: 40px;"></mat-divider>
+            <div class="row field">
+                <div class="col-md-6">
+                    <h1>Khung giờ thuê sân ({{sportCenter.timeOpen | numberToTime}} -
+                        {{sportCenter.timeClose | numberToTime}})
+                        <button mat-mini-fab color="warn" (click)="addSlot()" matTooltip="Thêm"
+                            matTooltipPosition="above" matTooltipClass="primary-tooltip">
+                            <i class="material-icons">add</i>
+                        </button>
+                    </h1>
+                </div>
+                <div class="col-md-6">
+                    <button mat-raised-button color="warn" (click)="openDialogAddSlotAutomatic()">
+                        <i class="material-icons">add</i> Thêm tự động
+                    </button>
+                </div>
+            </div>
+        </form>
+        <form [formGroup]="formSlots">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <th scope="col">#</th>
+                        <th scope="col" class="text-center">Thời gian bắt đầu</th>
+                        <th scope="col" class="text-center">Thời gian kết thúc</th>
+                        <th scope="col" class="text-center">Giá (VNĐ)</th>
+                        <th scope="col" class="text-center"></th>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let slot of slots; let i=index">
+                            <tr [formGroupName]="'slot_' + i">
+                                <th scope="row">{{i + 1}}</th>
+                                <td class="text-center">
+                                    <mat-form-field class="field">
+                                        <input matInput placeholder="Thời gian bắt đầu" formControlName="startTime"
+                                            required>
+                                    </mat-form-field>
+                                </td>
+                                <td class="text-center">
+                                    <mat-form-field class="field">
+                                        <input matInput placeholder="Thời gian kết thúc" formControlName="endTime"
+                                            required>
+                                    </mat-form-field>
+                                </td>
+                                <td class="text-center">
+                                    <mat-form-field class="field">
+                                        <input matInput type="number" min="0" placeholder="Giá" formControlName="price"
+                                            required>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <button mat-icon-button color="warn" (click)="removeSlot(i)" matTooltip="Xoá"
+                                        matTooltipPosition="above" matTooltipClass="primary-tooltip">
+                                        <i class="material-icons">delete</i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>

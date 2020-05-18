@@ -1,3 +1,5 @@
+import { PageEvent } from '@angular/material/paginator';
+import { Pagination, PageSizeOption } from './../../../shared/models/page.model';
 import { mergeMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { of } from 'rxjs';
@@ -11,6 +13,8 @@ import { NotifyService } from './../../../shared/service/notify.service';
 })
 export class RequestCoOperateManagerComponent implements OnInit {
     requestcoOperate: IRequestCoOperate[] = [];
+    pageData: Pagination = new Pagination();
+    pageSizeOptions: number[] = new PageSizeOption().pageSize;
 
     constructor(
         private readonly requestCoOperateService: RequestCoOperateService,
@@ -18,9 +22,25 @@ export class RequestCoOperateManagerComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.requestCoOperateService.get({ status: 'WAITTING' }).subscribe((data: IRequestCoOperate[]) => {
+        this.pageData.pageSize = this.pageSizeOptions[0];
+        this.initCoOperate();
+    }
+
+    initCoOperate(): void {
+        this.requestCoOperateService.get({
+            status: 'WAITTING',
+            page: this.pageData.currentPage,
+            limit: this.pageData.pageSize
+        }).subscribe((data: IRequestCoOperate[]) => {
             this.requestcoOperate = data;
         })
+    }
+
+
+    onPageChange($event: PageEvent): void {
+        this.pageData.currentPage = $event.pageIndex + 1;
+        this.pageData.pageSize = $event.pageSize;
+        this.initCoOperate();
     }
 
     onApprove(index: number): void {

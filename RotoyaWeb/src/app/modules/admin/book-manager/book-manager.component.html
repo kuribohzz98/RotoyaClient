@@ -3,7 +3,7 @@
         <div class="col-lg-4 col-md-4 col-sm-4">
             <mat-form-field>
                 <mat-label>Chọn ngày</mat-label>
-                <mat-select [(value)]="dateSelected">
+                <mat-select [formControl]="dateControl">
                     <mat-option *ngFor="let date of listDate" [value]="date.value">{{date.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
@@ -28,7 +28,6 @@
         <div class="card">
             <div class="card-header card-header-danger">
                 <h3 class="card-title">Các khung giờ thuê sân</h3>
-                <p class="card-category">Những thay đổi tại đây sẽ được cập nhập cho ngày tiếp theo</p>
             </div>
             <div class="card-body">
                 <div class="row">

@@ -1,3 +1,4 @@
+import { ISportCenterFull } from './sport-center';
 import { IPagination } from './base';
 import { IBooking } from './booking';
 import { IUser } from './user';
@@ -13,7 +14,8 @@ export interface IPayment {
     createdAt?: Date;
     updatedAt?: Date;
     bookings?: IBooking[];
-    user?: IUser[];
+    user?: IUser;
+    sportCenter?: ISportCenterFull;
 }
 
 export interface IPaymentQuery extends IPayment, IPagination { }

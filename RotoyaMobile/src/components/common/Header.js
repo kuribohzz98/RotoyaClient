@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     width: '100%',
     fontSize: 20,
     fontWeight: 'bold',
-    marginLeft: 10,
+    marginLeft: 20,
     marginBottom: 5
   },
   navbar: {

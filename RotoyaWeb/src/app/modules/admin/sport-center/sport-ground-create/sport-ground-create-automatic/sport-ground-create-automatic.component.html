@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Thêm slot tự động</h1>
+<form [formGroup]="formAutomatic" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content>
+        <div class="row field">
+            <div class="col">
+                <mat-form-field>
+                    <input matInput placeholder="Thời gian/slot" formControlName="time" required>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row field">
+            <div class="col">
+                <mat-form-field>
+                    <input matInput placeholder="Thời gian nghỉ giữa các slot" formControlName="timeWait" required>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row field">
+            <div class="col">
+                <mat-form-field>
+                    <input matInput type="number" min="0" placeholder="Giá (VNĐ)" formControlName="price" required>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div mat-dialog-actions [align]="'end'">
+        <button mat-button mat-dialog-close>Đóng</button>
+        <button type="submit" mat-button class="btn btn-info" cdkFocusInitial>Lưu</button>
+    </div>
+</form>

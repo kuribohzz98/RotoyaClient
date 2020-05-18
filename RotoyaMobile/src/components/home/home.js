@@ -7,38 +7,59 @@ import {
     TouchableWithoutFeedback,
     ActivityIndicator,
     Platform,
-    Linking
+    Linking,
+    PermissionsAndroid
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Card } from 'react-native-elements';
-import { SportService, SportCenterService } from '../../service';
+import { Card, ButtonGroup, Icon } from 'react-native-elements';
+import Geolocation from 'react-native-geolocation-service';
+import { SportCenterService, SportService } from '../../service';
 import { ComponentAction, SportAction } from '../../redux/action';
-import { ApiConstants } from '../../constants';
+import { ApiConstants, ComponentConstants, Images } from '../../constants';
+import { NumberUtil } from '../../helper/util';
 
 class MyHomeScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            sports: [],
             isLoading: false,
-            sportListName: [],
+            selectedIndex: 0,
+            sports: [],
+            reload: false
         }
+        this.updateIndex = this.updateIndex.bind(this);
     }
 
     async componentDidMount() {
-        console.log(this.props.navigation);
-        //network
-        SportService.getSports().then(res => {
-            this.setState({
-                sports: res.data,
-                sportListName: res.data.map(sport => sport.name)
+        const optionsGet = this.initOptionsQuery();
+        const res_sport = await SportService.getSports();
+        this.setState({ sports: res_sport.data });
+        const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+        );
+        if (granted == PermissionsAndroid.RESULTS.GRANTED) {
+            await new Promise(resolve => {
+                Geolocation.getCurrentPosition(position => {
+                    optionsGet.latitude = position.coords.latitude;
+                    optionsGet.longitude = position.coords.longitude;
+                    optionsGet.isByLocation = true;
+                    optionsGet.distance = 10;
+                    console.log(optionsGet, '___+++______');
+                    resolve(position);
+                }, (error) => {
+                    // See error code charts below.
+                    console.log(error.code, error.message);
+                }, { enableHighAccuracy: true, timeout: 15000 })
             });
-        })
-        console.log(this.props.optionsGetSportCenters);
-        SportCenterService.getSportCenters(this.props.optionsGetSportCenters).then(res => {
+        }
+        this.setState({ reload: true });
+        // console.log(optionsGet, '______');
+        SportCenterService.getSportCenters(optionsGet).then(res => {
+            this.setState({ reload: false });
             const { data } = res;
             this.props.setSportCentersAction(data);
+            this.props.setOptionsGetSportCenters(optionsGet);
         })
         // if (this.props.route.params.orderId) {
         //     this.props.navigation.navigate('BookedDetail', { orderId: this.props.route.params.orderId });
@@ -49,6 +70,15 @@ class MyHomeScreen extends React.Component {
         } else {
             Linking.addEventListener('url', this.handleOpenURL);
         }
+    }
+
+    initOptionsQuery() {
+        const opts = {};
+        opts.time = new Date().getTime();
+        opts.sport = 'SOCCER';
+        opts.limit = 5;
+        opts.page = 1;
+        return opts;
     }
 
     componentWillUnmount() {
@@ -98,30 +128,74 @@ class MyHomeScreen extends React.Component {
                 <Card
                     containerStyle={styles.card}
                     title={item.name}
-                    image={{ uri: ApiConstants.URL_API + '/image/' + item.avatar }}
+                    image={item.avatar ? { uri: ApiConstants.URL_API + '/image/' + item.avatar } : Images.DefaultImage}
                     imageProps={{ PlaceholderContent: <ActivityIndicator size={50} color="#55a66d" /> }}
                 >
+                    {item.distance ? <Text style={{ marginBottom: 10 }}>Khoảng cách: {NumberUtil.convertDistance(item.distance)} km</Text> : null}
                     <Text style={{ marginBottom: 10 }}>
-                        {`Address: ${item.address ? item.address + ", " : ''}${item.commune}, ${item.district}, ${item.city}`}
+                        {`Địa chỉ: ${item.address ? item.address + ", " : ''}${item.commune}, ${item.district}, ${item.city}`}
                     </Text>
                 </Card>
             </TouchableWithoutFeedback>
         )
     }
 
+    updateIndex(selectedIndex) {
+        this.setState({ reload: true });
+        this.setState({ selectedIndex });
+        const opts = {};
+        opts.time = new Date().getTime();
+        opts.sport = this.state.sports.find(sport => +ComponentConstants.SportEnum[sport.code] == +selectedIndex).code;
+        opts.limit = 5;
+        opts.page = 1;
+        const opts_merge = Object.assign({}, this.props.optionsGetSportCenters, opts)
+        SportCenterService.getSportCenters(opts_merge).then(res => {
+            this.setState({ reload: false });
+            this.props.setSportCentersAction(res.data);
+            this.props.setOptionsGetSportCenters(opts_merge);
+        })
+    }
+
+    initSportButton() {
+        return this.state.sports
+            .sort((a, b) => ComponentConstants.SportEnum[a.code] - ComponentConstants.SportEnum[b.code])
+            .map(sport => {
+                const component = () => (
+                    <View style={{ justifyContent: 'center' }}>
+                        <Icon type="material-community" name={ComponentConstants.IconSports[sport.code]} />
+                        <Text>{ComponentConstants.SportConvertName[sport.code]}</Text>
+                    </View>
+                )
+                return { element: component }
+            })
+    }
+
     render() {
+        const buttons = this.initSportButton();
+        const { selectedIndex } = this.state;
         return (
-            <View style={styles.container}>
-                <View style={styles.listItems}>
-                    <FlatList
-                        onEndReached={() => this.loadMore()}
-                        onEndReachedThreshold={1}
-                        data={this.props.sportCenters}
-                        ListFooterComponent={() => this.footerLoadMore()}
-                        renderItem={this.renderItem.bind(this)}
-                        keyExtractor={(item, index) => index.toString()}
-                    />
-                </View>
+            <View style={{ flex: 1, backgroundColor: 'white' }}>
+                <ButtonGroup
+                    onPress={this.updateIndex.bind(this)}
+                    selectedIndex={selectedIndex}
+                    buttons={buttons}
+                    containerStyle={{ height: 60 }}
+                    selectedButtonStyle={{ backgroundColor: '#dbffe9', borderBottomColor: '#32995b', borderBottomWidth: 5 }}
+                />
+                {
+                    !this.state.reload ? <View style={styles.container}>
+                        <View style={styles.listItems}>
+                            <FlatList
+                                onEndReached={() => this.loadMore()}
+                                onEndReachedThreshold={1}
+                                data={this.props.sportCenters}
+                                ListFooterComponent={() => this.footerLoadMore()}
+                                renderItem={this.renderItem.bind(this)}
+                                keyExtractor={(item, index) => index.toString()}
+                            />
+                        </View>
+                    </View> : <ActivityIndicator size={50} color="#55a66d" style={{ marginTop: 30, justifyContent: 'center' }} />
+                }
             </View>
         );
     }

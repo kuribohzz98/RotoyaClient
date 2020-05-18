@@ -56,7 +56,7 @@ class PaymnetScreen extends React.Component {
         return (
             <View style={styles.root}>
                 <View>
-                    <Text style={styles.cardTitle}>Momo</Text>
+                    <Text style={styles.cardTitle}>Ví điện tử</Text>
                     <TouchableOpacity onPress={this.payment.bind(this, null)}>
                         <View style={styles.momo}>
                             <Image
@@ -64,12 +64,13 @@ class PaymnetScreen extends React.Component {
                                 resizeMode="contain"
                                 style={styles.image1}
                             ></Image>
+                            <Text style={styles.abBank3}>Ví momo</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
                 <View style={{ marginTop: 10 }}>
-                    <Text style={styles.cardTitle}>Bank Inland</Text>
-                    <ScrollView>
+                    <Text style={styles.cardTitle}>Ngân hàng nội địa</Text>
+                    <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={styles.scroll}>
                             {this.renderBank()}
                         </View>
@@ -88,10 +89,12 @@ const styles = StyleSheet.create({
     },
     cardTitle: {
         backgroundColor: "transparent",
-        fontSize: 16,
+        fontSize: 18,
         fontFamily: "poppins-600",
         letterSpacing: 0.3,
-        textAlign: 'left'
+        textAlign: 'left',
+        fontWeight: 'bold',
+        marginRight: 20
     },
     scroll: {
         flexDirection: 'row',
@@ -126,7 +129,9 @@ const styles = StyleSheet.create({
         shadowRadius: 10,
         elevation: 8,
         width: 95,
-        paddingBottom: 10
+        paddingBottom: 10,
+        marginTop: 15,
+        marginLeft: 20
 
     },
     image1: {

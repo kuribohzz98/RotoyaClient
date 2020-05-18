@@ -1,3 +1,4 @@
+import { SportGroundCreateComponent } from './sport-ground-create/sport-ground-create.component';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -16,6 +17,7 @@ import { SportCenterComponent } from './sport-center.component';
 import { SportCenterMapComponent } from './map/sport-center-map.component';
 import { SportCenterCreateComponent } from './sport-center-create/sport-center-create.component';
 import { MainInfoEditDialogComponent } from './sport-center-edit/main-info-dialog/main-info-dialog.component';
+import { SportGroundCreateAutomaticComponent } from './sport-ground-create/sport-ground-create-automatic/sport-ground-create-automatic.component';
 
 @NgModule({
     imports: [
@@ -36,7 +38,9 @@ import { MainInfoEditDialogComponent } from './sport-center-edit/main-info-dialo
         SportCenterComponent,
         SportCenterMapComponent,
         SportCenterCreateComponent,
-        MainInfoEditDialogComponent
+        MainInfoEditDialogComponent,
+        SportGroundCreateComponent,
+        SportGroundCreateAutomaticComponent
     ]
 })
 export class SportCenterModule { }

@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
@@ -27,8 +28,8 @@ interface TypeDateOption {
 })
 export class BookManagerComponent implements OnInit, OnDestroy {
   sportCenter: ISportCenterFull;
-  dateSelected: number;
   listDate: TypeDateOption[] = [];
+  dateControl: FormControl;
 
   private _destroy$: Subject<boolean> = new Subject();
 
@@ -40,14 +41,21 @@ export class BookManagerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initListDate();
-    this.dateSelected = this.listDate[0].value;
-    this.adminLayoutService.sportCenterSelected.id &&
-      this.sportCenterService.getSportCenter(this.adminLayoutService.sportCenterSelected.id, new Date().getTime())
-        .subscribe(sportCenter => {
-          this.sportCenter = sportCenter;
-        })
-
+    this.dateControl = new FormControl(this.listDate[0].value);
+    this.adminLayoutService.sportCenterSelected.id && this.initSportCenter();
     this.watchSportCenter();
+    this.dateControl.valueChanges
+      .pipe(takeUntil(this._destroy$))
+      .subscribe(value => {
+        this.initSportCenter(value);
+      })
+  }
+
+  initSportCenter(time?: number): void {
+    this.sportCenterService.getSportCenter(this.adminLayoutService.sportCenterSelected.id, time || new Date().getTime())
+      .subscribe(sportCenter => {
+        this.sportCenter = sportCenter;
+      })
   }
 
   initListDate(): void {
@@ -80,7 +88,7 @@ export class BookManagerComponent implements OnInit, OnDestroy {
   openInfo(timeSlotId: number): void {
     const data = {} as TimeSlotDialogData;
     data.id = timeSlotId || 5;
-    data.time = this.dateSelected || 1583712000000;
+    data.time = this.dateControl.value || 1583712000000;
     const dialogRef = this.dialog.open(TimeSlotDialogComponent, {
       width: '1000px',
       data

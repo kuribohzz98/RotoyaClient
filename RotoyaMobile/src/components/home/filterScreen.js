@@ -12,11 +12,10 @@ import {
 import { Block, Checkbox } from "galio-framework";
 import { Button, Text } from 'galio-framework';
 import { Slider, Select, Switch } from '../common/Form';
-import { Icon } from 'react-native-elements'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Geolocation from 'react-native-geolocation-service';
-import { SportService, SportCenterService } from '../../service';
+import { SportCenterService } from '../../service';
 import { ComponentAction, SportAction } from '../../redux/action';
 import { DateUtil } from '../../helper/util';
 
@@ -38,18 +37,11 @@ class filterForm extends React.Component {
             disabledFilterByPosition: false,
             showFilter: true,
             dataSelectDay: this.getDataSelectDay(),
-            sportListName: [],
-            sports: []
+            sportListName: []
         }
     }
 
     componentDidMount() {
-        SportService.getSports().then(res => {
-            this.setState({
-                sportListName: res.data.map(sport => sport.name),
-                sport: res.data
-            });
-        })
     }
 
     UNSAFE_componentWillMount() {
@@ -57,7 +49,6 @@ class filterForm extends React.Component {
             isTimeSlostBlank,
             isByLocation,
             distance,
-            sport,
             time
         } = this.props.optionsGetSportCenters;
         this.props.initialize({
@@ -65,7 +56,6 @@ class filterForm extends React.Component {
             isTimeSlostBlank,
             isFilterByPosition: isByLocation,
             distance,
-            sport,
             findByDay: DateUtil.getDateDDMM(time)
         });
         if (isByLocation) this.setState({ disabledFilterByPosition: true });
@@ -89,12 +79,10 @@ class filterForm extends React.Component {
     async submitFilter(value, dispatch) {
         const {
             distance,
-            sport,
             findByDay,
             isFilterByPosition,
             isTimeSlostBlank
         } = value;
-        console.log(value);
         const opts = {};
         if (isFilterByPosition) {
             const granted = await PermissionsAndroid.request(
@@ -112,21 +100,16 @@ class filterForm extends React.Component {
                     resolve(position);
                 })
             });
-
         }
         opts.time = findByDay ?
             new Date(DateUtil.convertDateDDMMToMMDD(findByDay)).getTime() :
             new Date().getTime();
         opts.isTimeSlotBlank = isTimeSlostBlank;
         opts.isByLocation = isFilterByPosition;
-        if (sport) opts.sport = sport;
         if (distance) opts.distance = distance;
         opts.limit = 5;
         opts.page = 1;
-        if (sport) {
-            const sportTemp = this.state.sports.find(sport => sport.name == sport);
-            if (sportTemp) opts.sportId = sportTemp.id;
-        }
+        opts.sport = this.props.optionsGetSportCenters.sport;
         console.log(opts, '-----');
         SportCenterService.getSportCenters(opts).then(res => {
             dispatch(SportAction.setSportCentersAction(res.data));
@@ -149,7 +132,7 @@ class filterForm extends React.Component {
                                 {/* <View style={{ alignItems: 'center' }}>
                                     <Text h3 >Search filter</Text>
                                 </View> */}
-                                <ScrollView style={{ flex: 1 }}>
+                                <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
                                     <View style={{ marginTop: 50, flex: 1 }}>
                                         <Field
                                             name="isTimeSlostBlank"
@@ -167,16 +150,6 @@ class filterForm extends React.Component {
                                             options={this.getDataSelectDay()}
                                             width={200}
                                         // initialValue={}
-                                        />
-                                    </View>
-                                    <View style={{ marginTop: 50, flex: 1 }}>
-                                        <Field
-                                            name="sport"
-                                            label="Sport"
-                                            options={this.state.sportListName}
-                                            component={Select}
-                                            width={200}
-                                        // row
                                         />
                                     </View>
                                     <View style={{ marginTop: 50, flex: 1 }}>

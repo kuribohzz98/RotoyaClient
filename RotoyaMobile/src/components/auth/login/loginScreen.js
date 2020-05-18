@@ -44,7 +44,11 @@ class LoginScreen extends React.Component {
             return;
         }
         this.props.loginAction(res.data.user);
-        await StorageService.saveItem(StorageConstants.AccessToken, res.data.access_token);
+        await Promise.all([
+            StorageService.saveItem(StorageConstants.AccessToken, res.data.access_token),
+            StorageService.saveItem(StorageConstants.Role, res.data.user.roles && res.data.user.roles.length ? res.data.user.roles[0] : null),
+            StorageService.saveItem(StorageConstants.UserId, res.data.user.id + '')
+        ]);
         this.props.navigation.navigate('App');
     }
     render() {

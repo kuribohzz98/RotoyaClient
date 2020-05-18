@@ -14,7 +14,7 @@ import {
     DrawerItem,
 } from '@react-navigation/drawer';
 import { AuthAction } from '../../redux/action';
-import { ApiConstants } from '../../constants';
+import { ApiConstants, Images } from '../../constants';
 import ColorConstants from '../../constants/color.constants';
 
 class CustomDrawerComponent extends React.Component {
@@ -44,7 +44,7 @@ class CustomDrawerComponent extends React.Component {
                             <Avatar
                                 rounded
                                 size="large"
-                                source={{uri: ApiConstants.URL_API + '/image/' + this.props.avatar}}
+                                source={this.props.avatar ? {uri: ApiConstants.URL_API + '/image/' + this.props.avatar} : Images.DefaultImage}
                                 showEditButton
                                 onPress={() => this.props.navigation.navigate('UserInfo')}
                             />
@@ -57,7 +57,7 @@ class CustomDrawerComponent extends React.Component {
                     <Divider style={{ backgroundColor: ColorConstants.DrawerNavigation.ActiveBackground, marginBottom: 10 }} />
                     <DrawerItemList {...this.props} />
                     <DrawerItem
-                        label="Logout"
+                        label="Đăng xuất"
                         focused
                         onPress={() => this.alertLogout()}
                         icon={() => <Icon type="material-community" name="logout" size={24} color={ColorConstants.DrawerNavigation.Logout}/>}

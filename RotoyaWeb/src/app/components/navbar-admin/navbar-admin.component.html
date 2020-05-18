@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-wrapper" style="padding-left: 20px">
             <mat-form-field *ngIf="!isAdmin()">
-                <mat-select [(value)]="sportCenterControl" (selectionChange)="onchange($event)">
+                <mat-select [(value)]="sportCenterControl" (selectionChange)="onchange($event)" [disabled]="disabledSelect">
                     <mat-option *ngIf="!sportCenters || !sportCenters.length">---</mat-option>
                     <mat-option *ngFor="let sportCenter of sportCenters" [value]="sportCenter">
                         {{sportCenter.name}}

@@ -5,7 +5,7 @@ import { getDateDDMM } from '../../helper/util/date';
     name: 'datetimeToDate'
 })
 export class ConvertDatetimeToDatePipe implements PipeTransform {
-    transform(value: Date | number, ...args: any[]): any {
+    transform(value: Date | number | string, ...args: any[]): any {
         return getDateDDMM(value);
     }
 }

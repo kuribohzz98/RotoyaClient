@@ -11,6 +11,7 @@ export default class RotoyaMap extends React.Component {
         // MapboxGL.setTelemetryEnabled(false);
     }
     render() {
+        const {latitude, longitude} = this.props.route.params;
         return (
             <View style={styles.map}>
                 {/* <MapView
@@ -22,7 +23,7 @@ export default class RotoyaMap extends React.Component {
                     }}
                 /> */}
                 <WebView
-                    source={{uri: `https://www.google.com/maps/place/21°01'24.3"N+105°47'03.7"E/@21.023421,105.7821773,17`}}
+                    source={{uri: `https://www.google.com/maps/place/${latitude || 21.005888} + ${longitude || 105.794319}`}}
                 />
                 {/* <MapboxGL.MapView
                     style={styles.map}

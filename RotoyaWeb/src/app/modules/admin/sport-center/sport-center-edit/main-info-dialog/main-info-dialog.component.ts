@@ -8,7 +8,7 @@ import { AddressService } from './../../../../../shared/service/address.service'
 import { DialogAcceptComponent } from './../../../../../shared/components/dialog-accept/dialog-accept.component';
 import { SportCenterService } from './../../../../../service/sport-center.service';
 import { ISportCenter } from './../../../../../shared/models/sport-center';
-import { converTimeToNumber, convertNumberToTime } from './../../../../../helper/util/time';
+import { convertTimeToNumber, convertNumberToTime } from './../../../../../helper/util/time';
 import { filterObjectChange } from './../../../../../helper/util/common';
 import { NotifyService } from './../../../../../shared/service/notify.service';
 
@@ -116,12 +116,13 @@ export class MainInfoEditDialogComponent implements OnInit, OnDestroy {
                 if (!result) return;
                 const sportCenterData = {} as ISportCenter;
                 sportCenterData.id = this.data.id;
+                sportCenterData.name = this.formEditInfo.value.name;
                 sportCenterData.city = this.cities.find(city => city.id == +this.formEditInfo.value.city).name;
                 sportCenterData.district = this.districts.find(district => district.id == +this.formEditInfo.value.district).name;
                 sportCenterData.commune = this.wards.find(ward => ward.id == +this.formEditInfo.value.commune).name;
                 sportCenterData.address = this.formEditInfo.value.address;
-                sportCenterData.timeOpen = converTimeToNumber(this.formEditInfo.value.timeOpen);
-                sportCenterData.timeClose = converTimeToNumber(this.formEditInfo.value.timeClose);
+                sportCenterData.timeOpen = convertTimeToNumber(this.formEditInfo.value.timeOpen);
+                sportCenterData.timeClose = convertTimeToNumber(this.formEditInfo.value.timeClose);
                 const body = filterObjectChange(this.oldData, sportCenterData);
                 if (!body) {
                     this.notifyService.showNotifyWarning('Bạn chưa thay đổi gì');

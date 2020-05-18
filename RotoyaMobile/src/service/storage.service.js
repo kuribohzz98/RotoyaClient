@@ -17,9 +17,17 @@ const getItem = async (key) => {
     return item;
 }
 
-const removeItem = async (key) =>  {
+const removeItem = async (key) => {
     try {
         await AsyncStorage.removeItem(key);
+    } catch (error) {
+        console.log('AsyncStorage Error: ' + error.message);
+    }
+}
+
+const clear = async () => {
+    try {
+        await AsyncStorage.clear();
     } catch (error) {
         console.log('AsyncStorage Error: ' + error.message);
     }
@@ -28,5 +36,6 @@ const removeItem = async (key) =>  {
 export default {
     saveItem,
     getItem,
-    removeItem
+    removeItem,
+    clear
 }

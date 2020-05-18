@@ -6,7 +6,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
 import { Header } from '../components/common';
 import Components from '../components';
-import { ColorConstants } from '../constants';
+import { ColorConstants, StorageConstants } from '../constants';
+import { StorageService } from '../service';
 
 const { width } = Dimensions.get('window');
 
@@ -22,7 +23,7 @@ const StackHome = () => (
             options={{
                 header: ({ navigation, scene }) => (
                     <Header
-                        title="Home"
+                        title="Trang chủ"
                         navigation={navigation}
                         scene={scene}
                     />
@@ -36,7 +37,7 @@ const StackHome = () => (
             options={{
                 header: ({ navigation, scene }) => (
                     <Header
-                        title="Filter"
+                        title="Bộ lọc tìm kiếm"
                         back
                         navigation={navigation}
                         scene={scene}
@@ -51,7 +52,7 @@ const StackHome = () => (
             options={{
                 header: ({ navigation, scene }) => (
                     <Header
-                        title="Sport Center"
+                        title="Trung tâm thể thao"
                         back
                         navigation={navigation}
                         scene={scene}
@@ -62,6 +63,17 @@ const StackHome = () => (
         <Stack.Screen
             name="Bill"
             component={Components.BillScreen}
+            headerMode="screen"
+            options={{
+                header: ({ navigation, scene }) => (
+                    <Header
+                        title="Hóa đơn"
+                        back
+                        navigation={navigation}
+                        scene={scene}
+                    />
+                )
+            }}
         />
         <Stack.Screen
             name="Payment"
@@ -70,7 +82,7 @@ const StackHome = () => (
             options={{
                 header: ({ navigation, scene }) => (
                     <Header
-                        title="Payment"
+                        title="Thanh toán"
                         back
                         navigation={navigation}
                         scene={scene}
@@ -87,6 +99,109 @@ const StackHome = () => (
             name="BookedDetail"
             component={Components.BookedDetailScreen}
         />
+        <Stack.Screen
+            name="Position"
+            component={Components.MapScreen}
+            headerMode="screen"
+            options={{
+                header: ({ navigation, scene }) => (
+                    <Header
+                        title="Vị trí trung tâm thể thao"
+                        back
+                        navigation={navigation}
+                        scene={scene}
+                    />
+                )
+            }}
+        />
+    </Stack.Navigator>
+)
+
+const StackFavorites = () => (
+    <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+            name="FavoritesScreen"
+            component={Components.FavoritesScreen}
+            headerMode="screen"
+            options={{
+                header: ({ navigation, scene }) => (
+                    <Header
+                        title="Yêu thích"
+                        navigation={navigation}
+                        scene={scene}
+                    />
+                )
+            }}
+        />
+        <Stack.Screen
+            name="SportCenter"
+            component={Components.SportCenterScreen}
+            headerMode="screen"
+            options={{
+                header: ({ navigation, scene }) => (
+                    <Header
+                        title="Trung tâm thể thao"
+                        back
+                        navigation={navigation}
+                        scene={scene}
+                    />
+                )
+            }}
+        />
+        <Stack.Screen
+            name="Bill"
+            component={Components.BillScreen}
+            headerMode="screen"
+            options={{
+                header: ({ navigation, scene }) => (
+                    <Header
+                        title="Hóa đơn"
+                        back
+                        navigation={navigation}
+                        scene={scene}
+                    />
+                )
+            }}
+        />
+        <Stack.Screen
+            name="Payment"
+            component={Components.PaymentScreen}
+            headerMode="screen"
+            options={{
+                header: ({ navigation, scene }) => (
+                    <Header
+                        title="Thanh toán"
+                        back
+                        navigation={navigation}
+                        scene={scene}
+                    />
+                )
+            }}
+        />
+        <Stack.Screen
+            name="PaymentWebView"
+            component={Components.PaymentWebViewScreen}
+            headerMode="screen"
+        />
+        <Stack.Screen
+            name="BookedDetail"
+            component={Components.BookedDetailScreen}
+        />
+        <Stack.Screen
+            name="Position"
+            component={Components.MapScreen}
+            headerMode="screen"
+            options={{
+                header: ({ navigation, scene }) => (
+                    <Header
+                        title="Vị trí trung tâm thể thao"
+                        back
+                        navigation={navigation}
+                        scene={scene}
+                    />
+                )
+            }}
+        />
     </Stack.Navigator>
 )
 
@@ -99,7 +214,7 @@ const StackBooked = () => (
             options={{
                 header: ({ navigation, scene }) => (
                     <Header
-                        title="Booked Ground"
+                        title="Các sân đã đặt"
                         navigation={navigation}
                         scene={scene}
                     />
@@ -113,25 +228,6 @@ const StackBooked = () => (
     </Stack.Navigator>
 )
 
-const StackMap = () => (
-    <Stack.Navigator initialRouteName="Main">
-        <Stack.Screen
-            name="Main"
-            component={Components.MapScreen}
-            headerMode="screen"
-            options={{
-                header: ({ navigation, scene }) => (
-                    <Header
-                        title="Map"
-                        navigation={navigation}
-                        scene={scene}
-                    />
-                )
-            }}
-        />
-    </Stack.Navigator>
-)
-
 const StackUserInfo = () => (
     <Stack.Navigator initialRouteName="Main">
         <Stack.Screen
@@ -141,8 +237,7 @@ const StackUserInfo = () => (
             options={{
                 header: ({ navigation, scene }) => (
                     <Header
-                        title="Info"
-                        back
+                        title="Thông tin cá nhân"
                         navigation={navigation}
                         scene={scene}
                     />
@@ -152,59 +247,136 @@ const StackUserInfo = () => (
     </Stack.Navigator>
 )
 
-const DrawerNavigation = () => (
-    <Drawer.Navigator initialRouteName="Home"
-        drawerContent={props => <Components.ContentDrawerScreen {...props} />}
-        drawerContentOptions={{
-            activeBackgroundColor: ColorConstants.DrawerNavigation.ActiveBackground,
-            activeTintColor: ColorConstants.DrawerNavigation.ActiveTint
-        }}
-        drawerStyle={{
-            backgroundColor: ColorConstants.DrawerNavigation.StyleBackground,
-            width: width * 3.5 / 5
-        }}
-        edgeWidth={-10}
-    >
-        <Drawer.Screen
-            name="Home"
-            component={StackHome}
+const StackQrScanner = () => (
+    <Stack.Navigator initialRouteName="Scanner">
+        <Stack.Screen
+            name="Scanner"
+            component={Components.QrScannerScreen}
+            headerMode="screen"
             options={{
-                drawerIcon: props => (
-                    <Icon type="font-awesome" name="home" size={24} color={props.color}></Icon>
+                header: ({ navigation, scene }) => (
+                    <Header
+                        title="Quét mã QR"
+                        navigation={navigation}
+                        scene={scene}
+                    />
                 )
             }}
         />
-        <Drawer.Screen
-            name="Booked"
-            component={StackBooked}
+        <Stack.Screen
+            name="BookedScanner"
+            component={Components.BookedScannerScreen}
+            headerMode="screen"
             options={{
-                drawerIcon: props => (
-                    <Icon type="font-awesome" name="bookmark" size={24} color={props.color}></Icon>
-                ),
-                title: 'Booked Ground'
-            }}
-        />
-        <Drawer.Screen
-            name="Map"
-            component={StackMap}
-            options={{
-                drawerIcon: props => (
-                    <Icon type="font-awesome" name="map" size={24} color={props.color}></Icon>
+                header: ({ navigation, scene }) => (
+                    <Header
+                        title="Thông tin đơn"
+                        navigation={navigation}
+                        scene={scene}
+                    />
                 )
             }}
         />
-        <Drawer.Screen
-            name="UserInfo"
-            component={StackUserInfo}
-            options={{
-                drawerIcon: props => (
-                    <Icon type="font-awesome" name="user" size={24} color={props.color}></Icon>
-                ),
-                title: 'User Info'
-            }}
-        />
-    </Drawer.Navigator>
+    </Stack.Navigator>
 )
+
+class DrawerNavigation extends React.Component {
+    // const [role, setRole] = React.useState(null);
+    // React.useEffect(async () => {
+    //     const role_temp = await StorageService.getItem(StorageConstants.Role);
+    //     setRole(role_temp);
+    // }, [role])
+    constructor(props) {
+        super(props);
+        this.state = {
+            role: ""
+        }
+    }
+    async componentDidMount() {
+        const role_temp = await StorageService.getItem(StorageConstants.Role);
+        this.setState({ role: role_temp })
+    }
+    render() {
+        return (
+            <Drawer.Navigator initialRouteName="Home"
+                drawerContent={props => <Components.ContentDrawerScreen {...props} />}
+                drawerContentOptions={{
+                    activeBackgroundColor: ColorConstants.DrawerNavigation.ActiveBackground,
+                    activeTintColor: ColorConstants.DrawerNavigation.ActiveTint
+                }}
+                drawerStyle={{
+                    backgroundColor: ColorConstants.DrawerNavigation.StyleBackground,
+                    width: width * 3.5 / 5
+                }}
+                edgeWidth={-10}
+            >
+                {
+                    this.state.role && this.state.role == "" ?
+                        <Drawer.Screen
+                            name="main"
+                            component={Components.EmptyScreen}
+                            options={{
+                                drawerIcon: props => (
+                                    <Icon type="font-awesome" name="home" size={24} color={props.color}></Icon>
+                                ),
+                                title: ''
+                            }}
+                        /> : (!this.state.role ? <>
+                            <Drawer.Screen
+                                name="Home"
+                                component={StackHome}
+                                options={{
+                                    drawerIcon: props => (
+                                        <Icon type="font-awesome" name="home" size={24} color={props.color}></Icon>
+                                    ),
+                                    title: 'Trang chủ'
+                                }}
+                            />
+                            <Drawer.Screen
+                                name="Favorites"
+                                component={StackFavorites}
+                                options={{
+                                    drawerIcon: props => (
+                                        <Icon type="material" name="favorite" size={24} color={props.color}></Icon>
+                                    ),
+                                    title: 'Yêu thích'
+                                }}
+                            />
+                            <Drawer.Screen
+                                name="Booked"
+                                component={StackBooked}
+                                options={{
+                                    drawerIcon: props => (
+                                        <Icon type="font-awesome" name="bookmark" size={24} color={props.color}></Icon>
+                                    ),
+                                    title: 'Các sân đã đặt'
+                                }}
+                            />
+                            <Drawer.Screen
+                                name="UserInfo"
+                                component={StackUserInfo}
+                                options={{
+                                    drawerIcon: props => (
+                                        <Icon type="font-awesome" name="user" size={24} color={props.color}></Icon>
+                                    ),
+                                    title: 'Thông tin cá nhân'
+                                }}
+                            />
+                        </> : <Drawer.Screen
+                                name="QrScanner"
+                                component={StackQrScanner}
+                                options={{
+                                    drawerIcon: props => (
+                                        <Icon type="font-awesome" name="qrcode" size={24} color={props.color}></Icon>
+                                    ),
+                                    title: 'Quét mã QR'
+                                }}
+                            />)
+                }
+            </Drawer.Navigator>
+        )
+    }
+}
 
 const StackAuth = () => (
     <Stack.Navigator

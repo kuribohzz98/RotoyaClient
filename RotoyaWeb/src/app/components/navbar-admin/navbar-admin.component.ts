@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { MatSelectChange } from '@angular/material/select';
 import { Subject } from 'rxjs';
-import { takeUntil, mergeMap } from 'rxjs/operators';
+import { takeUntil, mergeMap, filter } from 'rxjs/operators';
 import { ROUTES } from '../sidebar/sidebar.component';
 import { AdminLayoutService } from './../../shared/service/admin-layout.service';
 import { ISportCenter } from './../../shared/models/sport-center';
@@ -22,6 +22,7 @@ export class NavbarAdminComponent implements OnInit, OnDestroy {
     private sidebarVisible: boolean;
     sportCenters: ISportCenter[];
     sportCenterControl: ISportCenter;
+    disabledSelect: boolean = false;
 
     private _destroy$: Subject<boolean> = new Subject();
 
@@ -53,6 +54,12 @@ export class NavbarAdminComponent implements OnInit, OnDestroy {
                 }
             });
 
+        this.router.events
+            .pipe(filter(events => events instanceof NavigationEnd))
+            .subscribe((event: NavigationEnd) => {
+                if (event.url == '/manager/sport-center/create-sport-ground') return this.disabledSelect = true;
+                this.disabledSelect = false;
+            })
         this.watchSportCenters();
     }
 
@@ -79,6 +86,13 @@ export class NavbarAdminComponent implements OnInit, OnDestroy {
                 this.adminLayoutService.sportCenters = sportCenters;
                 this.adminLayoutService.sportCenterSelected = sportCenters[0];
                 this.adminLayoutService.sportCenterSelectedSubject$.next(null);
+                this.sportCenterControl = this.adminLayoutService.sportCenterSelected;
+            })
+        this.adminLayoutService.sportCenterSelectedSubject$
+            .pipe(takeUntil(this._destroy$))
+            .subscribe(data => {
+                this.sportCenters = this.adminLayoutService.sportCenters;
+                console.log(this.sportCenters);
                 this.sportCenterControl = this.adminLayoutService.sportCenterSelected;
             })
     }

@@ -7,7 +7,30 @@ const IconSports = {
     TENNIS: 'tennis-ball'
 }
 
+const SportEnum = {
+    SOCCER: 0,
+    TENNIS: 1,
+    BASKETBALL: 2,
+    BADMINTON: 3
+}
+
+const SportConvertName = {
+    SOCCER: 'Bóng đá',
+    TENNIS: 'Tennis',
+    BADMINTON: 'Cầu lông',
+    BASKETBALL: 'Bóng rổ'
+}
+
+const Gender = {
+    Male: 'Nam',
+    Femal: 'Nữ',
+    Other: 'Khác'
+}
+
 export default {
     TimeOutBooking,
-    IconSports
+    IconSports,
+    Gender,
+    SportEnum,
+    SportConvertName
 }

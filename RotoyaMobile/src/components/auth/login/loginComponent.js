@@ -56,7 +56,7 @@ let LoginForm = props => {
                             <Block style={styles.container}>
                                 <Block flex>
                                     <Block flex={0.3} middle>
-                                        <Text h3>Login</Text>
+                                        <Text h3>Đăng nhập</Text>
                                     </Block>
                                     <Block flex center>
                                         <KeyboardAvoidingView
@@ -66,7 +66,7 @@ let LoginForm = props => {
                                         >
                                             <Block width={width * 0.8} style={{ marginBottom: 15 }}>
                                                 <Field
-                                                    label="Email"
+                                                    label="Tên đăng nhập"
                                                     name="username"
                                                     icon="ic_mail_24px"
                                                     family="ArgonExtra"
@@ -75,7 +75,7 @@ let LoginForm = props => {
                                             </Block>
                                             <Block width={width * 0.8} style={{ marginBottom: 15 }}>
                                                 <Field
-                                                    label="Password"
+                                                    label="Mật khẩu"
                                                     name="password"
                                                     icon="padlock-unlocked"
                                                     family="ArgonExtra"
@@ -83,7 +83,7 @@ let LoginForm = props => {
                                                     component={renderField}
                                                 />
                                             </Block>
-                                            <View style={{ flexDirection: 'row', width: width * 0.8, justifyContent: 'center', marginBottom: 15 }}>
+                                            {/* <View style={{ flexDirection: 'row', width: width * 0.8, justifyContent: 'center', marginBottom: 15 }}>
                                                 <Text style={{ alignSelf: 'center', fontWeight: 'bold' }}>or login with </Text>
                                                 <SocialIcon
                                                     type='facebook'
@@ -97,20 +97,21 @@ let LoginForm = props => {
                                                     // button
                                                     style={{ paddingLeft: 10, paddingRight: 10 }}
                                                 />
-                                            </View>
+                                            </View> */}
                                             <View style={{ alignItems: 'center' }}>
                                                 <View style={{ flexDirection: 'row' }}>
                                                     <Text style={{ fontSize: 16 }}>
-                                                        Do not have an account???
-                                                </Text>
-                                                    <TouchableOpacity
-                                                        onPress={() => navigation.navigate('Register')}
-                                                    >
-                                                        <Text style={{ fontWeight: 'bold', fontSize: 16 }} textDecorationLine="underline"> Register</Text>
-                                                    </TouchableOpacity>
+                                                        Bạn chưa có tài khoản???
+                                                    </Text>
                                                 </View>
-                                                <TouchableOpacity onPress={() => null}>
-                                                    <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Forgot password</Text>
+                                                <TouchableOpacity
+                                                    onPress={() => navigation.navigate('Register')}
+                                                    style={{marginTop: 20}}
+                                                >
+                                                    <Text style={{ fontWeight: 'bold', fontSize: 16 }} textDecorationLine="underline">Đăng ký ngay</Text>
+                                                </TouchableOpacity>
+                                                <TouchableOpacity onPress={() => null} style={{marginTop: 20}}>
+                                                    <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Quên mật khẩu</Text>
                                                 </TouchableOpacity>
                                             </View>
                                             <Block middle>
@@ -120,7 +121,7 @@ let LoginForm = props => {
                                                     onPress={handleSubmit(props.onSubmit)}
                                                 >
                                                     <Text bold size={14} color={argonTheme.COLORS.WHITE}>
-                                                        LOGIN
+                                                        Đăng nhập
                                             </Text>
                                                 </Button>
                                             </Block>

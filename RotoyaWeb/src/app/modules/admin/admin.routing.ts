@@ -5,6 +5,9 @@ import { BookManagerComponent } from './book-manager/book-manager.component';
 import { RequestCoOperateManagerComponent } from './request-co-operate-manager/request-co-operate-manager.component';
 import { AccountComponent } from './account/account.component';
 import { PaymentComponent } from './payment/payment.component';
+import { PaymentInfoComponent } from './payment/payment-info/payment-info.component';
+import { StatisticProviderComponent } from './statistic-provider/statistic-provider.component';
+import { EquipmentComponent } from './equipment/equipment.component';
 
 export const adminRoutes: Routes = [
     {
@@ -51,5 +54,29 @@ export const adminRoutes: Routes = [
         },
         canActivate: [UserRouteAccessService],
         component: PaymentComponent
+    },
+    {
+        path: 'payment/:orderId',
+        data: {
+            authorities: [Authorities.PROVIDER]
+        },
+        canActivate: [UserRouteAccessService],
+        component: PaymentInfoComponent
+    },
+    {
+        path: 'statistic-provider',
+        data: {
+            authorities: [Authorities.PROVIDER]
+        },
+        canActivate: [UserRouteAccessService],
+        component: StatisticProviderComponent
+    },
+    {
+        path: 'equipment',
+        data: {
+            authorities: [Authorities.PROVIDER]
+        },
+        canActivate: [UserRouteAccessService],
+        component: EquipmentComponent
     }
 ];

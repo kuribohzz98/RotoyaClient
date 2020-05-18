@@ -92,7 +92,7 @@ export class SportCenterComponent implements OnInit, OnDestroy {
             ).subscribe(res => {
                 if (res && res.message == 'success') {
                     this.notifyService.showNotifySuccess('Thay ảnh đại diện thành công');
-                    this.initSportCenters();
+                    this.initSportCenters(true);
                     this.cancelEditAvatar();
                     return;
                 }
@@ -122,15 +122,16 @@ export class SportCenterComponent implements OnInit, OnDestroy {
             .subscribe(result => {
                 if (result) {
                     this.notifyService.showNotifySuccess('Thay đổi thông tin thành công');
-                    this.initSportCenters();
+                    this.initSportCenters(true);
                 }
             });
     }
 
-    initSportCenters(): void {
+    initSportCenters(changeData?: boolean): void {
         this.sportCenterService.getSportCenter(+(this.adminLayoutService.sportCenterSelected || {}).id).subscribe(sportCenter => {
             this.sportCenter = sportCenter;
             console.log(this.sportCenter);
+            changeData && this.adminLayoutService.changeOneSportCenter(sportCenter);
             this.initBooleanView(this.sportCenter);
         })
     }
@@ -190,6 +191,10 @@ export class SportCenterComponent implements OnInit, OnDestroy {
 
     createSportCenter(): void {
         this.router.navigate(['/manager/sport-center/create']);
+    }
+
+    createSportGround(): void {
+        this.router.navigate(['manager/sport-center/create-sport-ground']);
     }
 
     ngOnDestroy(): void {

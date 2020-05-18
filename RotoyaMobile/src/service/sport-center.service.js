@@ -1,4 +1,6 @@
 import { axiosBase } from './base.service';
+import { StorageService } from '.';
+import { StorageConstants } from '../constants';
 
 const url = '/sport-center'
 
@@ -12,7 +14,15 @@ const getSportCenter = async (id, time) => {
     })
 }
 
+const getSportCenterFavorites = async (options = {}) => {
+    const userId = await StorageService.getItem(StorageConstants.UserId);
+    return axiosBase.get(`${url}/favorites/${+userId}`, {
+        params: options
+    })
+}
+
 export default {
     getSportCenters,
-    getSportCenter
+    getSportCenter,
+    getSportCenterFavorites
 }

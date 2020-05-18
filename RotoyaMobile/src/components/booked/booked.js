@@ -96,25 +96,26 @@ class Booked extends React.Component {
             <TouchableOpacity onPress={this.redirectDetail.bind(this, item.orderId)}>
                 <View style={styles.cardContainer}>
                     <View style={styles.cardRowContainer}>
-                        <Text style={styles.cardTitle}>TransactonId:</Text>
+                        <Text style={styles.cardTitle}>Mã đơn:</Text>
                         <Text style={styles.cardContent}>{item.orderId}</Text>
                     </View>
                     <View style={styles.cardRowContainer}>
-                        <Text style={styles.cardTitle}>Sport Center:</Text>
+                        <Text style={styles.cardTitle}>Trung tâm thể thao:</Text>
                         <Text style={styles.cardContent}>{item.sportCenter.name}</Text>
                     </View>
                     <View style={styles.cardRowContainer}>
-                        <Text style={styles.cardTitle}>Book Date:</Text>
+                        <Text style={styles.cardTitle}>Ngày đặt:</Text>
                         <Text style={styles.cardContent}>{DateUtil.getDateDDMM(item.createdAt)} / {TimeUtil.getTime(item.createdAt)}</Text>
                     </View>
                     <View style={styles.cardRowContainer}>
-                        <Text style={styles.cardTitle}>Price:</Text>
-                        <Text style={styles.cardContent}>{NumberUtil.convertNumberToCurrency(item.amount)} VNĐ</Text>
+                        <Text style={styles.cardTitle}>Giá:</Text>
+                        <Text style={styles.cardContent}>{NumberUtil.convertNumberToCurrency(item.amount)} đ</Text>
                     </View>
                     <View style={styles.cardRowContainer}>
-                        <Text style={styles.cardTitle}>Status:</Text>
-                        <Text style={item.transactionId ? styles.cardContentGreen : styles.cardContentRed}>
-                            {item.transactionId ? 'paid' : 'used'}
+                        <Text style={styles.cardTitle}>Trạng thái:</Text>
+                        <Text style={ styles.cardContentGreen}>
+                            {/* {item.transactionId ? 'paid' : 'used'} */}
+                            Đã thanh toán
                         </Text>
                     </View>
                 </View>

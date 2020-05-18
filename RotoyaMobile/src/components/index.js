@@ -12,6 +12,10 @@ import PaymentScreen from './payment/payment';
 import PaymentWebViewScreen from './payment/paymentWebview';
 import SportCenterScreen from './sportCenter/sportCenterScreen';
 import UserScreen from './user/userInfo';
+import BookedScannerScreen from './bill-scanner/bill-scanner';
+import QrScannerScreen from './qr-scanner/qr-scanner';
+import EmptyScreen from './empty/empty';
+import FavoritesScreen from './favorites/favorites';
 
 export default {
     AuthLoadingScreen,
@@ -27,5 +31,9 @@ export default {
     PaymentScreen,
     PaymentWebViewScreen,
     SportCenterScreen,
-    UserScreen
+    UserScreen,
+    BookedScannerScreen,
+    QrScannerScreen,
+    EmptyScreen,
+    FavoritesScreen
 }

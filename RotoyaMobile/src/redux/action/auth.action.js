@@ -1,5 +1,5 @@
 import { StorageService } from '../../service';
-import { StorageConstants, ActionConstants } from '../../constants';
+import { ActionConstants } from '../../constants';
 
 const loginAction = (user) => { 
     return {
@@ -9,7 +9,7 @@ const loginAction = (user) => {
 }
 
 const logoutAction = () => {
-    StorageService.removeItem(StorageConstants.AccessToken);
+    StorageService.clear();
     return {
         type: ActionConstants.LOGOUT
     }

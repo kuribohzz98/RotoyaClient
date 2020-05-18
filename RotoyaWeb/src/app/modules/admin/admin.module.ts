@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -8,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { SharedModule } from './../../shared/shared.module';
 import { adminRoutes } from './admin.routing';
 import { BookManagerComponent } from './book-manager/book-manager.component';
@@ -16,6 +18,8 @@ import { TimeSlotDialogComponent } from './book-manager/time-slot-dialog/time-sl
 import { AccountComponent } from './account/account.component';
 import { AccountInfoDialogComponent } from './account/account-info-dialog/account-info-dialog.component';
 import { PaymentComponent } from './payment/payment.component';
+import { PaymentInfoComponent } from './payment/payment-info/payment-info.component';
+import { StatisticProviderComponent } from './statistic-provider/statistic-provider.component';
 
 @NgModule({
     imports: [
@@ -28,7 +32,9 @@ import { PaymentComponent } from './payment/payment.component';
         MatFormFieldModule,
         MatSelectModule,
         MatTooltipModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        NgxChartsModule,
+        ReactiveFormsModule
     ],
     declarations: [
         BookManagerComponent,
@@ -36,7 +42,9 @@ import { PaymentComponent } from './payment/payment.component';
         TimeSlotDialogComponent,
         AccountComponent,
         AccountInfoDialogComponent,
-        PaymentComponent
+        PaymentComponent,
+        PaymentInfoComponent,
+        StatisticProviderComponent
     ]
 })
 export class AdminModule { }

@@ -53,6 +53,9 @@
                             </tbody>
                         </table>
                     </div>
+                    <mat-paginator showFirstLastButtons [length]="pageData.totalSize" [pageSize]="pageData.pageSize"
+                        [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)">
+                    </mat-paginator>
                 </div>
             </div>
         </ng-container>

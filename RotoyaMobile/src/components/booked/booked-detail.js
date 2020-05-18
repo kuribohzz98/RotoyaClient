@@ -2,13 +2,24 @@ import React from "react";
 import {
     StyleSheet,
     View,
-    Text
+    Text,
+    ActivityIndicator,
+    ScrollView
 } from "react-native";
 import { Header } from "../common";
 import { NumberUtil, TimeUtil, NotificationUtil, DateUtil } from "../../helper/util";
 import { PaymentService } from "../../service";
 import { CommonActions } from "@react-navigation/native";
+import { ApiConstants } from "../../constants";
+import { Image } from 'react-native-elements';
+import { Button } from 'galio-framework';
+import * as AddCalendarEvent from 'react-native-add-calendar-event';
+import moment from 'moment';
 
+const utcDateToString = (momentInUTC) => {
+    let s = moment.utc(momentInUTC).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
+    return s;
+};
 class BookedDetailScreen extends React.Component {
     nativeEventSubscription = null;
     timeOutBook = null;
@@ -16,8 +27,21 @@ class BookedDetailScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            payment: {}
+            payment: null
         }
+    }
+
+    addCalendar() {
+        const { bookings, sportCenter } = this.state.payment;
+        bookings.map(booking => {
+            const eventConfig = {
+                title: 'Rotoya: Có lịch tại ' + sportCenter.name,
+                startDate: utcDateToString(moment.utc(moment(new Date(booking.bookingDate + 'T' + TimeUtil.convertFloatToTime(booking.sportGroundTimeSlot.startTime) + ':00.000Z'))).subtract(15, 'minutes')),
+                endDate: utcDateToString(moment.utc(moment(new Date(booking.bookingDate + 'T' + TimeUtil.convertFloatToTime(booking.sportGroundTimeSlot.startTime) + ':00.000Z')))),
+                notes: 'Sân: ' + booking.sportGroundTimeSlot.sportGround.name
+            };
+            AddCalendarEvent.presentEventCreatingDialog(eventConfig);
+        })
     }
 
     goBack() {
@@ -36,7 +60,7 @@ class BookedDetailScreen extends React.Component {
         this.props.navigation.setOptions({
             header: ({ navigation, scene }) => (
                 <Header
-                    title="Bill"
+                    title="Hóa đơn"
                     back={this.props.route.params.isBack}
                     remove={!this.props.route.params.isBack}
                     goBack={this.goBack.bind(this)}
@@ -58,24 +82,31 @@ class BookedDetailScreen extends React.Component {
 
     render() {
         const { payment } = this.state;
-        return (
+        if (payment) return (
             <View style={styles.root}>
-                <View style={styles.rect2}>
+                <View style={styles.qrcode}>
+                    <Image
+                        source={{ uri: ApiConstants.URL_API + '/image/' + payment.orderId + '.png' }}
+                        style={{ width: 200, height: 200 }}
+                        PlaceholderContent={<ActivityIndicator size={50} color="#55a66d" />}
+                    ></Image>
+                </View>
+                <ScrollView style={styles.rect2} showsVerticalScrollIndicator={false}>
                     <View style={styles.cardRowContainer}>
-                        <Text style={styles.cardTitle}>TransactionId</Text>
+                        <Text style={styles.cardTitle}>Mã đơn</Text>
                         <Text style={styles.cardContent}>{payment.orderId}</Text>
                     </View>
                     <View style={styles.cardRowContainer}>
-                        <Text style={styles.cardTitle}>Sport Center</Text>
+                        <Text style={styles.cardTitle}>Trung tâm thể thao</Text>
                         <Text style={styles.cardContent}>{(payment.sportCenter || {}).name}</Text>
                     </View>
                     <View style={styles.cardRowContainer}>
-                        <Text style={styles.cardTitle}>Status</Text>
-                        <Text style={payment.transactionId ? styles.cardContentGreen : styles.cardContentRed}>
-                            {payment.transactionId ? 'paid' : 'used'}
+                        <Text style={styles.cardTitle}>Trạng thái</Text>
+                        <Text style={styles.cardContentGreen}>
+                            Đã thanh toán
                         </Text>
                     </View>
-                    <Text style={styles.cardTitle}>SportGround</Text>
+                    <Text style={styles.cardTitle}>Sân</Text>
                     {
                         (payment.bookings || []).map(booking => {
                             return (
@@ -85,28 +116,82 @@ class BookedDetailScreen extends React.Component {
                                         <Text style={styles.success}>{booking.sportGroundTimeSlot.sportGround.name}</Text>
                                     </View>
                                     <View style={styles.cardRowContainer}>
-                                        <Text style={styles.cardLitteTitle}>Date</Text>
+                                        <Text style={styles.cardLitteTitle}>Ngày</Text>
                                         <Text style={styles.cardLitteContent}>{DateUtil.getDateDDMM(booking.bookingDate)}</Text>
                                     </View>
                                     <View style={styles.cardRowContainer}>
-                                        <Text style={styles.cardLitteTitle}>Time</Text>
+                                        <Text style={styles.cardLitteTitle}>Thời gian</Text>
                                         <Text style={styles.cardLitteContent}>{TimeUtil.convertFloatToTime(booking.sportGroundTimeSlot.startTime)} - {TimeUtil.convertFloatToTime(booking.sportGroundTimeSlot.endTime)}</Text>
                                     </View>
                                     <View style={styles.cardRowContainer}>
-                                        <Text style={styles.cardLitteTitle}>Price</Text>
-                                        <Text style={styles.cardLitteContent}>{NumberUtil.convertNumberToCurrency(booking.sportGroundTimeSlot.price)} VNĐ</Text>
+                                        <Text style={styles.cardLitteTitle}>Giá</Text>
+                                        <Text style={styles.cardLitteContent}>{NumberUtil.convertNumberToCurrency(booking.sportGroundTimeSlot.price)} đ</Text>
                                     </View>
                                 </View>
                             )
                         })
                     }
-                </View>
+                    {
+                        payment.bookings.some(booking => !!booking.sportCenterEquipmentBookings && !!booking.sportCenterEquipmentBookings.length) ?
+                            <View>
+                                <Text style={styles.cardTitle}>Dụng cụ thể thao</Text>
+                                {
+                                    payment.bookings.map(booking => {
+                                        return booking.sportCenterEquipmentBookings.map(sgeBooking => {
+                                            return (
+                                                <View>
+                                                    <View style={styles.transactionStatusRow}>
+                                                        <Text style={styles.transactionStatus}>-</Text>
+                                                        <Text style={styles.success}>{sgeBooking.sportGroundEquipment.sportEquipment.name}</Text>
+                                                    </View>
+                                                    <View style={styles.cardRowContainer}>
+                                                        <Text style={styles.cardLitteTitle}>Số lượng</Text>
+                                                        <Text style={styles.cardLitteContent}>{sgeBooking.amount}</Text>
+                                                    </View>
+                                                    <View style={styles.cardRowContainer}>
+                                                        <Text style={styles.cardLitteTitle}>Ngày</Text>
+                                                        <Text style={styles.cardLitteContent}>{booking.bookingDate}</Text>
+                                                    </View>
+                                                    <View style={styles.cardRowContainer}>
+                                                        <Text style={styles.cardLitteTitle}>Thời gian</Text>
+                                                        <Text style={styles.cardLitteContent}>{TimeUtil.convertFloatToTime(booking.sportGroundTimeSlot.startTime)} - {TimeUtil.convertFloatToTime(booking.sportGroundTimeSlot.endTime)}</Text>
+                                                    </View>
+                                                    <View style={styles.cardRowContainer}>
+                                                        <Text style={styles.cardLitteTitle}>Giá</Text>
+                                                        <Text style={styles.cardLitteContent}>{NumberUtil.convertNumberToCurrency(sgeBooking.price)} đ</Text>
+                                                    </View>
+                                                </View>
+                                            )
+                                        })
+                                    })
+                                }
+                            </View> : null
+                    }
+                </ScrollView>
                 <View style={styles.billingRow}>
-                    <Text style={styles.billing}>Total</Text>
-                    <Text style={styles.billing2}>{NumberUtil.convertNumberToCurrency(this.state.payment.amount || 0)} VNĐ</Text>
+                    <Text style={styles.billing}>Tổng</Text>
+                    <Text style={styles.billing2}>{NumberUtil.convertNumberToCurrency(this.state.payment.amount || 0)} đ</Text>
                 </View>
+                {
+                    !this.props.route.params.isBack ?
+                        <View style={{ alignSelf: 'center', marginBottom: 20 }}>
+                            <Button
+                                color="info"
+                                shadowless
+                                size="small"
+                                capitalize
+                                round
+                                onPress={this.addCalendar.bind(this)}
+                            >
+                                + Thêm vào lời nhắc
+                            </Button>
+                        </View>
+                        : null
+                }
+
             </View>
         );
+        return null;
     }
 }
 
@@ -225,6 +310,11 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginLeft: 25,
         marginRight: -1
+    },
+    qrcode: {
+        alignSelf: 'center',
+        margin: 10,
+        flex: 0.6
     }
 });
 

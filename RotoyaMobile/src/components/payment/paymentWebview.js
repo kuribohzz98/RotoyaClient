@@ -18,7 +18,7 @@ class PaymnetWebViewScreen extends React.Component {
         navigation.setOptions({
             header: ({ navigation, scene }) => (
                 <Header
-                    title={isBankPayment ? "Napas Payment" : "Momo payment"}
+                    title={isBankPayment ? "Cổng thanh toán Napas" : "Thanh toán với Momo"}
                     back
                     goBack={this.goBack.bind(this)}
                     navigation={navigation}
