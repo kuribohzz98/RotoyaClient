@@ -16,6 +16,7 @@ import BookedScannerScreen from './bill-scanner/bill-scanner';
 import QrScannerScreen from './qr-scanner/qr-scanner';
 import EmptyScreen from './empty/empty';
 import FavoritesScreen from './favorites/favorites';
+import BookingScreen from './booking/booking';
 
 export default {
     AuthLoadingScreen,
@@ -35,5 +36,6 @@ export default {
     BookedScannerScreen,
     QrScannerScreen,
     EmptyScreen,
-    FavoritesScreen
+    FavoritesScreen,
+    BookingScreen
 }

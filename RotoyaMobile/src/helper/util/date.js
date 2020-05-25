@@ -8,8 +8,9 @@ const getDateDDMM = (inpDate) => {
 }
 
 const convertDateDDMMToMMDD = (str) => {
+    if (str instanceof Date) return str;
     let date = str.split(' - ');
-    if (date.length != 3) data = str.split('-');
+    // if (date.length != 3) data = str.split('-');
     return `${date[1]}/${date[0]}/${date[2]}`;
 }
 

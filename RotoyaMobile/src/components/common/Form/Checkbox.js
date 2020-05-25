@@ -9,6 +9,7 @@ export default checkboxField = ({
     labelStyle,
     color,
     disabled = false,
+    onSubmitSelect
     // initialValue
 }) => {
     // if (initialValue) onChange(initialValue);
@@ -19,7 +20,10 @@ export default checkboxField = ({
             iconName={iconName}
             labelStyle={labelStyle}
             color={color}
-            onChange={(value) => onChange(value)}
+            onChange={(value) => {
+                onChange(value);
+                onSubmitSelect && setTimeout(() => onSubmitSelect(), 500);
+            }}
             disabled={disabled}
             initialValue={value || false}
         />

@@ -79,7 +79,8 @@ class BillScreen extends React.Component {
       bookDatas,
       payment,
       equipments,
-      sportCenter
+      sportGround,
+      date
     } = this.props.route.params;
     return (
       <View style={styles.root}>
@@ -90,36 +91,38 @@ class BillScreen extends React.Component {
           </View>
           <View style={styles.cardRowContainer}>
             <Text style={styles.cardTitle}>Trung tâm thể thao</Text>
-            <Text style={styles.cardContent}>{sportCenter.name}</Text>
+            <Text style={styles.cardContent}>{sportGround.sportCenter.name}</Text>
+          </View>
+          <View style={styles.cardRowContainer}>
+            <Text style={styles.cardTitle}>Ngày đặt</Text>
+            <Text style={styles.cardContent}>{DateUtil.getDateDDMM(date)}</Text>
           </View>
           <Text style={styles.cardTitle}>Sân</Text>
           {
-            (sportCenter.sportGrounds || []).map(sportGround => {
-              return (sportGround.sportGroundTimeSlots || []).map(timeSlot => {
-                const bookData = bookDatas.find(bookData => bookData.timeSlotId == timeSlot.id);
-                if (bookData) {
-                  return (
-                    <View>
-                      <View style={styles.transactionStatusRow}>
-                        <Text style={styles.transactionStatus}>-</Text>
-                        <Text style={styles.success}>{sportGround.name}</Text>
-                      </View>
-                      <View style={styles.cardRowContainer}>
-                        <Text style={styles.cardLitteTitle}>Ngày</Text>
-                        <Text style={styles.cardLitteContent}>{DateUtil.getDateDDMM(bookData.bookingDate)}</Text>
-                      </View>
-                      <View style={styles.cardRowContainer}>
-                        <Text style={styles.cardLitteTitle}>Thời gian</Text>
-                        <Text style={styles.cardLitteContent}>{TimeUtil.convertFloatToTime(timeSlot.startTime)} - {TimeUtil.convertFloatToTime(timeSlot.endTime)}</Text>
-                      </View>
-                      <View style={styles.cardRowContainer}>
-                        <Text style={styles.cardLitteTitle}>Giá</Text>
-                        <Text style={styles.cardLitteContent}>{NumberUtil.convertNumberToCurrency(timeSlot.price)} đ</Text>
-                      </View>
+            (sportGround.sportGroundTimeSlots || []).map(timeSlot => {
+              const bookData = bookDatas.find(bookData => bookData.timeSlotId == timeSlot.id);
+              if (bookData) {
+                return (
+                  <View>
+                    <View style={styles.transactionStatusRow}>
+                      <Text style={styles.transactionStatus}>-</Text>
+                      <Text style={styles.success}>{sportGround.name}</Text>
                     </View>
-                  )
-                }
-              })
+                    {/* <View style={styles.cardRowContainer}>
+                      <Text style={styles.cardLitteTitle}>Ngày</Text>
+                      <Text style={styles.cardLitteContent}>{DateUtil.getDateDDMM(bookData.bookingDate)}</Text>
+                    </View> */}
+                    <View style={styles.cardRowContainer}>
+                      <Text style={styles.cardLitteTitle}>Thời gian</Text>
+                      <Text style={styles.cardLitteContent}>{TimeUtil.convertFloatToTime(timeSlot.startTime)} - {TimeUtil.convertFloatToTime(timeSlot.endTime)}</Text>
+                    </View>
+                    <View style={styles.cardRowContainer}>
+                      <Text style={styles.cardLitteTitle}>Giá</Text>
+                      <Text style={styles.cardLitteContent}>{NumberUtil.convertNumberToCurrency(timeSlot.price)} đ</Text>
+                    </View>
+                  </View>
+                )
+              }
             })
           }
           {
@@ -128,10 +131,7 @@ class BillScreen extends React.Component {
                 <Text style={styles.cardTitle}>Dụng cụ thể thao</Text>
                 {
                   equipments.map(equipment => {
-                    let timeSlot;
-                    (sportCenter.sportGrounds || []).map(sportGround => {
-                      timeSlot = (sportGround.sportGroundTimeSlots || []).find(timeSlot_ => timeSlot_.id == equipment.timeSlotId);
-                    })
+                    let timeSlot = (sportGround.sportGroundTimeSlots || []).find(timeSlot_ => timeSlot_.id == equipment.timeSlotId);
                     return (
                       <View>
                         <View style={styles.transactionStatusRow}>
@@ -142,10 +142,10 @@ class BillScreen extends React.Component {
                           <Text style={styles.cardLitteTitle}>Số lượng</Text>
                           <Text style={styles.cardLitteContent}>{equipment.amount}</Text>
                         </View>
-                        <View style={styles.cardRowContainer}>
+                        {/* <View style={styles.cardRowContainer}>
                           <Text style={styles.cardLitteTitle}>Ngày</Text>
                           <Text style={styles.cardLitteContent}>{DateUtil.getDateDDMM(new Date().getTime() + equipment.time * 1000 * 60 * 60 * 24)}</Text>
-                        </View>
+                        </View> */}
                         <View style={styles.cardRowContainer}>
                           <Text style={styles.cardLitteTitle}>Thời gian</Text>
                           <Text style={styles.cardLitteContent}>{TimeUtil.convertFloatToTime(timeSlot.startTime)} - {TimeUtil.convertFloatToTime(timeSlot.endTime)}</Text>

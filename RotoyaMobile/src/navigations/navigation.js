@@ -61,6 +61,21 @@ const StackHome = () => (
             }}
         />
         <Stack.Screen
+            name="Booking"
+            component={Components.BookingScreen}
+            headerMode="screen"
+            options={{
+                header: ({ navigation, scene }) => (
+                    <Header
+                        title="Đặt sân"
+                        back
+                        navigation={navigation}
+                        scene={scene}
+                    />
+                )
+            }}
+        />
+        <Stack.Screen
             name="Bill"
             component={Components.BillScreen}
             headerMode="screen"

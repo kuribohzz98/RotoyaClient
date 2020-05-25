@@ -5,6 +5,7 @@ import SportService from './sport.service';
 import StorageService from './storage.service';
 import SportCenterService from './sport-center.service';
 import SportCenterFavoriteService from './sport-center-favorite.service';
+import SportGroundService from './sport-ground.service';
 
 export {
     AuthService,
@@ -13,5 +14,6 @@ export {
     SportService,
     StorageService,
     SportCenterService,
-    SportCenterFavoriteService
+    SportCenterFavoriteService,
+    SportGroundService
 }
