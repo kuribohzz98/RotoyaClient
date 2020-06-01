@@ -1,11 +1,13 @@
-import { EActionRedux } from '../../constants/actions.constants';
+import { ActionConstants } from "../../constants";
 
-export const mapReducer = (state = {}, action) => {
+const mapReducer = (state = {}, action) => {
     switch (action.type) {
-        case EActionRedux.SET_LOCATION:
+        case ActionConstants.SET_LOCATION:
             return Object.assign({}, state, {
                 location: action.location
             });
     }
     return state;
 }
+
+export default mapReducer;

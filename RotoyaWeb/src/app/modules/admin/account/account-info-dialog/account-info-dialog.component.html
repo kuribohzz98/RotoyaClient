@@ -1,0 +1,29 @@
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <th scope="col" class="text-center">Họ, tên đệm</th>
+                        <th scope="col" class="text-center">Tên</th>
+                        <th scope="col" class="text-center">Giới tính</th>
+                        <th scope="col" class="text-center">Số điện thoại</th>
+                        <th scope="col" class="text-center">Địa chỉ</th>
+                        <th scope="col" class="text-center">Email</th>
+
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">{{data.firstName}}</td>
+                            <td class="text-center">{{data.lastName}}</td>
+                            <td class="text-center">{{data.gender | gender}}</td>
+                            <td class="text-center">0{{data.phone}}</td>
+                            <td class="text-center">{{data.address}}</td>
+                            <td class="text-center">{{data.email}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,8 +1,12 @@
-import { EActionRedux } from '../../constants/actions.constants';
+import { ActionConstants } from '../../constants';
 
-export const setShowFilterHomeAction = (showFilterHome) => {
+export const setOptionsGetSportCenters = (optionsGetSportCenters) => {
     return {
-        type: EActionRedux.SET_SHOW_FILTER_HOME,
-        showFilterHome
+        type: ActionConstants.SET_OPTIONS_GET_SPORTCENTERS,
+        optionsGetSportCenters
     }
+}
+
+export default {
+    setOptionsGetSportCenters
 }

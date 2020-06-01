@@ -44,7 +44,7 @@ let registerForm = props => {
             <StatusBar hidden />
             <ImageBackground
                 source={Images.RegisterBackground}
-                style={{ width, height, zIndex: 1 }}
+                style={{ width, height }}
             >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                     <Block flex middle>

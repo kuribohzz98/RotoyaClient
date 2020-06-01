@@ -1,0 +1,40 @@
+<div class="card">
+    <div class="card-header card-header-danger">
+        <h3 class="card-title">Quản lý hoá đơn đặt sân</h3>
+        <p class="card-category">&nbsp;</p>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <th scope="col">#</th>
+                            <th scope="col" class="text-center">Tên khách hàng</th>
+                            <th scope="col" class="text-center">Số điện thoại</th>
+                            <th scope="col" class="text-center">Mã đơn</th>
+                            <th scope="col" class="text-center">Tổng tiền (VNĐ)</th>
+                            <th scope="col" class="text-center">Ngày đặt</th>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let payment of payments; let i=index">
+                                <tr class="primary-tooltip-info" matTooltip="Chi tiết" matTooltipPosition="above"
+                                    matTooltipClass="primary-tooltip" (click)="openInfo(i)">
+                                    <th scope="row">{{i + 1 + (pageData.currentPage - 1) * pageData.pageSize}}</th>
+                                    <td class="text-center">{{payment.user.userInfo.firstName}}&nbsp;{{payment.user.userInfo.lastName}}</td>
+                                    <td class="text-center">0{{payment.user.userInfo.phone}}</td>
+                                    <td class="text-center">{{payment.orderId}}</td>
+                                    <td class="text-center">{{payment.amount | number}}</td>
+                                    <td class="text-center">{{payment.createdAt | datetimeToDate}}</td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+                <mat-paginator showFirstLastButtons [length]="pageData.totalSize" [pageSize]="pageData.pageSize"
+                    [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)">
+                </mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,13 +10,11 @@ import {
     Keyboard,
     TouchableWithoutFeedback,
     KeyboardAvoidingView,
-    StatusBar,
-    ActivityIndicator
+    StatusBar
 } from 'react-native';
-// import { RotoyaButton } from '../../common/index';
 import { SocialIcon } from 'react-native-elements';
-import { Block, Checkbox, Text, theme } from "galio-framework";
-import { Button, Icon, Input, Select } from "../../common";
+import { Block, Text } from "galio-framework";
+import { Button, Icon, Input } from "../../common";
 import { Images, argonTheme } from "../../../constants";
 import SpinnerLoading from '../../common/spinnerLoading';
 
@@ -58,7 +56,7 @@ let LoginForm = props => {
                             <Block style={styles.container}>
                                 <Block flex>
                                     <Block flex={0.3} middle>
-                                        <Text h3>Login</Text>
+                                        <Text h3>Đăng nhập</Text>
                                     </Block>
                                     <Block flex center>
                                         <KeyboardAvoidingView
@@ -68,7 +66,7 @@ let LoginForm = props => {
                                         >
                                             <Block width={width * 0.8} style={{ marginBottom: 15 }}>
                                                 <Field
-                                                    label="Email"
+                                                    label="Tên đăng nhập"
                                                     name="username"
                                                     icon="ic_mail_24px"
                                                     family="ArgonExtra"
@@ -77,7 +75,7 @@ let LoginForm = props => {
                                             </Block>
                                             <Block width={width * 0.8} style={{ marginBottom: 15 }}>
                                                 <Field
-                                                    label="Password"
+                                                    label="Mật khẩu"
                                                     name="password"
                                                     icon="padlock-unlocked"
                                                     family="ArgonExtra"
@@ -85,8 +83,8 @@ let LoginForm = props => {
                                                     component={renderField}
                                                 />
                                             </Block>
-                                            <View style={{ flexDirection: 'row', width: width * 0.8, justifyContent: 'center', marginBottom: 15 }}>
-                                                <Text style={{alignSelf: 'center', fontWeight: 'bold'}}>or login with </Text>
+                                            {/* <View style={{ flexDirection: 'row', width: width * 0.8, justifyContent: 'center', marginBottom: 15 }}>
+                                                <Text style={{ alignSelf: 'center', fontWeight: 'bold' }}>or login with </Text>
                                                 <SocialIcon
                                                     type='facebook'
                                                     // title='Facebook'
@@ -99,20 +97,21 @@ let LoginForm = props => {
                                                     // button
                                                     style={{ paddingLeft: 10, paddingRight: 10 }}
                                                 />
-                                            </View>
+                                            </View> */}
                                             <View style={{ alignItems: 'center' }}>
                                                 <View style={{ flexDirection: 'row' }}>
                                                     <Text style={{ fontSize: 16 }}>
-                                                        Do not have an account???
-                                                </Text>
-                                                    <TouchableOpacity
-                                                        onPress={() => navigation.navigate('Register')}
-                                                    >
-                                                        <Text style={{ fontWeight: 'bold', fontSize: 16 }} textDecorationLine="underline"> Register</Text>
-                                                    </TouchableOpacity>
+                                                        Bạn chưa có tài khoản???
+                                                    </Text>
                                                 </View>
-                                                <TouchableOpacity onPress={() => null}>
-                                                    <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Forgot password</Text>
+                                                <TouchableOpacity
+                                                    onPress={() => navigation.navigate('Register')}
+                                                    style={{marginTop: 20}}
+                                                >
+                                                    <Text style={{ fontWeight: 'bold', fontSize: 16 }} textDecorationLine="underline">Đăng ký ngay</Text>
+                                                </TouchableOpacity>
+                                                <TouchableOpacity onPress={() => null} style={{marginTop: 20}}>
+                                                    <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Quên mật khẩu</Text>
                                                 </TouchableOpacity>
                                             </View>
                                             <Block middle>
@@ -122,7 +121,7 @@ let LoginForm = props => {
                                                     onPress={handleSubmit(props.onSubmit)}
                                                 >
                                                     <Text bold size={14} color={argonTheme.COLORS.WHITE}>
-                                                        LOGIN
+                                                        Đăng nhập
                                             </Text>
                                                 </Button>
                                             </Block>
@@ -154,29 +153,6 @@ const styles = StyleSheet.create({
         elevation: 1,
         overflow: "hidden"
     },
-    socialConnect: {
-        backgroundColor: argonTheme.COLORS.WHITE,
-        borderBottomWidth: StyleSheet.hairlineWidth,
-        borderColor: "#8898AA"
-    },
-    socialButtons: {
-        width: 120,
-        height: 40,
-        backgroundColor: "#fff",
-        shadowColor: argonTheme.COLORS.BLACK,
-        shadowOffset: {
-            width: 0,
-            height: 4
-        },
-        shadowRadius: 8,
-        shadowOpacity: 0.1,
-        elevation: 1
-    },
-    socialTextButtons: {
-        color: argonTheme.COLORS.PRIMARY,
-        fontWeight: "800",
-        fontSize: 14
-    },
     inputIcons: {
         marginRight: 12
     },
@@ -188,10 +164,6 @@ const styles = StyleSheet.create({
     createButton: {
         width: width * 0.5,
         marginTop: 25
-    },
-    button: {
-        alignSelf: 'stretch',
-        margin: 10,
     }
 });
 

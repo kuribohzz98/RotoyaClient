@@ -27,7 +27,7 @@ export default selectField = ({
             >{label}:  </Text>
             <Select
                 color={color}
-                defaultValue={0}
+                defaultValue={value || 0}
                 options={options}
                 textStyle={{ fontSize: textSize || 16 }}
                 dropdownTextStyle={{ fontSize: textSize || 16 }}
@@ -35,7 +35,7 @@ export default selectField = ({
                 disabled={disabled}
                 style={{ width: width || 100 }}
                 dropdownStyle={{ marginTop: 8, marginLeft: -16, width: width || 100 }}
-                defaultText="Please select..."
+                defaultText={value ? value : "Please select..."}
             />
         </View >
     )

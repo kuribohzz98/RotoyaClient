@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+    <p>Bạn có chắc chắn muốn {{data.content || 'xác nhận thay đổi'}} ?</p>
+</div>
+<div mat-dialog-actions [align]="'end'">
+    <button mat-button mat-dialog-close>Đóng</button>
+    <button mat-button class="btn btn-info" [mat-dialog-close]="true" cdkFocusInitial>Xác nhận</button>
+</div>

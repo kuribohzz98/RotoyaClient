@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { URL_API } from '../constants/api.constants';
+import { ApiConstants } from '../constants';
 
 export const setHeadersApi = {
     setAuthorization: function (access_token) {
@@ -12,16 +12,11 @@ export const setHeadersApi = {
     }
 }
 
-export const axiosBase = (headers) => {
-    if (headers) {
-        return axios.create({
-            baseURL: URL_API,
-            timeout: 5000,
-            headers
-        });
-    }
+export const axiosBase = axios.create(ApiConstants.optionsBaseAxios);
+
+export const axiosBaseHeader = (headers) => {
     return axios.create({
-        baseURL: URL_API,
-        timeout: 5000,
+        ...ApiConstants.optionsBaseAxios,
+        headers
     });
 }

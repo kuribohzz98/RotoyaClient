@@ -1,7 +1,17 @@
-export const API_CONFIG = {
+const API_CONFIG = {
     PROTOCOL: 'http',
-    HOST: 'bde1351e.ngrok.io',
+    HOST: 'c0877d26.ngrok.io',
     // PORT: '3000'
 };
 
-export const URL_API = `${API_CONFIG.PROTOCOL}://${API_CONFIG.HOST}${API_CONFIG.PORT ? ':' + API_CONFIG.PORT : ''}/api/rotoya`;
+const URL_API = `${API_CONFIG.PROTOCOL}://${API_CONFIG.HOST}${API_CONFIG.PORT ? ':' + API_CONFIG.PORT : ''}/api/rotoya`;
+
+const optionsBaseAxios = {
+    baseURL: URL_API,
+    timeout: 5000
+}
+
+export default {
+    URL_API,
+    optionsBaseAxios
+}

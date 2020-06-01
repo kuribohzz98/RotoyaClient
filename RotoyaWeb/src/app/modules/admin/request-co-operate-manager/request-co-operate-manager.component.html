@@ -1,0 +1,66 @@
+<div class="card">
+    <div class="card-header card-header-danger">
+        <h3 class="card-title">Các yêu cầu hợp tác</h3>
+        <p class="card-category">&nbsp;</p>
+    </div>
+    <div class="card-body">
+        <ng-container *ngIf="requestcoOperate && requestcoOperate.length; else tableRequestcoOperate">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <th scope="col">#</th>
+                                <th scope="col" class="text-center">Họ, Tên đệm</th>
+                                <th scope="col" class="text-center">Tên</th>
+                                <th scope="col" class="text-center">Số điện thoại</th>
+                                <th scope="col" class="text-center">Email</th>
+                                <th scope="col" class="text-center">Tỉnh/ Thành phố</th>
+                                <th scope="col" class="text-center">Quận/ Huyện</th>
+                                <th scope="col" class="text-center">Phường/ Xã</th>
+                                <th scope="col" class="text-center">Địa chỉ</th>
+                                <th scope="col" class="text-center">Ngày tạo</th>
+                                <th scope="col"></th>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngFor="let request of requestcoOperate; let i=index">
+                                    <tr>
+                                        <th scope="row">{{i + 1}}</th>
+                                        <td class="text-center">{{request.firstName}}</td>
+                                        <td class="text-center">{{request.lastName}}</td>
+                                        <td class="text-center">{{request.phone}}</td>
+                                        <td class="text-center">{{request.email}}</td>
+                                        <td class="text-center">{{request.city}}</td>
+                                        <td class="text-center">{{request.district}}</td>
+                                        <td class="text-center">{{request.commune}}</td>
+                                        <td class="text-center">{{request.address}}</td>
+                                        <td class="text-center">{{request.createdAt | datetimeToDate}}</td>
+                                        <td class="text-center">
+                                            <button mat-icon-button matTooltip="Xác nhận" matTooltipPosition="above"
+                                                color="warn" (click)="onApprove(i)">
+                                                <i class="material-icons">check</i>
+                                            </button>
+                                            <button mat-icon-button matTooltip="Từ chối" matTooltipPosition="above"
+                                                color="accent" (click)="onReject(i)">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                            <!-- <button mat-icon-button matTooltip="Thông tin" matTooltipPosition="above" class="btn btn-info">
+                                                <i class="material-icons">info</i>
+                                            </button> -->
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                    <mat-paginator showFirstLastButtons [length]="pageData.totalSize" [pageSize]="pageData.pageSize"
+                        [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)">
+                    </mat-paginator>
+                </div>
+            </div>
+        </ng-container>
+        <ng-template #tableRequestcoOperate>
+            <app-table-empty></app-table-empty>
+        </ng-template>
+    </div>
+</div>

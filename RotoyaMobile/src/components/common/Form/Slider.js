@@ -11,12 +11,13 @@ export default sliderField = ({
     minimumTrackTintColor,
     maximumTrackTintColor,
     step,
-    maximumValue
+    maximumValue,
+    unit
 }) => (
         <View>
             <View style={{ flexDirection: 'row' }}>
                 <Text style={{ fontWeight: 'bold', fontSize: labelSize || 16 }}>{label}: </Text>
-                <Text style={{ fontSize: labelSize || 16 }}>{value || 0}</Text>
+                <Text style={{ fontSize: labelSize || 16 }}>{value || 0}{"  " + unit || ""}</Text>
             </View>
             <Slider
                 maximumValue={maximumValue || 2}
@@ -25,7 +26,8 @@ export default sliderField = ({
                 maximumTrackTintColor={maximumTrackTintColor || "#8cb3f5"}
                 onValueChange={value => onChange(value)}
                 step={step || 1}
-                disabled={disabled}
+                disabled={disabled || false}
+                value={+value}
             />
         </View>
     )

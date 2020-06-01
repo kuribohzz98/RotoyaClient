@@ -1,17 +1,16 @@
 import React from 'react';
-import { registerService } from '../../../service/auth.service';
 import RegisterComponent from './registerComponent';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { saveItem } from '../../../service/storage.service';
-import { StorageConstants } from '../../../constants/storage.constants';
-
+import { AuthService, StorageService } from '../../../service';
+import { StorageConstants } from '../../../constants';
+StorageConstants.AccessToken
 class RegisterScreen extends React.Component {
     static navigationOptions = {
     };
     onSubmit = values => {
         console.log(values);
-        // registerService(
+        // AuthService.registerService(
         //     {
         //         'username': values.username,
         //         'password': values.password
@@ -19,7 +18,7 @@ class RegisterScreen extends React.Component {
         //     .then((response) => {
         //         // console.log(response.data);
         //         // this.props.loginAction(response.data.user.username);
-        //         // saveItem(StorageConstants.ACCESS_TOKEN, response.data.access_token);
+        //         // StorageService.saveItem(StorageConstants.AccessToken, response.data.access_token);
         //         // this.props.navigation.navigate('Home');
         //     })
         //     .catch((err) => {
@@ -36,7 +35,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ registerService }, dispatch);
+    return bindActionCreators({ }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterScreen);

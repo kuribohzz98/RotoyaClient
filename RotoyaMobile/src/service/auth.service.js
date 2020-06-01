@@ -1,13 +1,16 @@
 import { axiosBase } from './base.service';
 
-export async function loginService(data) {
-    return axiosBase().post('/auth/login', data);
+const url = '/auth';
+
+const loginService = async (data) => {
+    return axiosBase.post(`${url}/login`, data);
 }
 
-export async function registerService(data) {
-    return axiosBase().post('/auth/register', data);
+const registerService = async (data) => {
+    return axiosBase.post(`${url}/register`, data);
 }
 
-export async function logoutService(data) {
-    return axiosBase().post('/auth/logout', data);
+export default {
+    loginService,
+    registerService
 }

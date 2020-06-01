@@ -1,17 +1,21 @@
-import { EActionRedux } from '../../constants/actions.constants';
-import { removeItem } from '../../service/storage.service';
-import { StorageConstants } from '../../constants/storage.constants';
+import { StorageService } from '../../service';
+import { ActionConstants } from '../../constants';
 
-export const loginAction = (user) => { 
+const loginAction = (user) => { 
     return {
-        type: EActionRedux.LOGIN,
+        type: ActionConstants.LOGIN,
         user
     }
 }
 
-export const logoutAction = () => {
-    removeItem(StorageConstants.ACCESS_TOKEN);
+const logoutAction = () => {
+    StorageService.clear();
     return {
-        type: EActionRedux.LOGOUT
+        type: ActionConstants.LOGOUT
     }
+}
+
+export default {
+    loginAction,
+    logoutAction
 }

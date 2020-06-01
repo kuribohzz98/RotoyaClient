@@ -1,12 +1,14 @@
-import { EActionRedux } from '../../constants/actions.constants';
+import { ActionConstants } from '../../constants';
 
-export const componentReducer = (state = {}, action) => {
+const componentReducer = (state = {} , action) => {
 
-    switch (action.type) {
-        case EActionRedux.SET_SHOW_FILTER_HOME:
+    switch (action.type) {       
+        case ActionConstants.SET_OPTIONS_GET_SPORTCENTERS:
             return Object.assign({}, state, {
-                showFilterHome: action.showFilterHome
-            });
+                optionsGetSportCenters: action.optionsGetSportCenters
+            })
     }
     return state;
 }
+
+export default componentReducer;

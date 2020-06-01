@@ -1,0 +1,183 @@
+<ng-container *ngIf="payment; else elsePaymentInfo">
+    <div class="row">
+        <div class="col text-center">
+            <h1>Chi tiết đơn: {{payment.orderId}}</h1>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header card-header-info">
+            <h3 class="card-title">Thông tin khách hàng</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <p class="font-weight-bold">Tên khách hàng:</p>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9">
+                    <p>{{payment.user.userInfo.firstName}}&nbsp;{{payment.user.userInfo.lastName}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <p class="font-weight-bold">Giới tính:</p>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9">
+                    <p>{{payment.user.userInfo.gender | gender}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <p class="font-weight-bold">Số điện thoại:</p>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9">
+                    <p>0{{payment.user.userInfo.phone}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <p class="font-weight-bold">Địa chỉ:</p>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9">
+                    <p>{{payment.user.userInfo.address}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header card-header-danger">
+            <h3 class="card-title">Thông tin đơn đặt sân</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <p class="font-weight-bold">Tên trung tâm thể thao:</p>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9">
+                    <p>{{payment.sportCenter.name}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <p class="font-weight-bold">Mã đơn:</p>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9">
+                    <p>{{payment.orderId}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <p class="font-weight-bold">Tổng tiền:</p>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9">
+                    <p class="text-danger">{{payment.amount | number}}đ</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <p class="font-weight-bold">Ngày đặt:</p>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9">
+                    <p>{{payment.createdAt | datetimeToDate}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <p class="font-weight-bold">Chi tiết sân:</p>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9">
+                </div>
+            </div>
+            <ng-container *ngFor="let booking of payment.bookings">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                        <p class="font-weight-bold">Sân:</p>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <p>{{booking.sportGroundTimeSlot.sportGround.name}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                        <p class="font-weight-bold">Thời gian:</p>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <p>{{booking.sportGroundTimeSlot.startTime | numberToTime}} -
+                            {{booking.sportGroundTimeSlot.endTime | numberToTime}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                        <p class="font-weight-bold">Ngày:</p>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <p>{{booking.bookingDate | datetimeToDate}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                        <p class="font-weight-bold">Giá:</p>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <p>{{booking.sportGroundTimeSlot.price | number}}đ</p>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="hasEquipment">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <p class="font-weight-bold">Chi tiết dụng cụ thể thao:</p>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                    </div>
+                </div>
+                <ng-container *ngFor="let booking of payment.bookings">
+                    <ng-container *ngFor="let sgeBooking of booking.sportCenterEquipmentBookings">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                                <p class="font-weight-bold">Tên:</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <p>{{sgeBooking.sportCenterEquipment.sportEquipment.name}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                                <p class="font-weight-bold">Số lượng:</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <p>{{sgeBooking.amount}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                                <p class="font-weight-bold">Ngày:</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <p>{{booking.bookingDate}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                                <p class="font-weight-bold">Thời gian:</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <p>{{booking.sportGroundTimeSlot.startTime | numberToTime}} - {{booking.sportGroundTimeSlot.endTime | numberToTime}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                                <p class="font-weight-bold">Giá:</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <p>{{sgeBooking.price | number}}đ</p>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+</ng-container>
+<ng-template #elsePaymentInfo>
+
+</ng-template>
