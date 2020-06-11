@@ -42,13 +42,13 @@ class UserInfoScreen extends React.Component {
                                     <TouchableOpacity onPress={() => null}>
                                         <Image
                                             // source={{ uri: 'data:image/jpeg;base64,' + this.props.avatar }}
-                                            source={{ uri: ApiConstants.URL_API + '/image/' + this.props.avatar }}
+                                            source={this.props.avatar ? { uri: ApiConstants.URL_API + '/image/' + this.props.avatar } : Images.DefaultImage}
                                             style={styles.avatar}
                                         />
                                     </TouchableOpacity>
                                 </Block>
                                 <Block style={styles.info}>
-                                    <Block
+                                    {/* <Block
                                         middle
                                         row
                                         space="evenly"
@@ -57,7 +57,6 @@ class UserInfoScreen extends React.Component {
                                         <Button
                                             small
                                             style={{ backgroundColor: argonTheme.COLORS.INFO }}
-                                            onPress={this.addCalendar.bind(this)}
                                         >
                                             CONNECT
                                         </Button>
@@ -67,7 +66,7 @@ class UserInfoScreen extends React.Component {
                                         >
                                             MESSAGE
                                     </Button>
-                                    </Block>
+                                    </Block> */}
                                     {/* <Block row space="between">
                                         <Block middle>
                                             <Text
@@ -118,7 +117,7 @@ class UserInfoScreen extends React.Component {
                                     </Block>
                                     <Block left row style={{ marginBottom: 15 }}>
                                         <Text size={20} style={{ fontWeight: 'bold', width: 100 }}>
-                                            Address:
+                                            Địa chỉ:
                                         </Text>
                                         <Text
                                             size={16}
@@ -130,7 +129,7 @@ class UserInfoScreen extends React.Component {
                                     </Block>
                                     <Block left row style={{ marginBottom: 15 }}>
                                         <Text size={20} style={{ fontWeight: 'bold', width: 100 }}>
-                                            Phone:
+                                            Số điện thoại:
                                         </Text>
                                         <Text
                                             size={16}
@@ -154,14 +153,14 @@ class UserInfoScreen extends React.Component {
                                     </Block>
                                     <Block left row style={{ marginBottom: 15 }}>
                                         <Text size={20} style={{ fontWeight: 'bold', width: 100 }}>
-                                            Gender:
+                                            Giới tính:
                                         </Text>
                                         <Text
                                             size={16}
                                             color="#525F7F"
                                             style={{ textAlign: "center", alignSelf: 'center' }}
                                         >
-                                            {this.props.gender}
+                                            {this.props.gender == 'Male' ? 'Nam' : (this.props.gender == 'Female' ? 'Nữ' : 'Khác')}
                                         </Text>
                                     </Block>
                                     {/* <Block middle>

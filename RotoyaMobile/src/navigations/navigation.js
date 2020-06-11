@@ -20,15 +20,15 @@ const StackHome = () => (
             name="Home"
             component={Components.HomeScreen}
             headerMode="screen"
-            options={{
-                header: ({ navigation, scene }) => (
-                    <Header
-                        title="Trang chủ"
-                        navigation={navigation}
-                        scene={scene}
-                    />
-                )
-            }}
+            // options={{
+            //     header: ({ navigation, scene }) => (
+            //         <Header
+            //             title="Trang chủ"
+            //             navigation={navigation}
+            //             scene={scene}
+            //         />
+            //     )
+            // }}
         />
         <Stack.Screen
             name="Filter"
@@ -41,6 +41,7 @@ const StackHome = () => (
                         back
                         navigation={navigation}
                         scene={scene}
+                        search
                     />
                 )
             }}
@@ -304,12 +305,12 @@ class DrawerNavigation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            role: ""
+            role: null
         }
     }
     async componentDidMount() {
         const role_temp = await StorageService.getItem(StorageConstants.Role);
-        this.setState({ role: role_temp })
+        this.setState({ role: role_temp || "" });
     }
     render() {
         return (
@@ -326,7 +327,7 @@ class DrawerNavigation extends React.Component {
                 edgeWidth={-10}
             >
                 {
-                    this.state.role && this.state.role == "" ?
+                    this.state.role == null ?
                         <Drawer.Screen
                             name="main"
                             component={Components.EmptyScreen}
@@ -408,8 +409,25 @@ const StackAuth = () => (
         <Stack.Screen
             name="Register"
             component={Components.RegisterScreen}
+            // headerMode="screen"
+            // options={{
+            //     header: ({ navigation, scene }) => (
+            //         <Header
+            //             title="Đăng ký"
+            //             navigation={navigation}
+            //             scene={scene}
+            //         />
+            //     )
+            // }}
             options={{
-                headerTitle: 'Register Account'
+                headerTitle: 'Đăng ký'
+            }}
+        />
+        <Stack.Screen
+            name="ForgetPassword"
+            component={Components.ForgetPasswordScreen}
+            options={{
+                headerTitle: 'Quên mật khẩu'
             }}
         />
     </Stack.Navigator>

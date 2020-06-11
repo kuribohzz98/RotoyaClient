@@ -1,6 +1,6 @@
 import { combineEpics } from "redux-observable";
-import { imageSportCenterEpic } from "./image";
+import { searchSportCenterEpic } from "./search";
 
 export default combineEpics(
-    imageSportCenterEpic
+    searchSportCenterEpic
 );

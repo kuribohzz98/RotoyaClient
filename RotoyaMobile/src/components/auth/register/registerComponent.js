@@ -16,13 +16,26 @@ import { Button, Icon, Input, Select } from "../../common";
 import { Images, argonTheme } from "../../../constants";
 
 const { height, width } = Dimensions.get('window');
-
-const renderField = ({ input, label, secureTextEntry, icon, family }) => (
+const required = value => value ? undefined : 'Không được bỏ trống trường này';
+const email = value =>
+    value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
+        'Email không đúng' : undefined;
+const maxLength = max => value =>
+    value && (value + '').length > max ? `Chỉ được có ${max} ký tự hoặc ít hơn` : undefined;
+const maxLength11 = maxLength(11);
+const minLength = min => value =>
+    value && (value + '').length < min ? `Ít nhât phải có ${min} ký tự` : undefined;
+const minLength6 = minLength(6);
+const minLength10 = minLength(10);
+const character = value => value && /[A-Za-z]+/g.test(value) ? undefined : 'Chỉ được bao gồm chữ thường và chữ in hoa';
+const comparePassword =  (value, allValues) => value && value == allValues.password ? undefined : 'Mật khẩu nhập lại không đúng';
+const renderField = ({ input, label, secureTextEntry, icon, family, keyboardType = 'default', meta: { touched, error, warning } }) => (
     <Block>
         <Input
             borderless
             password={secureTextEntry}
             placeholder={label}
+            keyboardType={keyboardType}
             {...input}
             iconContent={
                 <Icon
@@ -34,11 +47,12 @@ const renderField = ({ input, label, secureTextEntry, icon, family }) => (
                 />
             }
         />
+        {touched && ((error && <Text style={{ color: 'red' }}>{error}</Text>) || (warning && <Text>{warning}</Text>))}
     </Block>
 )
 
 let registerForm = props => {
-    const { handleSubmit } = props;
+    const { handleSubmit, onSubmitRegister } = props;
     return (
         <Block flex middle>
             <StatusBar hidden />
@@ -63,30 +77,34 @@ let registerForm = props => {
                                             <Block row>
                                                 <Block width={width * 0.38} style={{ marginBottom: 15, marginRight: width * 0.04 }}>
                                                     <Field
-                                                        label="First name"
+                                                        label="Họ, Tên đệm"
                                                         name="firstName"
                                                         icon="hat-3"
                                                         family="ArgonExtra"
                                                         component={renderField}
+                                                        validate={[required, character]}
                                                     />
                                                 </Block>
                                                 <Block width={width * 0.38} style={{ marginBottom: 15 }}>
                                                     <Field
-                                                        label="Last name"
+                                                        label="Tên"
                                                         name="lastName"
                                                         icon="hat-3"
                                                         family="ArgonExtra"
                                                         component={renderField}
+                                                        validate={[required, character]}
                                                     />
                                                 </Block>
                                             </Block>
                                             <Block width={width * 0.8} style={{ marginBottom: 15 }}>
                                                 <Field
-                                                    label="Phone number"
+                                                    label="Số điện thoại"
                                                     name="phone"
                                                     icon="phone"
                                                     family="font-awesome"
                                                     component={renderField}
+                                                    keyboardType="numeric"
+                                                    validate={[required, maxLength11, minLength10]}
                                                 />
                                             </Block>
                                             <Block width={width * 0.8} style={{ marginBottom: 15 }}>
@@ -96,16 +114,19 @@ let registerForm = props => {
                                                     icon="ic_mail_24px"
                                                     family="ArgonExtra"
                                                     component={renderField}
+                                                    keyboardType="email-address"
+                                                    validate={[required, email]}
                                                 />
                                             </Block>
                                             <Block width={width * 0.8} style={{ marginBottom: 15 }}>
                                                 <Field
-                                                    label="Password"
+                                                    label="Mật khẩu"
                                                     name="password"
                                                     icon="padlock-unlocked"
                                                     family="ArgonExtra"
                                                     secureTextEntry={true}
                                                     component={renderField}
+                                                    validate={[required, minLength6]}
                                                 />
                                                 {/* <Block row style={styles.passwordCheck}>
                                             <Text size={12} color={argonTheme.COLORS.MUTED}>
@@ -119,12 +140,13 @@ let registerForm = props => {
                                             </Block>
                                             <Block width={width * 0.8}>
                                                 <Field
-                                                    label="Confirm password"
+                                                    label="Nhập lại mật khẩu"
                                                     name="confirmPassword"
                                                     icon="padlock-unlocked"
                                                     family="ArgonExtra"
                                                     secureTextEntry={true}
                                                     component={renderField}
+                                                    validate={[required, minLength6, comparePassword]}
                                                 />
                                             </Block>
                                             <Block row width={width * 0.75}>
@@ -150,10 +172,10 @@ let registerForm = props => {
                                                 <Button
                                                     color="primary"
                                                     style={styles.createButton}
-                                                    onPress={handleSubmit(props.onSubmit)}
+                                                    onPress={handleSubmit(onSubmitRegister.bind(this))}
                                                 >
                                                     <Text bold size={14} color={argonTheme.COLORS.WHITE}>
-                                                        CREATE ACCOUNT
+                                                        Tạo tài khoản
                                                     </Text>
                                                 </Button>
                                             </Block>

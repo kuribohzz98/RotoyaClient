@@ -10,6 +10,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { SharedModule } from './../../shared/shared.module';
 import { adminRoutes } from './admin.routing';
 import { BookManagerComponent } from './book-manager/book-manager.component';
@@ -20,7 +23,10 @@ import { AccountInfoDialogComponent } from './account/account-info-dialog/accoun
 import { PaymentComponent } from './payment/payment.component';
 import { PaymentInfoComponent } from './payment/payment-info/payment-info.component';
 import { StatisticProviderComponent } from './statistic-provider/statistic-provider.component';
-
+import { EquipmentComponent } from './equipment/equipment.component';
+import { CreateEditEquipmentComponent } from './equipment/create-edit-equipment/create-edit-equipment.component';
+import { DatePickerYearStatisticComponent } from './statistic-provider/datepicker-year-statistic/datepicker-year-statistic.component';
+import { DatePickerMonthStatisticComponent } from './statistic-provider/datepicker-month-statistic/datepicker-month-statistic.component';
 @NgModule({
     imports: [
         RouterModule.forChild(adminRoutes),
@@ -34,7 +40,10 @@ import { StatisticProviderComponent } from './statistic-provider/statistic-provi
         MatTooltipModule,
         MatPaginatorModule,
         NgxChartsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatButtonToggleModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ],
     declarations: [
         BookManagerComponent,
@@ -44,7 +53,11 @@ import { StatisticProviderComponent } from './statistic-provider/statistic-provi
         AccountInfoDialogComponent,
         PaymentComponent,
         PaymentInfoComponent,
-        StatisticProviderComponent
+        StatisticProviderComponent,
+        EquipmentComponent,
+        CreateEditEquipmentComponent,
+        DatePickerMonthStatisticComponent,
+        DatePickerYearStatisticComponent
     ]
 })
 export class AdminModule { }

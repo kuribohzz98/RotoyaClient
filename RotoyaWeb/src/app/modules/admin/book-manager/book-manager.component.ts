@@ -42,6 +42,7 @@ export class BookManagerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initListDate();
     this.dateControl = new FormControl(this.listDate[0].value);
+    console.log(this.listDate);
     this.adminLayoutService.sportCenterSelected.id && this.initSportCenter();
     this.watchSportCenter();
     this.dateControl.valueChanges
@@ -76,7 +77,9 @@ export class BookManagerComponent implements OnInit, OnDestroy {
   }
 
   compareDate(date: string): boolean {
-    const dateSelected = this.listDate.find(_date => _date.name == date)
+    if (!date) return false;
+    const dateSelected = this.listDate.find(_date => _date.name == getDateDDMM(date));
+    if (!dateSelected) return false;
     return getDateDDMM(date) == dateSelected.name;
   }
 

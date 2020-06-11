@@ -1,3 +1,4 @@
+import { ISportGroundTimeSlot } from './time-slot';
 export interface IBooking {
     id?: number;
     timeSlotId?: number;
@@ -5,4 +6,5 @@ export interface IBooking {
     bookingDate?: string;
     detail?: string;
     equipment?: string;
+    sportGroundTimeSlot?: ISportGroundTimeSlot;
 }

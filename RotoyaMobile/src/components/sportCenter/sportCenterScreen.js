@@ -142,7 +142,6 @@ class SportCenterScreen extends React.Component {
                         buttons={buttons}
                         containerStyle={{ height: 60, backgroundColor: '#fff', borderColor: '#fff' }}
                         underlayColor="#e1e7f0"
-                        vertical
                     />
                     <Divider style={{ backgroundColor: 'blue', marginTop: 10, marginBottom: 10, marginLeft: 20, marginRight: 20 }} />
                     <Block style={styles.content}>

@@ -142,7 +142,7 @@ class BookedDetailScreen extends React.Component {
                                                 <View>
                                                     <View style={styles.transactionStatusRow}>
                                                         <Text style={styles.transactionStatus}>-</Text>
-                                                        <Text style={styles.success}>{sgeBooking.sportGroundEquipment.sportEquipment.name}</Text>
+                                                        <Text style={styles.success}>{sgeBooking.sportCenterEquipment.sportEquipment.name}</Text>
                                                     </View>
                                                     <View style={styles.cardRowContainer}>
                                                         <Text style={styles.cardLitteTitle}>Số lượng</Text>
@@ -170,7 +170,7 @@ class BookedDetailScreen extends React.Component {
                 </ScrollView>
                 <View style={styles.billingRow}>
                     <Text style={styles.billing}>Tổng</Text>
-                    <Text style={styles.billing2}>{NumberUtil.convertNumberToCurrency(this.state.payment.amount || 0)} đ</Text>
+                    <Text style={styles.billing2}>{NumberUtil.convertNumberToCurrency(payment.amount || 0)} đ</Text>
                 </View>
                 {
                     !this.props.route.params.isBack ?

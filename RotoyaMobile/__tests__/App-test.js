@@ -8,7 +8,9 @@ import App from '../App';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
+import EmptyScreen from '../src/components/empty/empty';
 
-it('renders correctly', () => {
-  renderer.create(<App />);
+test('renders correctly', () => {
+  const tree = renderer.create(<EmptyScreen />).toJSON();
+  expect(tree).toMatchSnapshot();
 });

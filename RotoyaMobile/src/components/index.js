@@ -17,6 +17,7 @@ import QrScannerScreen from './qr-scanner/qr-scanner';
 import EmptyScreen from './empty/empty';
 import FavoritesScreen from './favorites/favorites';
 import BookingScreen from './booking/booking';
+import ForgetPasswordScreen from './forget-password/forget-password';
 
 export default {
     AuthLoadingScreen,
@@ -37,5 +38,6 @@ export default {
     QrScannerScreen,
     EmptyScreen,
     FavoritesScreen,
-    BookingScreen
+    BookingScreen,
+    ForgetPasswordScreen
 }

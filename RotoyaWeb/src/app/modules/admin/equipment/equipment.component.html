@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-6">
+        <mat-form-field>
+            <mat-label>Môn thể thao</mat-label>
+            <mat-select [formControl]="sportControl">
+                <mat-option *ngFor="let sport of sports" [value]="sport.id">{{sport.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6"></div>
+    <div class="col-lg-2 col-md-2 col-sm-6">
+        <button mat-raised-button color="primary" (click)="createEdit()">
+            <i class="material-icons">add</i>
+            Thêm mới
+        </button>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header card-header-danger">
+        <h3 class="card-title">Các dụng cụ thể thao</h3>
+        <p class="card-category">&nbsp;</p>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <th scope="col">#</th>
+                            <th scope="col" class="text-center">Tên</th>
+                            <th scope="col" class="text-center">Ảnh</th>
+                            <th scope="col" class="text-center">Số lượng</th>
+                            <th scope="col" class="text-center">Giá (VNĐ)</th>
+                            <th scope="col" class="text-center"></th>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let scEquipment of scEquipments; let i=index">
+                                <tr>
+                                    <th scope="row">{{i + 1}}</th>
+                                    <td class="text-center">{{scEquipment.name}}</td>
+                                    <td class="text-center">
+                                        <img [src]="scEquipment.image ? host + '/image/' + scEquipment.image : 'assets/img/image-default.jpg'"
+                                            style="height: 100px; width: 150px; border-radius: 10px;">
+                                    </td>
+                                    <td class="text-center">{{scEquipment.quantity}}</td>
+                                    <td class="text-center">{{scEquipment.price | number}}</td>
+                                    <td>
+                                    <td class="text-center">
+                                        <button mat-icon-button color="primary" (click)="createEdit(i)">
+                                            <i class="material-icons">edit</i>
+                                        </button>
+                                        <button mat-icon-button color="warn" (click)="deleteEquipment(i)">
+                                            <i class="material-icons">delete</i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

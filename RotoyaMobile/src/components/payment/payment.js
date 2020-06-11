@@ -27,7 +27,7 @@ class PaymnetScreen extends React.Component {
             return;
         }
         this.props.navigation.navigate('PaymentWebView', {
-            payUrl: res.data.payUrl,
+            payUrl: bankCode ? res.data : res.data.payUrl,
             orderId,
             isBankPayment: !!bankCode
         })

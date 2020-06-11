@@ -50,19 +50,19 @@ class BookedScannerScreen extends React.Component {
         })
     }
 
-    async componentDidMount() {
-        const res = await PaymentService.getPayment({ orderId: this.props.route.params.orderId });
-        // if (!res.data || res.status >= 400) {
-        //     NotificationUtil.errorServer(res);
-        //     return;
-        // }
-        console.log(res.data.user.userInfo.phone);
-        this.setState({ payment: res.data });
+    // async componentDidMount() {
+    //     const res = await PaymentService.getPayment({ orderId: this.props.route.params.orderId });
+    //     // if (!res.data || res.status >= 400) {
+    //     //     NotificationUtil.errorServer(res);
+    //     //     return;
+    //     // }
+    //     console.log(res.data.user.userInfo.phone);
+    //     this.setState({ payment: res.data });
 
-    }
+    // }
 
     render() {
-        const { payment } = this.state;
+        const { payment } = this.props.route.params;
         if (payment) return (
             <View style={styles.root}>
                 <ScrollView style={styles.rect2} showsVerticalScrollIndicator={false}>
@@ -119,27 +119,37 @@ class BookedScannerScreen extends React.Component {
                         })
                     }
                     {
-                        payment.bookings[0].sportGroundEquipmentBookings && payment.bookings[0].sportGroundEquipmentBookings.length ?
+                        payment.bookings.some(booking => !!booking.sportCenterEquipmentBookings && !!booking.sportCenterEquipmentBookings.length) ?
                             <View>
                                 <Text style={styles.cardTitle}>Dụng cụ thể thao</Text>
                                 {
-                                    payment.bookings[0].sportGroundEquipmentBookings.map(equipment => {
-                                        return (
-                                            <View>
-                                                <View style={styles.transactionStatusRow}>
-                                                    <Text style={styles.transactionStatus}>-</Text>
-                                                    <Text style={styles.success}>{equipment.sportGroundEquipment.sportEquipment.name}</Text>
+                                    payment.bookings.map(booking => {
+                                        return booking.sportCenterEquipmentBookings.map(sgeBooking => {
+                                            return (
+                                                <View>
+                                                    <View style={styles.transactionStatusRow}>
+                                                        <Text style={styles.transactionStatus}>-</Text>
+                                                        <Text style={styles.success}>{sgeBooking.sportCenterEquipment.sportEquipment.name}</Text>
+                                                    </View>
+                                                    <View style={styles.cardRowContainer}>
+                                                        <Text style={styles.cardLitteTitle}>Số lượng</Text>
+                                                        <Text style={styles.cardLitteContent}>{sgeBooking.amount}</Text>
+                                                    </View>
+                                                    <View style={styles.cardRowContainer}>
+                                                        <Text style={styles.cardLitteTitle}>Ngày</Text>
+                                                        <Text style={styles.cardLitteContent}>{booking.bookingDate}</Text>
+                                                    </View>
+                                                    <View style={styles.cardRowContainer}>
+                                                        <Text style={styles.cardLitteTitle}>Thời gian</Text>
+                                                        <Text style={styles.cardLitteContent}>{TimeUtil.convertFloatToTime(booking.sportGroundTimeSlot.startTime)} - {TimeUtil.convertFloatToTime(booking.sportGroundTimeSlot.endTime)}</Text>
+                                                    </View>
+                                                    <View style={styles.cardRowContainer}>
+                                                        <Text style={styles.cardLitteTitle}>Giá</Text>
+                                                        <Text style={styles.cardLitteContent}>{NumberUtil.convertNumberToCurrency(sgeBooking.price)} đ</Text>
+                                                    </View>
                                                 </View>
-                                                <View style={styles.cardRowContainer}>
-                                                    <Text style={styles.cardLitteTitle}>Số lượng</Text>
-                                                    <Text style={styles.cardLitteContent}>{equipment.amount}</Text>
-                                                </View>
-                                                <View style={styles.cardRowContainer}>
-                                                    <Text style={styles.cardLitteTitle}>Giá</Text>
-                                                    <Text style={styles.cardLitteContent}>{NumberUtil.convertNumberToCurrency(equipment.price * payment.bookings.length)} đ</Text>
-                                                </View>
-                                            </View>
-                                        )
+                                            )
+                                        })
                                     })
                                 }
                             </View> : null
@@ -147,7 +157,7 @@ class BookedScannerScreen extends React.Component {
                 </ScrollView>
                 <View style={styles.billingRow}>
                     <Text style={styles.billing}>Tổng</Text>
-                    <Text style={styles.billing2}>{NumberUtil.convertNumberToCurrency(this.state.payment.amount || 0)} đ</Text>
+                    <Text style={styles.billing2}>{NumberUtil.convertNumberToCurrency(payment.amount || 0)} đ</Text>
                 </View>
             </View>
         );

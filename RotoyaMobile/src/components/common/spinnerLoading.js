@@ -7,17 +7,13 @@ import {
 export default class SpinnerLoading extends React.Component {
     constructor(props) {
         super(props);
-        props = {
-            isVisible: false
-        }
     }
     render() {
         return (
             <Overlay
                 fullScreen
                 isVisible={this.props.isVisible}
-                overlayBackgroundColor="rgba(255, 255, 255, 0)"
-                overlayStyle={{ justifyContent: 'center' }}
+                overlayStyle={{ justifyContent: 'center', backgroundColor: "rgba(255, 255, 255, 0)" }}
             >
                 <ActivityIndicator size={50} color="#55a66d" />
             </Overlay>

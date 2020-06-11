@@ -12,20 +12,28 @@ import {
     KeyboardAvoidingView,
     StatusBar
 } from 'react-native';
-import { SocialIcon } from 'react-native-elements';
 import { Block, Text } from "galio-framework";
 import { Button, Icon, Input } from "../../common";
 import { Images, argonTheme } from "../../../constants";
 import SpinnerLoading from '../../common/spinnerLoading';
 
 const { height, width } = Dimensions.get('window');
+const required = value => value ? undefined : 'Không được bỏ trống trường này';
+const maxLength = max => value =>
+    value && (value + '').length > max ? `Chỉ được có ${max} ký tự hoặc ít hơn` : undefined;
+const maxLength11 = maxLength(11);
+const minLength = min => value =>
+    value && (value + '').length < min ? `Ít nhât phải có ${min} ký tự` : undefined;
+const minLength6 = minLength(6);
+const minLength10 = minLength(10);
 
-const renderField = ({ input, label, secureTextEntry, icon, family }) => (
+const renderField = ({ input, label, secureTextEntry, icon, family, keyboardType = 'default', meta: { touched, error, warning } }) => (
     <Block>
         <Input
             borderless
             password={secureTextEntry}
             placeholder={label}
+            keyboardType={keyboardType}
             {...input}
             iconContent={
                 <Icon
@@ -37,6 +45,7 @@ const renderField = ({ input, label, secureTextEntry, icon, family }) => (
                 />
             }
         />
+        {touched && ((error && <Text style={{ color: 'red' }}>{error}</Text>) || (warning && <Text>{warning}</Text>))}
     </Block>
 )
 
@@ -66,11 +75,13 @@ let LoginForm = props => {
                                         >
                                             <Block width={width * 0.8} style={{ marginBottom: 15 }}>
                                                 <Field
-                                                    label="Tên đăng nhập"
+                                                    label="Số điện thoại"
                                                     name="username"
                                                     icon="ic_mail_24px"
                                                     family="ArgonExtra"
                                                     component={renderField}
+                                                    keyboardType="numeric"
+                                                    validate={[required, maxLength11, minLength10]}
                                                 />
                                             </Block>
                                             <Block width={width * 0.8} style={{ marginBottom: 15 }}>
@@ -81,6 +92,7 @@ let LoginForm = props => {
                                                     family="ArgonExtra"
                                                     secureTextEntry={true}
                                                     component={renderField}
+                                                    validate={[required, minLength6]}
                                                 />
                                             </Block>
                                             {/* <View style={{ flexDirection: 'row', width: width * 0.8, justifyContent: 'center', marginBottom: 15 }}>
@@ -106,11 +118,11 @@ let LoginForm = props => {
                                                 </View>
                                                 <TouchableOpacity
                                                     onPress={() => navigation.navigate('Register')}
-                                                    style={{marginTop: 20}}
+                                                    style={{ marginTop: 20 }}
                                                 >
                                                     <Text style={{ fontWeight: 'bold', fontSize: 16 }} textDecorationLine="underline">Đăng ký ngay</Text>
                                                 </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => null} style={{marginTop: 20}}>
+                                                <TouchableOpacity onPress={() => navigation.navigate('ForgetPassword')} style={{ marginTop: 20 }}>
                                                     <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Quên mật khẩu</Text>
                                                 </TouchableOpacity>
                                             </View>

@@ -43,7 +43,7 @@ const initialState = {
   }
 };
 
-const store = createStore(rootReducer, initialState);
-// epicMiddleware.run(rootEpics);
+const store = createStore(rootReducer, initialState, applyMiddleware(epicMiddleware));
+epicMiddleware.run(rootEpics);
 
 export default Storage = { store } //, persistor 

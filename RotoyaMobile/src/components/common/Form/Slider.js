@@ -12,6 +12,7 @@ export default sliderField = ({
     maximumTrackTintColor,
     step,
     maximumValue,
+    minimumValue,
     unit
 }) => (
         <View>
@@ -28,6 +29,7 @@ export default sliderField = ({
                 step={step || 1}
                 disabled={disabled || false}
                 value={+value}
+                minimumValue={minimumValue || 0}
             />
         </View>
     )

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 // import { withNavigation } from 'react-navigation';
 import { TouchableOpacity, StyleSheet, Platform, Dimensions } from 'react-native';
 import { Button, Block, NavBar, Text, theme } from 'galio-framework';
@@ -7,6 +7,8 @@ import { Icon } from 'react-native-elements';
 import Input from './Input';
 import Tabs from './Tabs';
 import argonTheme from '../../constants/Theme';
+import { useDispatch } from 'react-redux';
+import { ComponentAction } from './../../redux/action';
 
 const { height, width } = Dimensions.get('window');
 const iPhoneX = () => Platform.OS === 'ios' && (height === 812 || width === 812 || height === 896 || width === 896);
@@ -22,16 +24,38 @@ const iPhoneX = () => Platform.OS === 'ios' && (height === 812 || width === 812 
 //   </TouchableOpacity>
 // );
 
-const FilterButton = ({ isWhite, style, navigation }) => (
-  <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate('Filter')}>
-    <Icon
-      type="font-awesome"
-      size={24}
-      name="filter"
-      color={argonTheme.COLORS[isWhite ? 'WHITE' : 'ICON']}
-    />
-  </TouchableOpacity>
-)
+const GrillButton = ({ isWhite, style, navigation }) => {
+  const dispatch = useDispatch();
+  const onPress = () => {
+    dispatch(ComponentAction.setNameSearchSportCenters(''))
+    navigation.navigate('Filter');
+  }
+  return (
+    <TouchableOpacity style={[styles.button, style]} onPress={() => onPress()}>
+      <Icon
+        type="material-community"
+        size={24}
+        name="view-grid"
+        color={argonTheme.COLORS[isWhite ? 'WHITE' : 'ICON']}
+      />
+    </TouchableOpacity>
+  )
+}
+
+const FilterButton = ({ isWhite, style, navigation }) => {
+  const dispatch = useDispatch();
+  const onPress = () => dispatch(ComponentAction.setIsVisibleFilter(true));
+  return (
+    <TouchableOpacity style={[styles.button, style]} onPress={() => onPress()}>
+      <Icon
+        size={24}
+        family="material-community"
+        name="filter"
+        color={theme.COLORS[isWhite ? 'WHITE' : 'ICON']}
+      />
+    </TouchableOpacity>
+  )
+}
 
 const SearchButton = ({ isWhite, style, navigation }) => (
   <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate('Pro')}>
@@ -43,6 +67,21 @@ const SearchButton = ({ isWhite, style, navigation }) => (
     />
   </TouchableOpacity>
 );
+
+const SearchInput = () => {
+  const dispatch = useDispatch();
+  return (
+    <Input
+      right
+      color="black"
+      style={styles.search}
+      placeholder="Nhập tên trung tâm thể thao"
+      placeholderTextColor={'#8898AA'}
+      onChangeText={value => dispatch(ComponentAction.setNameSearchSportCentersEpic(value))}
+      iconContent={<Icon size={25} color={theme.COLORS.MUTED} name="search" family="font-awesome" />}
+    />
+  )
+}
 
 class Header extends React.Component {
   handleLeftPress = () => {
@@ -57,7 +96,8 @@ class Header extends React.Component {
     switch (name) {
       case 'Home':
         return ([
-          <FilterButton key='filter' navigation={navigation} isWhite={white} />
+          <GrillButton key='grill' navigation={navigation} isWhite={white} />,
+          <FilterButton key="filter" navigation={navigation} isWhite={white} />
         ]);
       // case 'Deals':
       //   return ([
@@ -68,18 +108,14 @@ class Header extends React.Component {
         break;
     }
   }
+  // searchChange(value) {
+  //   console.log(value)
+  //   dispatch(ComponentAction.setNameSearchSportCenters(value))
+  // }
   renderSearch = () => {
     const { navigation } = this.props;
     return (
-      <Input
-        right
-        color="black"
-        style={styles.search}
-        placeholder="What are you looking for?"
-        placeholderTextColor={'#8898AA'}
-        onFocus={() => navigation.navigate('Pro')}
-        iconContent={<Icon size={16} color={theme.COLORS.MUTED} name="search-zoom-in" family="ArgonExtra" />}
-      />
+      <SearchInput />
     );
   }
   renderOptions = () => {

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Alert } from 'react-native';
 import LoginForm from './loginComponent';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -22,34 +21,35 @@ class LoginScreen extends React.Component {
             return;
         }
         this.setState({ isVisible: true });
-        const res = await AuthService.loginService({
-            username: values.username,
-            password: values.password
-        });
-        this.setState({ isVisible: false });
-        if (!res.data || res.status >= 400) {
-            NotificationUtil.errorServer(res);
-            return;
+        try {
+            const res = await AuthService.loginService({
+                username: values.username,
+                password: values.password
+            });
+            this.setState({ isVisible: false });
+            if (!res.data || res.status >= 400) {
+                NotificationUtil.errorServer(res);
+                return;
+            }
+            if (!res.data.user) {
+                NotificationUtil.error('Tên tài khoản hoặc mật khẩu không chính xác');
+                return;
+            }
+            this.props.loginAction(res.data.user);
+            await Promise.all([
+                StorageService.saveItem(StorageConstants.AccessToken, res.data.access_token),
+                StorageService.saveItem(StorageConstants.Role, res.data.user.roles && res.data.user.roles.length ? res.data.user.roles[0] : ""),
+                StorageService.saveItem(StorageConstants.UserId, res.data.user.id + '')
+            ]);
+            this.props.navigation.navigate('App');
+        } catch (e) {
+            this.setState({ isVisible: false });
+            if (e.message == 'Request failed with status code 401') {
+                NotificationUtil.error('Tên đăng nhập hoặc mật khẩu không chính xác');
+                return;
+            }
+            NotificationUtil.error('Đã có lỗi xảy ra');
         }
-        this.setState({ isVisible: false });
-        if (!res.data.user) {
-            console.log('login faild');
-            Alert.alert(
-                'Problem',
-                'Username or password is correct',
-                [
-                    { text: 'OK', style: 'cancel' },
-                ]
-            );
-            return;
-        }
-        this.props.loginAction(res.data.user);
-        await Promise.all([
-            StorageService.saveItem(StorageConstants.AccessToken, res.data.access_token),
-            StorageService.saveItem(StorageConstants.Role, res.data.user.roles && res.data.user.roles.length ? res.data.user.roles[0] : null),
-            StorageService.saveItem(StorageConstants.UserId, res.data.user.id + '')
-        ]);
-        this.props.navigation.navigate('App');
     }
     render() {
         return <LoginForm

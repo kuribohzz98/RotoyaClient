@@ -7,6 +7,16 @@ const componentReducer = (state = {} , action) => {
             return Object.assign({}, state, {
                 optionsGetSportCenters: action.optionsGetSportCenters
             })
+
+        case ActionConstants.SEARCH_SPORT_CENTER:
+            return Object.assign({}, state, {
+                name: action.name
+            })
+
+        case ActionConstants.SET_IS_VISIBLE_FILTER:
+            return Object.assign({}, state, {
+                isVisibleFilter: action.isVisibleFilter
+            })
     }
     return state;
 }

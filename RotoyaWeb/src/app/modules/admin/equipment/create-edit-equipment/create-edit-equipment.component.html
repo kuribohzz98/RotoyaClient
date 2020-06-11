@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<form [formGroup]="formCreateEdit">
+    <div mat-dialog-content>
+        <mat-form-field class="field">
+            <input matInput placeholder="Tên" formControlName="name" required>
+        </mat-form-field>
+        <div class="row field">
+            <div class="col-md-5 col-sm-6">
+                <mat-form-field>
+                    <input matInput type="number" min="1" placeholder="Số lượng" formControlName="quantity" required>
+                </mat-form-field>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-5 col-sm-6">
+                <mat-form-field>
+                    <input matInput type="number" min="0" placeholder="Giá" formControlName="price" required>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row field">
+            <div class="col">
+                <div class="text-center">
+                    <img [ngClass]="isLoadImage ? 'load-image' : ''"
+                        [src]="avatarUpload || (scEquipment.image ? host + '/image/' + scEquipment.image : 'assets/img/image-default.jpg')"
+                        style="height: 300px; margin: 15px; border-radius: 10px;" (load)="onLoadImage()">
+                </div>
+                <div class="text-center">
+                    <app-upload-file (complete)="onFileComplete($event)" (fileData)="watchFileData($event)">
+                    </app-upload-file>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div mat-dialog-actions [align]="'end'">
+        <button mat-button mat-dialog-close (click)="dialogRef.close()">Đóng</button>
+        <button type="button" mat-button class="btn btn-info" cdkFocusInitial (click)="onSubmit()">Lưu</button>
+    </div>
+</form>

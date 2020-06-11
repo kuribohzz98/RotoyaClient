@@ -1,41 +1,41 @@
 const BankCode = {
+    NCB: {
+        name: 'NCB',
+        image: require('../../assets/imgs/bank-logo/NCBBank.jpg')
+    },
     VIB: {
         name: 'VIB',
         image: require('../../assets/imgs/bank-logo/VIBank.png')
     },
-    ABB: {
+    ABBANK: {
         name: 'AB Bank',
         image: require('../../assets/imgs/bank-logo/ABBank.png')
     },
-    STB: {
+    SACOMBANK: {
         name: 'Sacom Bank',
         image: require('../../assets/imgs/bank-logo/Sacombank.png')
     },
-    MSB: {
+    MSBANK: {
         name: 'Maritime Bank',
         image: require('../../assets/imgs/bank-logo/MaritimeBank.png')
     },
-    NVB: {
-        name: 'Navi Bank',
-        image: require('../../assets/imgs/bank-logo/Navibank.png')
-    },
-    CTG: {
-        name: 'Viettin Bank',
+    VIETINBANK: {
+        name: 'Vietin Bank',
         image: require('../../assets/imgs/bank-logo/Viettinbank.png')
     },
-    DAB: {
+    DONGABANK: {
         name: 'DongA Bank',
         image: require('../../assets/imgs/bank-logo/Dongabank.png')
     },
-    HDB: {
+    HDBANK: {
         name: 'HD Bank',
         image: require('../../assets/imgs/bank-logo/HDBank.png')
     },
-    VAB: {
+    VIETABANK: {
         name: 'VietA Bank',
         image: require('../../assets/imgs/bank-logo/Vietabank.png')
     },
-    VPB: {
+    VPBANK: {
         name: 'VP Bank',
         image: require('../../assets/imgs/bank-logo/VPbank.png')
     },
@@ -43,27 +43,15 @@ const BankCode = {
         name: 'ACB',
         image: require('../../assets/imgs/bank-logo/ACB.png')
     },
-    BVB: {
-        name: 'BaoViet Bank',
-        image: require('../../assets/imgs/bank-logo/BaoVietBank.png')
-    },
-    KLB: {
-        name: 'KienLong Bank',
-        image: require('../../assets/imgs/bank-logo/KienlongBank.png')
-    },
-    VCB: {
+    VIETCOMBANK: {
         name: 'Vietcom Bank',
         image: require('../../assets/imgs/bank-logo/Vietcombank.png')
     },
-    MB: {
+    MBBANK: {
         name: 'MB Bank',
         image: require('../../assets/imgs/bank-logo/MBBank.png')
     },
-    GPB: {
-        name: 'GP Bank',
-        image: require('../../assets/imgs/bank-logo/GPBank.png')
-    },
-    EIB: {
+    EXIMBANK: {
         name: 'Exim Bank',
         image: require('../../assets/imgs/bank-logo/Eximbank.png')
     },
@@ -71,7 +59,7 @@ const BankCode = {
         name: 'Ocean Bank',
         image: require('../../assets/imgs/bank-logo/OceanBank.png')
     },
-    NASB: {
+    BACABANK: {
         name: 'BacA Bank',
         image: require('../../assets/imgs/bank-logo/BacaBank.png')
     },
@@ -79,19 +67,15 @@ const BankCode = {
         name: 'OCB',
         image: require('../../assets/imgs/bank-logo/OCB.png')
     },
-    LPB: {
-        name: 'LienVietPost Bank',
-        image: require('../../assets/imgs/bank-logo/Lienvietpost.png')
-    },
-    TPB: {
+    TPBANK: {
         name: 'TP Bank',
         image: require('../../assets/imgs/bank-logo/TPbank.png')
     },
-    SEAB: {
+    SEABANK: {
         name: 'Sea Bank',
         image: require('../../assets/imgs/bank-logo/Seabank.png')
     },
-    VARB: {
+    AGRIBANK: {
         name: 'Agri Bank',
         image: require('../../assets/imgs/bank-logo/Agribank.png')
     },
@@ -107,7 +91,7 @@ const BankCode = {
         name: 'SCB',
         image: require('../../assets/imgs/bank-logo/SCB.png')
     },
-    TCB: {
+    TECHCOMBANK: {
         name: 'Techcom Bank',
         image: require('../../assets/imgs/bank-logo/Techcombank.png')
     }

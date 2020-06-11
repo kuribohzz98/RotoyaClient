@@ -25,6 +25,7 @@ class AuthLoadingScreen extends React.Component {
         this.navigate(event.url);
     }
     navigate = (url) => {
+        console.log(url)
         this._bootstrapAsync(url);
         // const { navigate } = this.props.navigation;
         // const route = url.replace(/.*?:\/\//g, '');
